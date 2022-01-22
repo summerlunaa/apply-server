@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -151,3 +152,6 @@ CORS_ALLOW_HEADERS = (
     'x-csrftoken',
     'x-requested-with',
 )
+
+# for costom user
+AUTH_USER_MODEL = 'user.CustomUser'
