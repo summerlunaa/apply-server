@@ -156,3 +156,4 @@ CORS_ALLOW_HEADERS = (
 
 # for costom user
 AUTH_USER_MODEL = 'user.CustomUser'
+AUTH_SUPERUSER_MODEL = 'user.CustomUserManager'
