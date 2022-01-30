@@ -1,0 +1,10 @@
+<form method="POST">
+    <!--
+        """
+        일반 로그인의 경우
+        """
+    -->
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">제출</button>
+</form>
