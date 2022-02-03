@@ -21,7 +21,10 @@ class CustomUserManager(BaseUserManager):
                 major = major,
                 phone_number = phone_number,
                 student_id = student_id,
+<<<<<<< HEAD
                 position = position,
+=======
+>>>>>>> eb00d025212e913c09b5c3d7df3c94d8bf0b8da0
             )
             user.set_password(password)
             user.save(using=self._db)
@@ -39,12 +42,16 @@ class CustomUserManager(BaseUserManager):
                 major = major,
                 phone_number = phone_number,
                 student_id = student_id,
+<<<<<<< HEAD
                 position = position,
+=======
+>>>>>>> eb00d025212e913c09b5c3d7df3c94d8bf0b8da0
             )
             user.set_unusable_password()
             user.save(using=self._db)
             return user
 
+<<<<<<< HEAD
     def create_user(self, email,  password, is_kakao, name, kakao_id, major, phone_number, student_id, position):
         return self._create_user(email, password,False, False, is_kakao, name, kakao_id, major, phone_number, student_id, position)
 
@@ -59,6 +66,17 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         ('기획', '기획'),
         ('디자인', '디자인'),
     ]
+=======
+    def create_user(self, email,  password, is_kakao, name, kakao_id, major, phone_number, student_id):
+        return self._create_user(email, password,False, False, is_kakao, name, kakao_id, major, phone_number, student_id)
+
+    def create_superuser(self, email, password):
+        return self._create_user(email, password,True,True,False, '','','','','')
+
+
+class CustomUser(AbstractBaseUser, PermissionsMixin):
+
+>>>>>>> eb00d025212e913c09b5c3d7df3c94d8bf0b8da0
     email = models.EmailField(max_length=100, unique=True, blank=False, null=True)
     name = models.CharField(max_length=20, blank=False, null=True)
     major = models.CharField(max_length=50)
@@ -78,7 +96,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = CustomUserManager()
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
+<<<<<<< HEAD
     REQUIRED_FIELD = ['email', 'name', 'major', 'phone_number', 'student_id','position']
+=======
+    REQUIRED_FIELD = ['name','email', 'major', 'phone_number', 'student_id']
+>>>>>>> eb00d025212e913c09b5c3d7df3c94d8bf0b8da0
 
     def __str__(self):
         return self.name
@@ -90,4 +112,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return self.is_superuser
 
     def get_absolute_url(self):
+<<<<<<< HEAD
         return "/user/%i/" % (self.pk) 
+=======
+        return "/user/%i/" % (self.pk)
+        
+>>>>>>> eb00d025212e913c09b5c3d7df3c94d8bf0b8da0

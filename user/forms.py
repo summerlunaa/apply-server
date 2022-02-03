@@ -1,5 +1,3 @@
-from select import select
-from turtle import position
 from unicodedata import name
 from django import forms
 from django.contrib.auth import authenticate
