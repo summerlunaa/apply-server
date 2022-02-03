@@ -1,7 +1,17 @@
+from django.contrib.auth.views import   PasswordResetView,\
+                                        PasswordResetDoneView, \
+                                        PasswordResetConfirmView, \
+                                        PasswordResetCompleteView
+from django.contrib.auth.forms import AuthenticationForm, \
+                                        PasswordChangeForm, \
+                                        PasswordResetForm, \
+                                        SetPasswordForm
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ValidationError
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, resolve_url
+from django.core.mail.message import EmailMessage
 from django.conf import settings
+from django.urls import reverse_lazy
 from .models import CustomUser
 from .forms import *
 import requests
@@ -210,4 +220,30 @@ def delete_user(request, user_pk):
         return redirect('login_home')
     else:
         raise ValidationError("잘못된 접근입니다.")
-        
+
+
+def send_email(request):
+    subject = "message"
+    to = ["junior0614@naver.com"]
+    from_email = "kdyme0614@gmail.com"
+    message = "왜 안뒈~~~~~"
+    EmailMessage(subject=subject, body=message, to=to, from_email=from_email).send()
+
+
+class UserPasswordResetConfirmView(PasswordResetConfirmView):
+    form_class = SetPasswordForm
+    success_url=reverse_lazy('password_reset_complete')
+    template_name = 'password_reset_confirm.html'
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+
+class UserPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = 'password_reset_complete.html'
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['login_url'] = resolve_url(settings.LOGIN_URL)
+        return context

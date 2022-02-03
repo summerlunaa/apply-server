@@ -83,3 +83,8 @@ class KakaoForm(ModelForm):
     class Meta:
         model = CustomUser
         fields = ['name', 'email', 'phone_number', 'student_id', 'major']
+
+class Emailform(ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['name', 'phone_number', 'student_id', 'major']
