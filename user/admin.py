@@ -7,14 +7,13 @@ from django.core.exceptions import ValidationError
 
 from .models import CustomUser
 
-
 class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
 
     class Meta:
         model = CustomUser
-        fields = ('email', 'name', 'major', 'phone_number', 'student_id')
+        fields = ('email', 'name', 'major', 'phone_number', 'student_id', 'position')
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -32,13 +31,13 @@ class UserCreationForm(forms.ModelForm):
             user.save()
         return user
 
-
+# admin에서 유저 수정 시 사용되는 폼
 class UserChangeForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField()
 
-    class Meta:
+    class Meta :
         model = CustomUser
-        fields = ('email', 'password', 'name', 'major', 'phone_number', 'student_id', 
+        fields = ('email', 'password', 'name', 'major', 'phone_number', 'student_id', 'is_kakao',
         'is_active', 'is_admin')
 
 
@@ -46,21 +45,21 @@ class UserAdmin(BaseUserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
 
-    list_display = ('email', 'name', 'major', 'phone_number', 'student_id', 'is_admin')
-    list_filter = ('is_admin',)
+    list_display = ('email', 'name', 'major', 'phone_number', 'student_id', 'position', 'is_admin', 'is_kakao','kakao_id')
+    list_filter = ('is_admin','is_superuser')
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('name', 'major', 'phone_number', 'student_id',)}),
+        ('Personal info', {'fields': ('name', 'major', 'phone_number', 'student_id','position')}),
         ('Permissions', {'fields': ('is_admin',)}),
     )
     
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'name', 'major', 'phone_number', 'student_id', 'password1', 'password2'),
+            'fields': ('name',  'email', 'password1', 'password2', 'major', 'phone_number', 'student_id','position'),
         }),
     )
-    search_fields = ('email',)
+    search_fields = ('name', 'email',)
     ordering = ('email',)
     filter_horizontal = ()
 
