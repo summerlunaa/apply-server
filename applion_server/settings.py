@@ -13,13 +13,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv  
 import os   
-<<<<<<< HEAD
 
 load_dotenv()
-=======
->>>>>>> eb00d025212e913c09b5c3d7df3c94d8bf0b8da0
 
-load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,17 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-<<<<<<< HEAD
 
 KAKAO_REST_API_KEY = os.getenv("KAKAO_REST_API_KEY")
 KAKAO_ADNIN_KEY = os.getenv("KAKAO_ADMIN_KEY")
 SECRET_KEY= os.getenv("SECRET_KEY")
 
-=======
-KAKAO_REST_API_KEY = os.getenv("KAKAO_REST_API_KEY")
-KAKAO_ADNIN_KEY = os.getenv("KAKAO_ADMIN_KEY")
-SECRET_KEY= os.getenv("SECRET_KEY")
->>>>>>> eb00d025212e913c09b5c3d7df3c94d8bf0b8da0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -178,7 +168,6 @@ CORS_ALLOW_HEADERS = (
 # for costom user
 AUTH_USER_MODEL = 'user.CustomUser'
 AUTH_SUPERUSER_MODEL = 'user.CustomUserManager'
-<<<<<<< HEAD
 
 # Email 전송
 # 메일을 호스트하는 서버
@@ -201,5 +190,3 @@ EMAIL_USE_TLS = True
 # 사이트와 관련한 자동응답을 받을 이메일 주소
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-=======
->>>>>>> eb00d025212e913c09b5c3d7df3c94d8bf0b8da0
