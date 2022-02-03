@@ -1,0 +1,15 @@
+<form action="{% url 'submit_kakao' %}" method="POST">
+
+    {% csrf_token %} 
+    {{ form.as_p }} 
+
+    <!--
+        """
+        카카오 로그인 가입 시 입력할 추가 정보 입력받는 폼
+        (이메일, 전공, 학번, 핸드폰 번호)
+        """
+    -->
+
+    <button type="submit">제출</button>
+</form>
+

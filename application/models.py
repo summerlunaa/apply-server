@@ -13,5 +13,5 @@ class Application(models.Model):
     updated_at = models.DateTimeField(default=timezone.now)
     portfolio = models.FileField(null=True, blank=True)
 
-    def __str__():
-        return user
+    def __str__(self):
+        return self.user

@@ -8,17 +8,30 @@ from django.core.exceptions import ValidationError
 
 
 class UserSignupForm(forms.Form):
-
+    position_choices=[
+        (None, '선택'),
+        ('개발', '개발'),
+        ('기획', '기획'),
+        ('디자인', '디자인'),
+    ]
     name = forms.CharField(label="이름(실명)", required=True, max_length=15)
     email = forms.EmailField(label="이메일", required=True)
     password1 = forms.CharField(label="비밀번호", widget=forms.PasswordInput, required=True)
     password2 = forms.CharField(label="비밀번호 재확인", widget=forms.PasswordInput, required=True)
-    major = forms.CharField(label="전공 / 복수(연계)전공", required=True, max_length=30)
+    major = forms.CharField(label="학과 / 복수(연계)전공", required=True, max_length=30)
     phone_number = forms.CharField(label="연락처", required=True, max_length=13)
     student_id = forms.CharField(label="학번", required=True, max_length=9)
+    position = forms.ChoiceField(label="내가 선택한 포지션은 ", choices=position_choices, required=True)
+    
     class Meta:
          model = CustomUser
-         fields = ['name',  'email', 'password1', 'password2', 'major', 'phone_number', 'student_id']
+         fields = ['email', 'password1', 'password2','name', 'student_id', 'major', 'phone_number', 'position']
+    
+    def not_default_position(self):
+        try : self.cleaned_data.get('position')
+        except KeyError:
+            raise ValidationError("개발/기획/디자인 중 포지션을 선택해주세요!")
+        return self.cleaned_data['position']
 
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -52,11 +65,40 @@ class UserSignupForm(forms.Form):
         major = self.cleaned_data['major']
         phone_number = self.cleaned_data['phone_number']
         student_id = self.cleaned_data['student_id']
-        user = CustomUser.objects.create_user(email, password, False, name, -1, major, phone_number, student_id)
+        position = self.not_default_position()
+        user = CustomUser.objects.create_user(email, password, False, name, -1, major, phone_number, student_id, position)
         return user
+
+
+class EmailAuthenticationForm(forms.Form):
+    email = forms.EmailField(label="이메일", required=True)
+    password = forms.CharField(label="비밀번호", widget=forms.PasswordInput)
+
+    def check_is_active(self, user):
+        return user.is_active
+
+    def authenticate_login(self):
+        email = self.cleaned_data.get("email")
+        password = self.cleaned_data.get("password")
+        if email and password:
+            user = authenticate(email=email, password=password)
+            if user is None:
+                raise ValueError("Email or Password is not exact.")
+            else:
+                if self.check_is_active(user):
+                    return True
+                else:
+                    return False
+        else:
+            raise ValueError("Email and Password should be filled(not empty).")
 
 
 class KakaoForm(ModelForm):
     class Meta:
         model = CustomUser
-        fields = ['name', 'email', 'phone_number', 'student_id', 'major']
+        fields = ['email', 'name', 'phone_number', 'student_id', 'major' , 'position']
+
+class Emailform(ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['name', 'phone_number', 'student_id', 'major', 'position']

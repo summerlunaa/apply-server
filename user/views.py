@@ -1,7 +1,30 @@
+from django.conf import settings
+
+from django.contrib.auth.forms import (
+    PasswordResetForm, SetPasswordForm,
+)
+from django.contrib.auth.tokens import default_token_generator
+
+from django.core.exceptions import ImproperlyConfigured, ValidationError
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, resolve_url
+from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.utils.http import (
+    urlsafe_base64_decode,
+)
+from django.utils.translation import gettext_lazy as _
+from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.debug import sensitive_post_parameters
+from django.views.generic.base import TemplateView
+from django.views.generic.edit import FormView
+from django.contrib.auth.forms import SetPasswordForm
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ValidationError
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, resolve_url
 from django.conf import settings
+from django.urls import reverse_lazy
 from .models import CustomUser
 from .forms import *
 import requests
@@ -19,6 +42,48 @@ def login_home(request):
     로그인, 회원가입을 진행할 페이지로 향하는 view
     """
     return render(request, 'login_home.html')
+
+
+def signup_email(request):
+    """
+    일반(이메일) 회원가입 처리해주는 view
+    이메일 회원가입 완료 후 로그인 페이지로 향함
+    """ 
+    if request.method == "POST":
+        form = UserSignupForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user, backend='user.kakaobackends.KakaoBackend') #authenticate
+            return redirect('login_home')
+        else : 
+            print(form)
+            print("Invalid Form")
+            print(form.errors)
+            return render(request, 'signup_email.html',{'form':form})
+    else:
+        form = UserSignupForm()
+    return render(request, 'signup_email.html', {'form':form})
+
+
+def email_login(request):
+    """
+    일반(이메일) 회원가입 처리해주는 view
+    로그인 완료 후 로그인 성공 시 이동할 페이지로 향함 (상의 필요)
+    """
+    if request.method=="POST":
+        form = EmailAuthenticationForm(request.POST)
+        if form.is_valid():
+            if form.authenticate_login():
+                email = form.cleaned_data.get("email")
+                password = form.cleaned_data.get("password")
+                user = authenticate(email=email, password=password)
+                if user is not None:
+                    login(request, user, backend='user.kakaobackends.KakaoBackend') 
+                    return redirect('success')
+    else:
+        form = EmailAuthenticationForm()
+    return render(request, 'email_login.html', {'form':form})
+
 
 def kakao_login(request):
     """
@@ -173,3 +238,150 @@ def delete_user(request, user_pk):
         return redirect('login_home')
     else:
         raise ValidationError("잘못된 접근입니다.")
+
+
+# Class-based password reset views
+# - PasswordResetView sends the mail
+# - PasswordResetDoneView shows a success message for the above
+# - PasswordResetConfirmView checks the link the user clicked and
+#   prompts for a new password
+# - PasswordResetCompleteView shows a success message for the above
+
+class PasswordContextMixin:
+    extra_context = None
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'title': self.title,
+            **(self.extra_context or {})
+        })
+        return context
+
+
+class PasswordResetView(PasswordContextMixin, FormView):
+    email_template_name = 'registration/password_reset_email.html'
+    extra_email_context = None
+    form_class = PasswordResetForm
+    from_email = None
+    html_email_template_name = None
+    subject_template_name = 'registration/password_reset_subject.txt'
+    success_url = reverse_lazy('password_reset_done')
+    template_name = 'registration/password_reset_form.html'
+    title = _('Password reset')
+    token_generator = default_token_generator
+
+    @method_decorator(csrf_protect)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+    def form_valid(self, form):
+        if CustomUser.objects.filter(email=self.request.POST.get("email")).exists():
+            opts = {
+                'use_https': self.request.is_secure(),
+                'token_generator': self.token_generator,
+                'from_email': self.from_email,
+                'email_template_name': self.email_template_name,
+                'subject_template_name': self.subject_template_name,
+                'request': self.request,
+                'html_email_template_name': self.html_email_template_name,
+                'extra_email_context': self.extra_email_context,
+            }
+            form.save(**opts)
+            return render(self.request, 'registration/password_reset_done.html', {'form' : form})
+            #return super().form_valid(form)
+        else : 
+            return render(self.request, 'registration/password_reset_done_fail.html', {'form' : form})
+
+INTERNAL_RESET_SESSION_TOKEN = '_password_reset_token'
+
+
+class PasswordResetDoneView(PasswordContextMixin, TemplateView):
+    template_name = 'registration/password_reset_done.html'
+    title = _('Password reset sent')
+
+
+class PasswordResetConfirmView(PasswordContextMixin, FormView):
+    form_class = SetPasswordForm
+    post_reset_login = False
+    post_reset_login_backend = None
+    reset_url_token = 'set-password'
+    success_url = reverse_lazy('password_reset_complete')
+    template_name = 'registration/password_reset_confirm.html'
+    title = _('Enter new password')
+    token_generator = default_token_generator
+
+    @method_decorator(sensitive_post_parameters())
+    @method_decorator(never_cache)
+    def dispatch(self, *args, **kwargs):
+        if 'uidb64' not in kwargs or 'token' not in kwargs:
+            raise ImproperlyConfigured(
+                "The URL path must contain 'uidb64' and 'token' parameters."
+            )
+
+        self.validlink = False
+        self.user = self.get_user(kwargs['uidb64'])
+
+        if self.user is not None:
+            token = kwargs['token']
+            if token == self.reset_url_token:
+                session_token = self.request.session.get(INTERNAL_RESET_SESSION_TOKEN)
+                if self.token_generator.check_token(self.user, session_token):
+                    # If the token is valid, display the password reset form.
+                    self.validlink = True
+                    return super().dispatch(*args, **kwargs)
+            else:
+                if self.token_generator.check_token(self.user, token):
+                    # Store the token in the session and redirect to the
+                    # password reset form at a URL without the token. That
+                    # avoids the possibility of leaking the token in the
+                    # HTTP Referer header.
+                    self.request.session[INTERNAL_RESET_SESSION_TOKEN] = token
+                    redirect_url = self.request.path.replace(token, self.reset_url_token)
+                    return HttpResponseRedirect(redirect_url)
+
+        # Display the "Password reset unsuccessful" page.
+        return self.render_to_response(self.get_context_data())
+
+    def get_user(self, uidb64):
+        try:
+            # urlsafe_base64_decode() decodes to bytestring
+            uid = urlsafe_base64_decode(uidb64).decode()
+            user = CustomUser._default_manager.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, CustomUser.DoesNotExist, ValidationError):
+            user = None
+        return user
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.user
+        return kwargs
+
+    def form_valid(self, form):
+        user = form.save()
+        del self.request.session[INTERNAL_RESET_SESSION_TOKEN]
+        if self.post_reset_login:
+            auth_login(self.request, user, self.post_reset_login_backend)
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.validlink:
+            context['validlink'] = True
+        else:
+            context.update({
+                'form': None,
+                'title': _('Password reset unsuccessful'),
+                'validlink': False,
+            })
+        return context
+
+
+class PasswordResetCompleteView(PasswordContextMixin, TemplateView):
+    template_name = 'registration/password_reset_complete.html'
+    title = _('Password reset complete')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['login_url'] = resolve_url(settings.LOGIN_URL)
+        return context
