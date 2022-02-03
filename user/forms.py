@@ -18,17 +18,16 @@ class UserSignupForm(forms.Form):
     email = forms.EmailField(label="이메일", required=True)
     password1 = forms.CharField(label="비밀번호", widget=forms.PasswordInput, required=True)
     password2 = forms.CharField(label="비밀번호 재확인", widget=forms.PasswordInput, required=True)
-    major = forms.CharField(label="전공 / 복수(연계)전공", required=True, max_length=30)
+    major = forms.CharField(label="학과 / 복수(연계)전공", required=True, max_length=30)
     phone_number = forms.CharField(label="연락처", required=True, max_length=13)
     student_id = forms.CharField(label="학번", required=True, max_length=9)
     position = forms.ChoiceField(label="내가 선택한 포지션은 ", choices=position_choices, required=True)
     
     class Meta:
          model = CustomUser
-         fields = ['name',  'email', 'password1', 'password2', 'major', 'phone_number', 'student_id', 'position']
+         fields = ['email', 'password1', 'password2','name', 'student_id', 'major', 'phone_number', 'position']
     
     def not_default_position(self):
-        print(self.cleaned_data.get('position'))
         try : self.cleaned_data.get('position')
         except KeyError:
             raise ValidationError("개발/기획/디자인 중 포지션을 선택해주세요!")
@@ -72,8 +71,8 @@ class UserSignupForm(forms.Form):
 
 
 class EmailAuthenticationForm(forms.Form):
-    email = forms.EmailField(label="Login Email", required=True)
-    password = forms.CharField(label="Password", widget=forms.PasswordInput)
+    email = forms.EmailField(label="이메일", required=True)
+    password = forms.CharField(label="비밀번호", widget=forms.PasswordInput)
 
     def check_is_active(self, user):
         return user.is_active
@@ -97,9 +96,9 @@ class EmailAuthenticationForm(forms.Form):
 class KakaoForm(ModelForm):
     class Meta:
         model = CustomUser
-        fields = ['name', 'email', 'phone_number', 'student_id', 'major']
+        fields = ['email', 'name', 'phone_number', 'student_id', 'major' , 'position']
 
 class Emailform(ModelForm):
     class Meta:
         model = CustomUser
-        fields = ['name', 'phone_number', 'student_id', 'major']
+        fields = ['name', 'phone_number', 'student_id', 'major', 'position']
