@@ -13,7 +13,7 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ('email', 'name', 'major', 'phone_number', 'student_id')
+        fields = ('email', 'name', 'major', 'phone_number', 'student_id', 'position')
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -45,18 +45,18 @@ class UserAdmin(BaseUserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
 
-    list_display = ('email', 'name', 'major', 'phone_number', 'student_id', 'is_admin', 'is_kakao','kakao_id')
+    list_display = ('email', 'name', 'major', 'phone_number', 'student_id', 'position', 'is_admin', 'is_kakao','kakao_id')
     list_filter = ('is_admin','is_superuser')
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('name', 'major', 'phone_number', 'student_id',)}),
+        ('Personal info', {'fields': ('name', 'major', 'phone_number', 'student_id','position')}),
         ('Permissions', {'fields': ('is_admin',)}),
     )
     
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('name',  'email', 'password1', 'password2', 'major', 'phone_number', 'student_id'),
+            'fields': ('name',  'email', 'password1', 'password2', 'major', 'phone_number', 'student_id','position'),
         }),
     )
     search_fields = ('name', 'email',)

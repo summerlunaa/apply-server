@@ -1,11 +1,5 @@
-from django.contrib.auth.views import   PasswordResetView,\
-                                        PasswordResetDoneView, \
-                                        PasswordResetConfirmView, \
-                                        PasswordResetCompleteView
-from django.contrib.auth.forms import AuthenticationForm, \
-                                        PasswordChangeForm, \
-                                        PasswordResetForm, \
-                                        SetPasswordForm
+from django.contrib.auth.views import PasswordResetConfirmView, PasswordResetCompleteView
+from django.contrib.auth.forms import SetPasswordForm
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect, resolve_url
@@ -42,6 +36,11 @@ def signup_email(request):
             user = form.save()
             login(request, user, backend='user.kakaobackends.KakaoBackend') #authenticate
             return redirect('login_home')
+        else : 
+            print(form)
+            print("Invalid Form")
+            print(form.errors)
+            return render(request, 'signup_email.html',{'form':form})
     else:
         form = UserSignupForm()
     return render(request, 'signup_email.html', {'form':form})
