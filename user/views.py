@@ -265,9 +265,9 @@ class PasswordResetView(PasswordContextMixin, FormView):
     form_class = PasswordResetForm
     from_email = None
     html_email_template_name = None
-    subject_template_name = 'registration/password_reset_subject.txt'
+    subject_template_name = 'user/registration/password_reset_subject.txt'
     success_url = reverse_lazy('password_reset_done')
-    template_name = 'registration/password_reset_form.html'
+    template_name = 'user/registration/password_reset_form.html'
     title = _('Password reset')
     token_generator = default_token_generator
 
@@ -288,16 +288,16 @@ class PasswordResetView(PasswordContextMixin, FormView):
                 'extra_email_context': self.extra_email_context,
             }
             form.save(**opts)
-            return render(self.request, 'registration/password_reset_done.html', {'form' : form})
+            return render(self.request, 'user/registration/password_reset_done.html', {'form' : form})
             #return super().form_valid(form)
         else : 
-            return render(self.request, 'registration/password_reset_done_fail.html', {'form' : form})
+            return render(self.request, 'user/registration/password_reset_done_fail.html', {'form' : form})
 
 INTERNAL_RESET_SESSION_TOKEN = '_password_reset_token'
 
 
 class PasswordResetDoneView(PasswordContextMixin, TemplateView):
-    template_name = 'registration/password_reset_done.html'
+    template_name = 'user/registration/password_reset_done.html'
     title = _('Password reset sent')
 
 
@@ -307,7 +307,7 @@ class PasswordResetConfirmView(PasswordContextMixin, FormView):
     post_reset_login_backend = None
     reset_url_token = 'set-password'
     success_url = reverse_lazy('password_reset_complete')
-    template_name = 'registration/password_reset_confirm.html'
+    template_name = 'user/registration/password_reset_confirm.html'
     title = _('Enter new password')
     token_generator = default_token_generator
 
@@ -378,7 +378,7 @@ class PasswordResetConfirmView(PasswordContextMixin, FormView):
 
 
 class PasswordResetCompleteView(PasswordContextMixin, TemplateView):
-    template_name = 'registration/password_reset_complete.html'
+    template_name = 'user/registration/password_reset_complete.html'
     title = _('Password reset complete')
 
     def get_context_data(self, **kwargs):
