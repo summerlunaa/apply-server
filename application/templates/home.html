@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,11 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>멋쟁이 사자처럼 지원하기</title>
-    <link rel="stylesheet" href="./home.css">
+    <link rel="stylesheet" href="{% static 'css/home.css'%}">
 </head>
 
-<body>
-    <div class="loading">
+<script language="javascript">
+  function init() {
+    alert("안녕 세계야!");
+  }
+</script>
+
+ 
+
+<body onload="delLoad();">
+    <div class="loading" >
         <div class="loading-box">
             <img src="../static/logo-line.png" alt="">
             <div class="red-box red-box1">
@@ -44,7 +53,7 @@
 
 
         <!-- 페이지2 컴포넌트 -->
-        <div class="page2 page">
+        <div class="page2 page" >
             <h1 class="pagecomp pagecomp2">
                 내 아이디어를
                 <br>내 손으로 실현한다
@@ -173,10 +182,10 @@
         </section>
 
         <!-- 영상 길이만큼 높이 맞추기 -->
-        <div id="video-scroll"></div>
+        <div id="video-scroll" ></div>
         <div id="video-con">
-            <video id="v0" tabindex="0" , autobuffer preload>
-                <source type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"' src="../static/background.mp4">
+            <video id="v0" tabindex="0" , autobuffer preload >
+                <source type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"' src="{% static 'background.mp4'%}">
                 </source>
             </video>
         </div>
@@ -195,7 +204,7 @@
 
         </footer>
     </div>
-    <script src="./home.js"></script>
+    <script src="{% static 'js/home.js'%}"></script>
 </body>
 
 </html>
