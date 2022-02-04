@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from .models import Application
-from .forms import ApplicationForm
+from .forms import ApplicationForm, UserPositionForm
 
 
 def index(request):
@@ -10,7 +10,20 @@ def index(request):
 
 
 @login_required
-def write(request):
+def user_info(request):
+    user = request.user
+    if request.method == 'POST':
+        user_form = UserPositionForm(request.POST, instance=user)
+        if user_form.is_valid():
+            user_form.save()
+        return redirect('user_info')
+    else:
+        user_form = UserPositionForm(instance=user)
+    return render(request, 'user_info.html', {'user_form':user_form})
+
+
+@login_required
+def write_application(request):
     application = Application.objects.filter(user=request.user).first()
     
     if request.method == 'POST':
