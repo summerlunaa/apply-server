@@ -78,7 +78,7 @@ def email_login(request):
                 user = authenticate(email=email, password=password)
                 if user is not None:
                     login(request, user, backend='user.kakaobackends.KakaoBackend') 
-                    return redirect('success')
+                    return redirect('user_info')
     else:
         form = EmailAuthenticationForm()
     return render(request, 'email_login.html', {'form':form})
@@ -105,7 +105,7 @@ def submit_kakao(request):
         print("form is post")
         if form.is_valid():
             form.save()
-            return redirect('success')
+            return redirect('user_info')
     else:
         print("else")
     return render(request, 'submit_kakao.html', {'form':form})
@@ -171,9 +171,9 @@ def kakao_login_callback(request):
     else:
         login(request, CustomUser.objects.get(kakao_id=kakao_id), backend='user.kakaobackends.KakaoBackend')
         if state=="none":
-            return redirect('success') #TO-DO : 우선은 로그인 완료 후 임시 페이지로 이동하게 함
+            return redirect('user_info') #TO-DO : 우선은 로그인 완료 후 임시 페이지로 이동하게 함
         else:
-            return redirect('success')
+            return redirect('user_info')
 
 
 def logout_view(request):
