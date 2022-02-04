@@ -111,6 +111,6 @@ const delLoad = () => {
 	}, 2000);
     console.log("loaded")
 };
-window.onload = delLoad;
+// window.onload = delLoad;
 
 
