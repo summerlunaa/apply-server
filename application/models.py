@@ -10,8 +10,9 @@ class Application(models.Model):
     answer3 = models.TextField(default='', blank=True)
     answer4 = models.TextField(default='', blank=True)
     answer5 = models.TextField(default='', blank=True)
+    portfolio = models.FileField(null=True, blank=True, upload_to='portfolio')
+    design_doc = models.FileField(null=True, blank=True, upload_to='design_doc')
     updated_at = models.DateTimeField(default=timezone.now)
-    portfolio = models.FileField(null=True, blank=True)
 
     def __str__(self):
-        return self.user
+        return self.user.email
