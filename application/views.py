@@ -5,6 +5,10 @@ from .models import Application
 from .forms import ApplicationForm
 
 
+def index(request):
+    return render(request, 'index.html')
+
+
 @login_required
 def write(request):
     application = Application.objects.filter(user=request.user).first()
