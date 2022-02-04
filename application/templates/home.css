@@ -30,34 +30,40 @@ html{
 }
 .loading img{
     width:25rem;
+    height:auto;
     background-color: transparent;
+    z-index:1
 }
 .loading-box{
-    border: solid red 1px;
     display:flex;
     width:25rem;
     height:25rem;
     overflow: hidden;
     position: absolute;
     top: calc(50vh - 12.5rem);
-    left:calc(50vw - 12.5rem);
+    left: calc(50vw - 12.5rem);
 }
 .red-box{
-    position: relative;
+    position: absolute;
     width:50%;
     height:100%;
     overflow: hidden;
-    border:solid green 1px;
     background-color: transparent;
+}
+.red-box1{
+    left:0;
+}
+.red-box2{
+    right:0;
 }
 
 .rb{
     content:" ";
     position:absolute;
-    bottom:-15rem;
-    width:22rem;
-    height:22rem;
-    border-radius: 9rem;
+    bottom:-24rem;
+    width:26rem;
+    height:26rem;
+    border-radius: 12rem;
     animation:spin 5s ease-in-out infinite;
     z-index:0;
 
@@ -69,7 +75,7 @@ html{
 }
 .rb2{
     right:-4rem;
-    
+    bottom: -22rem;
     background-color: gray;
 
 }
@@ -78,7 +84,7 @@ html{
         transform: translateY(0) rotate(0deg);
     }
     100%{
-        transform: translateY(-100%) rotate(500deg);
+        transform: translateY(-80%) rotate(500deg);
 
     }
 }
