@@ -11,7 +11,7 @@ class Application(models.Model):
     answer4 = models.TextField(default='', blank=True)
     answer5 = models.TextField(default='', blank=True)
     updated_at = models.DateTimeField(default=timezone.now)
-    portfolio = models.FileField(null=True, blank=True)
+    portfolio = models.FileField(null=True, blank=True, upload_to='portfolio')
 
     def __str__(self):
-        return self.user
+        return self.user.email
