@@ -16,7 +16,9 @@ def user_info(request):
         user_form = UserPositionForm(request.POST, instance=user)
         if user_form.is_valid():
             user_form.save()
-        return redirect('user_info')
+        # return redirect('user_info')
+        return redirect('application')
+
     else:
         user_form = UserPositionForm(instance=user)
     return render(request, 'user_info.html', {'user_form':user_form})
