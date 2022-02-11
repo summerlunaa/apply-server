@@ -1,14 +1,57 @@
-<form method="POST">
-    <!--
-        """
-        일반 로그인의 경우
-        """
-    -->
-    {% csrf_token %}
-    {{ form.as_p }}
-    
-    
-    <a href="{% url 'password_reset' %}">비밀번호를 잃어버리셨나요?</a>
-    <br><button type="submit">로그인</button><br>
-    <a href="{% url 'kakao_login' %}">카카오톡으로 로그인</a>
-</form>
+<!--{% load static %}-->
+<!DOCTYPE html>
+<head>
+    <title>Email Login Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale-1">
+    <link rel="stylesheet" href="email-login.css">
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+</head>
+
+<body>
+    <header>
+        <img src="logo-white.png" alt="">
+        <span id="logo-title">10TH LIKELION SOGANG</span>
+    </header>
+    <main>
+        <div class="container">
+            <div class="img">
+                <h2>Login</h2>
+                <img src="logo-color.png">
+                <!--<img src="{% static/logo-color.png %}">-->
+            </div>
+        </div>
+
+        <div class="login-container">
+            <form method="POST">{% csrf_token %}
+                {{ form.as_p }}
+                <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-solid fa-envelope"></i>
+                    </div>
+                    <div>
+                        <input class="input" type="text" placeholder="이메일" 
+                        onfocus="this.placeholder=''" onblur="this.placeholder='이메일'">
+                    </div>
+                </div>
+                <div class="input-div two">
+                    <div class="i">
+                        <i class="fas fa-solid fa-key"></i>
+                    </div>
+                    <div>
+                        <input class="input" type="password" placeholder="비밀번호" 
+                        onfocus="this.placeholder=''" onblur="this.placeholder='비밀번호'"]>
+                    </div>
+                </div>
+                <div class="linkto">
+                    <a href="{% url 'password_reset' %}">비밀번호를 잊어버리셨나요?</a>
+                    <a href="{% url 'signup_email' %}">아직 회원이 아니신가요?</a>
+                </div>
+                <br><button type="submit" class="btn key" value="Login">로그인</button><br>
+                <a href="{% url 'kakao_login' %}"><button class="btn other">카카오톡으로 로그인</button></a>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <a href="{% url 'home' %}"><button class="btn-prev">‹ Home</button></a>
+    </footer>
+</body>
