@@ -16,6 +16,10 @@ html {
         font-size: 8px;
     }
 }
+a:visited, a{
+    text-decoration: none;
+    color:white;
+}
 
   /* body color */
   body{
@@ -24,15 +28,6 @@ html {
     word-spacing: .5rem;
     position: relative;
   }
-  a:visited{
-    text-decoration: none;
-    color:white;
-}
-a{
-    text-decoration: none;
-    color:white;
-}
-
 /* 헤더 */
 header {
     position:fixed;
@@ -47,7 +42,6 @@ header {
     font-size: 3rem;
     font-weight: 400;
     font-family: "Bebas Neue", cursive;
-    z-index: 12;
   }
   header img {
     width: 4.3rem;
@@ -67,7 +61,6 @@ header {
   }
 /* progress bar */
 .progress-bar{
-    z-index: 3;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -84,91 +77,31 @@ header {
     height:3rem;
     margin: 0 1rem;
     box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.14), 0px 6px 30px rgba(0, 0, 0, 0.12), 0px 8px 10px rgba(0, 0, 0, 0.2);
-    background-color: white;
-}
-.bar1, .bar2{
     background-color: #b80e18;
 }
-/* form */
-form{
-    margin-top:calc(10rem + 15vh);
+/* done */
+.done{
+    margin-top:calc(10rem + 10vh);
+    color:white;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    color:white;
-    padding: 0 10%;
-}
-.label{
-    font-size:1.8rem;
-    line-height:4rem;
-    text-overflow: clip;
-    max-width:68vw;
-}
-textarea{
-    resize: none;
-    color:white;
-    width:65vw;
-    height:25rem;
-    padding:3rem;
-    font-size:1.4rem;
-    background-color: #04080F;
-    border: solid white 1px;
-    outline: none;
-    margin-top:2rem;    
-}
-form span{
-    align-self: flex-end;
-    margin-right:10%;
-    font-size:1.2rem;
-    margin-bottom: 8rem;
-}
-/* drag & drop */
-.dragdrop{
-    /* margin-top:calc(10rem + 15vh); */
-    height:60vh;
-    display:flex;
-    align-items: center;
     justify-content: center;
-    flex-direction: column;
-    color:white;
-}
-#portfolio , #design_doc{
-    opacity: 0;
-}
-#dragBoxP , #dragBoxD{
-    width:40vw;
-    height:25rem;
-    background-color: rgba(255, 255, 255, 0.8);
-    text-align: center;
-    line-height: 25rem;
-    border-radius: 1rem;
-    font-size:2rem;
-    
-}
-
-.cancel{
-    display: none;
-    font-size:2rem;
-    cursor:pointer;
-    transform: translate(0,-14rem);
-}
-
-/* button */
-.submit{
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    color:white;
-    margin-bottom: 20vh;
+    flex-direction: column;
+    height:calc(85vh - 10rem);
 }
-.save{
-    border: white solid 1px;
-    background-color: #b80e18;
-    color:white;
-    width:20rem;
-    height:5rem;
-    border-radius: 1rem;
-    margin-top:1rem;
+.done img{
+    width:30rem;
+}
+.done p{
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom:1rem;
+}
+.done div{
+    font-size:1.3rem;
+}
+.done .contact{
+    margin-bottom:2rem;
 }
 /* prev, next */
 .prevNext{
@@ -181,6 +114,10 @@ form span{
     height:3rem;
     margin-bottom: 4rem;;
 }
+.prevNext a:visited{
+    text-decoration: none;
+    color:white;
+}
 .prev{
     position: absolute;
     left:10rem;
@@ -189,20 +126,12 @@ form span{
     position: absolute;
     right:10rem;
 }
-.prevNext a:visited{
-    text-decoration: none;
-    color:white;
-}
-
 
 /* responsive  - mobile*/
 @media(max-width:500px){
     header button{
         width:10rem;
     }
-    .label{
-        font-size:1.5rem;
-        line-height: 2.5rem;
-    }
+    
     
 }
