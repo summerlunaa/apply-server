@@ -13,7 +13,8 @@ def index(request):
 def applySuccess(request):
     return render(request, "application-success.html")
 
-@login_required(login_url='/user/login/email/') #로그인 안된 상태라면 로그인 페이지로
+
+@login_required(login_url="/user/login/email/")  # 로그인 안된 상태라면 로그인 페이지로
 def user_info(request):
     user = request.user
     if request.method == "POST":
@@ -26,11 +27,15 @@ def user_info(request):
 
     else:
         user_form = UserPositionForm(instance=user)
-        if request.user.name == "name" or request.user.student_id=="student_id" or user.major =="major":
-            form = Emailform()  
-            return render(request, 'submit_kakao.html', {'form':form})
+        if (
+            request.user.name == "name"
+            or request.user.student_id == "student_id"
+            or user.major == "major"
+        ):
+            form = Emailform()
+            return render(request, "signup_info.html", {"form": form})
 
-    return render(request, 'user_info.html', {'user_form':user_form})
+    return render(request, "user_info.html", {"user_form": user_form})
 
 
 @login_required
