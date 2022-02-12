@@ -180,6 +180,7 @@ def kakao_login_callback(request):
         major = "본전공 / 복수전공"
         phone_number = "010-****-****"
         student_id = "20******"
+        position = "선택"
         user = CustomUser.objects.create_user(email, None, True, name, kakao_id, major, phone_number, student_id, position)
         form = KakaoForm()                   #email, password, is_kakao, name, kakao_id , major, phone_number, student_id
         login(request, user, backend='user.kakaobackends.KakaoBackend')
