@@ -43,9 +43,7 @@
                 onblur="this.placeholder='비밀번호'" ] />
             </div>
           </div>
-          {% if tlfvo %}
-          <p>실패</p>
-          {% endif %}
+
           <div class="linkto">
             <a href="{% url 'password_reset' %}">비밀번호를 잊어버리셨나요?</a>
             <a href="{% url 'signup_email' %}">아직 회원이 아니신가요?</a>

@@ -90,6 +90,15 @@ form{
     border-bottom: 1px solid #ffffff;
 }
 
+.input-div-info {
+    position: relative;
+    display: grid;
+    grid-template-columns: 7% 93%;
+    margin: 15px 0;
+    padding: 5px 0;
+   
+}
+
 .input-div.one{
     margin-top: 0px;
 }
@@ -108,10 +117,42 @@ form{
     align-items: center;
     color:white;
 }
+.info{
+    display: flex;
+    align-items: center;
+    color:white;
+        font-size: medium;
+        width: 40px;
+}
+.fs-medium{
+    font-size: medium;
+    margin-left: 5px;
+    font-weight: bolder;
+}
+.info.position {
+    font-size: small;
+    width: 150px;
+}
+.info.phone {
+    font-size: small;
+    width: 100px;
+}
 
 .input-div > div{
     position: relative;
     height: 30px;
+}
+.input-div-info>div {
+    position: relative;
+    height: 30px;
+    margin-left: 50px;
+    border-bottom: 1px solid #ffffff;
+}
+.input-div-info>.info-input-div {
+    position: relative;
+    height: 30px;
+    margin-left: 150px;
+    border-bottom: 1px solid #ffffff;
 }
 
 .input{
@@ -128,6 +169,20 @@ form{
     font-weight: 400;
     color: white;
 }
+.input-select {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: white;
+    background-color: #04080F;
+}
 
 .input::placeholder{
     left: 10px;
@@ -135,6 +190,7 @@ form{
     color: #ffffff;
     font-size: 1rem;
     font-weight: 400;
+    opacity: 0.5;
 }
 
 a{
@@ -207,9 +263,9 @@ footer{
     position: absolute;
     top:50%;
     display:flex;
-    display: none;
     flex-direction: column;
     transform: translate(-50%, -50%);
+    transition: all 2s;
 }
 
 .see-personal-info-agreement{
@@ -225,6 +281,8 @@ footer{
 .see-personal-info-agreement:hover{
     color:#B80E18;
     cursor:pointer;
+    font-weight: bold;
+
 }
 
 #click{

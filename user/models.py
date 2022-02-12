@@ -1,4 +1,3 @@
-from turtle import position
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager,PermissionsMixin
 class CustomUserManager(BaseUserManager):

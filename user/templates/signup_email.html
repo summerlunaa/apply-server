@@ -11,11 +11,12 @@
 
   <body>
     <header>
-      <img src="logo-white.png" alt="" />
+      <img src="{%static 'logo-white.png'%}" alt="" />
       <span id="logo-title">10TH LIKELION SOGANG</span>
     </header>
 
     <main>
+        
       <div class="container">
         <div class="img">
           <h2>Register</h2>
@@ -25,18 +26,7 @@
 
       <div class="login-container">
         <form method="POST">
-          {% csrf_token %} {% for field in form %}
-          <div>
-            {{ field.label }} {{ field }} {% if field.errors %} 
-            {% for e in field.errors %}
-            <p style="color: red">{{ e | escape }}</p>
-
-            <!--"""
-                                            이미 가입된 이메일, 잘못된 비번 입력 시 에러메시지 나타내는 부분입니다"""
-                                        -->
-            {% endfor %} {% endif %}
-          </div>
-          {% endfor %}
+          {% csrf_token %} 
           <div class="input-div one">
             <div class="i">
               <i class="fas fa-solid fa-envelope"></i>
@@ -82,11 +72,8 @@
             </div>
           </div>
           <div class="linkto">
-            <input type="checkbox" id="click" />
-            <label for="click" class="see-personal-info-agreement"
-              >개인정보 수집 동의하기</label
-            >
-            <a href="{% url 'signup_email' %}">이미 회원이신가요?</a>
+            
+            <a href="{% url 'email_login' %}">이미 회원이신가요?</a>
           </div>
           <br /><button type="submit" class="btn key" value="Login">다음</button
           ><br />
@@ -94,11 +81,11 @@
             ><button class="btn other">카카오톡으로 회원가입</button></a
           >
         </form>
-        <div class="personal-info-popup">
+        <div id="info_popup" class="personal-info-popup">
           <div class="popup-container">
             <div class="popup-top">
+                
               <h2>개인정보 수집·이용 동의서</h2>
-              <label for="hide" class="fas fa-light fa-xmark"> </label>
             </div>
 
             <div class="content">
@@ -150,8 +137,8 @@
             <div class="line"></div>
             <div class="agree">
               <h5>개인정보 수집에 동의하십니까?</h5>
-              <input type="checkbox" id="agree-click" />
-              <label for="agree-click" class="check-agree">동의합니다</label>
+              <input id="infoagree_check" type="checkbox" id="agree-click" />
+              <label  for="agree-click" class="check-agree">동의합니다</label>
             </div>
           </div>
         </div>
@@ -161,4 +148,16 @@
       <a href="{% url 'index' %}"><button class="btn-prev">‹ Home</button></a>
     </footer>
   </body>
+  <script>
+      let checkbox = document.querySelector("#infoagree_check");
+      let info_popup = document.querySelector("#info_popup");
+      checkbox.addEventListener('input',(e)=>{
+          if(e.target.checked){
+              info_popup.style.opacity="0";
+              setTimeout(()=>{
+                info_popup.style.display="none";
+              },1500)
+          }
+      })
+  </script>
 </html>
