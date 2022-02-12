@@ -9,21 +9,20 @@ from user.forms import EmailAuthenticationForm, Emailform
 def index(request):
     return render(request, "home.html")
 
+
 def applySuccess(request):
     return render(request, "application-success.html")
-
-
 
 @login_required(login_url='/user/login/email/') #로그인 안된 상태라면 로그인 페이지로
 def user_info(request):
     user = request.user
-    if request.method == 'POST':
+    if request.method == "POST":
         user_form = UserPositionForm(request.POST, instance=user)
 
         if user_form.is_valid():
             user_form.save()
-        # return redirect('user_info')
-        return redirect('application')
+
+        return redirect("application")
 
     else:
         user_form = UserPositionForm(instance=user)
@@ -56,4 +55,6 @@ def write_application(request):
             form = ApplicationForm(instance=application)
         else:  # 지원서 첫 작성
             form = ApplicationForm()
-    return render(request, 'application.html', {'form': form , 'application':application})
+    return render(
+        request, "application.html", {"form": form, "application": application}
+    )
