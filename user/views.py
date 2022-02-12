@@ -1,3 +1,4 @@
+from turtle import position
 from django.conf import settings
 
 from django.contrib.auth.forms import (
@@ -167,7 +168,7 @@ def kakao_login_callback(request):
         major = "본전공 / 복수전공"
         phone_number = "010-****-****"
         student_id = "20******"
-        user = CustomUser.objects.create_user(email, None, True, name, kakao_id, major, phone_number, student_id)
+        user = CustomUser.objects.create_user(email, None, True, name, kakao_id, major, phone_number, student_id, position)
         form = KakaoForm()                   #email, password, is_kakao, name, kakao_id , major, phone_number, student_id
         login(request, user, backend='user.kakaobackends.KakaoBackend')
         return render(request, 'submit_kakao.html', {'form':form})
