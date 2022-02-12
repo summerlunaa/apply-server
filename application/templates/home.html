@@ -42,7 +42,7 @@
             <span id="logo-title-mo">10TH LIKELION SOGANG</span>
 
             {% if user.is_authenticated %}
-                <a href="{% url 'url_info' %}"><button>지금 바로 지원하기 ▶</button></a>
+                <a href="{% url 'user_info' %}"><button>지금 바로 지원하기 ▶</button></a>
             {% else %}
                 <a href="{% url 'signup_email' %}"><button>지금 바로 지원하기 ▶</button></a>
             {% endif %}
@@ -186,7 +186,7 @@
         <div id="video-scroll" ></div>
         <div id="video-con">
             <video id="v0" tabindex="0" , autobuffer preload muted="muted">
-                <source type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"' src="{% static 'background.mp4'%}">
+                <source type='video/mp4;' src="{% static 'background.mp4'%}">
                 </source>
             </video>
         </div>
