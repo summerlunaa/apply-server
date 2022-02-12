@@ -2,7 +2,8 @@ from turtle import position
 from django.conf import settings
 
 from django.contrib.auth.forms import (
-    PasswordResetForm, SetPasswordForm,
+    PasswordResetForm,
+    SetPasswordForm,
 )
 from django.contrib.auth.tokens import default_token_generator
 
@@ -11,9 +12,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, resolve_url
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.utils.http import (
-    urlsafe_base64_decode,
-)
+from django.utils.http import urlsafe_base64_decode
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
@@ -31,37 +30,43 @@ from .forms import *
 import requests
 
 
-def success(request) :
+def success(request):
     """
     로그인, 회원가입 성공 시 돌아가 페이지로 향하는 view
     """
-    return render(request, 'success.html') 
+    return render(request, "success.html")
 
 
 def login_home(request):
     """
     로그인, 회원가입을 진행할 페이지로 향하는 view
     """
-    return render(request, 'login_home.html')
+    return render(request, "login_home.html")
+
+
+def signup_info(request):
+    return render(request, "signup_info.html")
 
 
 def signup_email(request):
     """
     일반(이메일) 회원가입 처리해주는 view
     이메일 회원가입 완료 후 로그인 페이지로 향함
-    """ 
+    """
     if request.method == "POST":
         form = UserSignupForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user, backend='user.kakaobackends.KakaoBackend') #authenticate
-            return redirect('index')
-        else : 
+            login(
+                request, user, backend="user.kakaobackends.KakaoBackend"
+            )  # authenticate
+            return redirect("index")
+        else:
             print("Invalid Form")
-            return render(request, 'signup_email.html',{'form':form})
+            return render(request, "signup_email.html", {"form": form})
     else:
         form = UserSignupForm()
-    return render(request, 'signup_email.html', {'form':form})
+    return render(request, "signup_email.html", {"form": form})
 
 
 def email_login(request):
@@ -69,7 +74,7 @@ def email_login(request):
     일반(이메일) 회원가입 처리해주는 view
     로그인 완료 후 로그인 성공 시 이동할 페이지로 향함 (상의 필요)
     """
-    if request.method=="POST":
+    if request.method == "POST":
         form = EmailAuthenticationForm(request.POST)
         if form.is_valid():
             if form.authenticate_login():
@@ -77,11 +82,13 @@ def email_login(request):
                 password = form.cleaned_data.get("password")
                 user = authenticate(email=email, password=password)
                 if user is not None:
-                    login(request, user, backend='user.kakaobackends.KakaoBackend') 
-                    return redirect('user_info')
+                    login(
+                        request, user, backend="user.kakaobackends.KakaoBackend"
+                    )
+                    return redirect("user_info")
     else:
         form = EmailAuthenticationForm()
-    return render(request, 'email_login.html', {'form':form})
+    return render(request, "email_login.html", {"form": form})
 
 
 def kakao_login(request):
@@ -93,22 +100,24 @@ def kakao_login(request):
     rest_api_key = settings.KAKAO_REST_API_KEY
     redirect_uri = "http://127.0.0.1:8000/user/kakao/login/callback/"
     state = "none"
-    return redirect(f"https://kauth.kakao.com/oauth/authorize?client_id={rest_api_key}&redirect_uri={redirect_uri}&response_type=code&state={state}")
+    return redirect(
+        f"https://kauth.kakao.com/oauth/authorize?client_id={rest_api_key}&redirect_uri={redirect_uri}&response_type=code&state={state}"
+    )
 
 
 def submit_kakao(request):
     if not request.user.is_authenticated:
         raise ValidationError("잘못된 접근입니다(Not authenticated)")
     form = KakaoForm(request.POST, instance=request.user)
-    if request.method=="POST":
+    if request.method == "POST":
         form = KakaoForm(request.POST, instance=request.user)
         print("form is post")
         if form.is_valid():
             form.save()
-            return redirect('user_info')
+            return redirect("user_info")
     else:
         print("else")
-    return render(request, 'submit_kakao.html', {'form':form})
+    return render(request, "submit_kakao.html", {"form": form})
 
 
 def kakao_login_callback(request):
@@ -125,16 +134,24 @@ def kakao_login_callback(request):
     if code is None:
         raise Exception("code is none")
 
-    state = request.GET.get("state") 
+    state = request.GET.get("state")
     token_url = "https://kauth.kakao.com/oauth/token"
     rest_api_key = settings.KAKAO_REST_API_KEY
     redirect_uri = "http://127.0.0.1:8000/user/kakao/login/callback/"
-    res = requests.post(token_url, data={'grant_type':'authorization_code', 'client_id':rest_api_key, 'redirect_uri':redirect_uri, 'code':code}) 
+    res = requests.post(
+        token_url,
+        data={
+            "grant_type": "authorization_code",
+            "client_id": rest_api_key,
+            "redirect_uri": redirect_uri,
+            "code": code,
+        },
+    )
     token_response = res.json()
-    access_token = token_response.get('access_token')
+    access_token = token_response.get("access_token")
     info_url = "https://kapi.kakao.com/v2/user/me"
-    headers = {'Authorization': f'Bearer {access_token}'}
-    params = {'secure_resource': True}
+    headers = {"Authorization": f"Bearer {access_token}"}
+    params = {"secure_resource": True}
     info_res = requests.get(info_url, headers=headers, params=params)
 
     try:
@@ -143,37 +160,53 @@ def kakao_login_callback(request):
         info = None
     kakao_id = str(info.get("id"))
 
-    try :
+    try:
         test = CustomUser.objects.get(kakao_id=kakao_id)
     except CustomUser.DoesNotExist:
         test = None
 
-    if  test is None: 
+    if test is None:
         personal_info = info.get("kakao_account")
         agree_on_nickname = personal_info.get("profile_needs_agreement")
-        if not agree_on_nickname :
+        if not agree_on_nickname:
             profile = personal_info.get("profile")
             name = profile.get("nickname")
         agree_on_email = personal_info.get("email_needs_agreement")
 
-        if not agree_on_email: 
+        if not agree_on_email:
             email = personal_info.get("email")
         else:
-            email = ''
+            email = ""
         major = "본전공 / 복수전공"
         phone_number = "010-****-****"
         student_id = "20******"
-        user = CustomUser.objects.create_user(email, None, True, name, kakao_id, major, phone_number, student_id, position)
-        form = KakaoForm()                   #email, password, is_kakao, name, kakao_id , major, phone_number, student_id
-        login(request, user, backend='user.kakaobackends.KakaoBackend')
-        return render(request, 'submit_kakao.html', {'form':form})
+        user = CustomUser.objects.create_user(
+            email,
+            None,
+            True,
+            name,
+            kakao_id,
+            major,
+            phone_number,
+            student_id,
+            position,
+        )
+        form = (
+            KakaoForm()
+        )  # email, password, is_kakao, name, kakao_id , major, phone_number, student_id
+        login(request, user, backend="user.kakaobackends.KakaoBackend")
+        return render(request, "submit_kakao.html", {"form": form})
 
     else:
-        login(request, CustomUser.objects.get(kakao_id=kakao_id), backend='user.kakaobackends.KakaoBackend')
-        if state=="none":
-            return redirect('user_info') #TO-DO : 우선은 로그인 완료 후 임시 페이지로 이동하게 함
+        login(
+            request,
+            CustomUser.objects.get(kakao_id=kakao_id),
+            backend="user.kakaobackends.KakaoBackend",
+        )
+        if state == "none":
+            return redirect("user_info")  # TO-DO : 우선은 로그인 완료 후 임시 페이지로 이동하게 함
         else:
-            return redirect('user_info')
+            return redirect("user_info")
 
 
 def logout_view(request):
@@ -184,20 +217,22 @@ def logout_view(request):
     => 로그아웃 완료 후 우선은 login_home으로 돌아가게 해놓음, 상의 필요
     """
     if request.user.is_kakao:
-        kakao_admin_key = settings.KAKAO_ADNIN_KEY 
+        kakao_admin_key = settings.KAKAO_ADNIN_KEY
         logout_url = "https://kapi.kakao.com/v1/user/logout"
         target_id = request.user.kakao_id
         target_id = int(target_id)
-        headers = {'Authorization': f'KakaoAK {kakao_admin_key}'}
-        data = {'target_id_type':'user_id','target_id':target_id}
-        logout_res = requests.post(logout_url, headers=headers, data=data).json()
+        headers = {"Authorization": f"KakaoAK {kakao_admin_key}"}
+        data = {"target_id_type": "user_id", "target_id": target_id}
+        logout_res = requests.post(
+            logout_url, headers=headers, data=data
+        ).json()
         response = logout_res.get("id")
         if target_id != response:
-            return Exception('Kakao Logout failed')
+            return Exception("Kakao Logout failed")
         else:
             print(str(response) + "Kakao Logout successed")
     logout(request)
-    return redirect('login_home')
+    return redirect("login_home")
 
 
 def logout_with_kakao(request):
@@ -206,23 +241,25 @@ def logout_with_kakao(request):
     """
     kakao_rest_api_key = settings.KAKAO_REST_API_KEY
     logout_redirect_uri = "http://127.0.0.1:8000/user/logout/"
-    state = "none" 
+    state = "none"
     kakao_service_logout_url = "https://kauth.kakao.com/oauth/logout"
-    return redirect(f"{kakao_service_logout_url}?client_id={kakao_rest_api_key}&logout_redirect_uri={logout_redirect_uri}&state={state}")
+    return redirect(
+        f"{kakao_service_logout_url}?client_id={kakao_rest_api_key}&logout_redirect_uri={logout_redirect_uri}&state={state}"
+    )
 
 
 def delete_user(request, user_pk):
     """
     탈퇴하기
     """
-    user =request.user
+    user = request.user
     if user.pk == user_pk:
         if user.is_kakao:
             kakao_admin_key = settings.KAKAO_ADNIN_KEY
-            user_kakao_id = int(user.kakao_id) 
+            user_kakao_id = int(user.kakao_id)
             url = "https://kapi.kakao.com/v1/user/unlink"
-            headers = {'Authorization':f'KakaoAK {kakao_admin_key}'} 
-            data = {'target_id_type':'user_id','target_id': user_kakao_id}
+            headers = {"Authorization": f"KakaoAK {kakao_admin_key}"}
+            data = {"target_id_type": "user_id", "target_id": user_kakao_id}
             res = requests.post(url, headers=headers, data=data)
             deleted_user_id = res.json().get("id")
             if deleted_user_id == user_kakao_id:
@@ -231,7 +268,7 @@ def delete_user(request, user_pk):
                 print("연결끊기 실패")
         logout(request)
         user.delete()
-        return redirect('login_home')
+        return redirect("login_home")
     else:
         raise ValidationError("잘못된 접근입니다.")
 
@@ -243,28 +280,26 @@ def delete_user(request, user_pk):
 #   prompts for a new password
 # - PasswordResetCompleteView shows a success message for the above
 
+
 class PasswordContextMixin:
     extra_context = None
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update({
-            'title': self.title,
-            **(self.extra_context or {})
-        })
+        context.update({"title": self.title, **(self.extra_context or {})})
         return context
 
 
 class PasswordResetView(PasswordContextMixin, FormView):
-    email_template_name = 'registration/password_reset_email.html'
+    email_template_name = "registration/password_reset_email.html"
     extra_email_context = None
     form_class = PasswordResetForm
     from_email = None
     html_email_template_name = None
-    subject_template_name = 'user/registration/password_reset_subject.txt'
-    success_url = reverse_lazy('password_reset_done')
-    template_name = 'user/registration/password_reset_form.html'
-    title = _('Password reset')
+    subject_template_name = "user/registration/password_reset_subject.txt"
+    success_url = reverse_lazy("password_reset_done")
+    template_name = "user/registration/password_reset_form.html"
+    title = _("Password reset")
     token_generator = default_token_generator
 
     @method_decorator(csrf_protect)
@@ -272,56 +307,69 @@ class PasswordResetView(PasswordContextMixin, FormView):
         return super().dispatch(*args, **kwargs)
 
     def form_valid(self, form):
-        if CustomUser.objects.filter(email=self.request.POST.get("email")).exists():
+        if CustomUser.objects.filter(
+            email=self.request.POST.get("email")
+        ).exists():
             opts = {
-                'use_https': self.request.is_secure(),
-                'token_generator': self.token_generator,
-                'from_email': self.from_email,
-                'email_template_name': self.email_template_name,
-                'subject_template_name': self.subject_template_name,
-                'request': self.request,
-                'html_email_template_name': self.html_email_template_name,
-                'extra_email_context': self.extra_email_context,
+                "use_https": self.request.is_secure(),
+                "token_generator": self.token_generator,
+                "from_email": self.from_email,
+                "email_template_name": self.email_template_name,
+                "subject_template_name": self.subject_template_name,
+                "request": self.request,
+                "html_email_template_name": self.html_email_template_name,
+                "extra_email_context": self.extra_email_context,
             }
             form.save(**opts)
-            return render(self.request, 'user/registration/password_reset_done.html', {'form' : form})
-            #return super().form_valid(form)
-        else : 
-            return render(self.request, 'user/registration/password_reset_done_fail.html', {'form' : form})
+            return render(
+                self.request,
+                "user/registration/password_reset_done.html",
+                {"form": form},
+            )
+            # return super().form_valid(form)
+        else:
+            return render(
+                self.request,
+                "user/registration/password_reset_done_fail.html",
+                {"form": form},
+            )
 
-INTERNAL_RESET_SESSION_TOKEN = '_password_reset_token'
+
+INTERNAL_RESET_SESSION_TOKEN = "_password_reset_token"
 
 
 class PasswordResetDoneView(PasswordContextMixin, TemplateView):
-    template_name = 'user/registration/password_reset_done.html'
-    title = _('Password reset sent')
+    template_name = "user/registration/password_reset_done.html"
+    title = _("Password reset sent")
 
 
 class PasswordResetConfirmView(PasswordContextMixin, FormView):
     form_class = SetPasswordForm
     post_reset_login = False
     post_reset_login_backend = None
-    reset_url_token = 'set-password'
-    success_url = reverse_lazy('password_reset_complete')
-    template_name = 'user/registration/password_reset_confirm.html'
-    title = _('Enter new password')
+    reset_url_token = "set-password"
+    success_url = reverse_lazy("password_reset_complete")
+    template_name = "user/registration/password_reset_confirm.html"
+    title = _("Enter new password")
     token_generator = default_token_generator
 
     @method_decorator(sensitive_post_parameters())
     @method_decorator(never_cache)
     def dispatch(self, *args, **kwargs):
-        if 'uidb64' not in kwargs or 'token' not in kwargs:
+        if "uidb64" not in kwargs or "token" not in kwargs:
             raise ImproperlyConfigured(
                 "The URL path must contain 'uidb64' and 'token' parameters."
             )
 
         self.validlink = False
-        self.user = self.get_user(kwargs['uidb64'])
+        self.user = self.get_user(kwargs["uidb64"])
 
         if self.user is not None:
-            token = kwargs['token']
+            token = kwargs["token"]
             if token == self.reset_url_token:
-                session_token = self.request.session.get(INTERNAL_RESET_SESSION_TOKEN)
+                session_token = self.request.session.get(
+                    INTERNAL_RESET_SESSION_TOKEN
+                )
                 if self.token_generator.check_token(self.user, session_token):
                     # If the token is valid, display the password reset form.
                     self.validlink = True
@@ -333,7 +381,9 @@ class PasswordResetConfirmView(PasswordContextMixin, FormView):
                     # avoids the possibility of leaking the token in the
                     # HTTP Referer header.
                     self.request.session[INTERNAL_RESET_SESSION_TOKEN] = token
-                    redirect_url = self.request.path.replace(token, self.reset_url_token)
+                    redirect_url = self.request.path.replace(
+                        token, self.reset_url_token
+                    )
                     return HttpResponseRedirect(redirect_url)
 
         # Display the "Password reset unsuccessful" page.
@@ -344,13 +394,19 @@ class PasswordResetConfirmView(PasswordContextMixin, FormView):
             # urlsafe_base64_decode() decodes to bytestring
             uid = urlsafe_base64_decode(uidb64).decode()
             user = CustomUser._default_manager.get(pk=uid)
-        except (TypeError, ValueError, OverflowError, CustomUser.DoesNotExist, ValidationError):
+        except (
+            TypeError,
+            ValueError,
+            OverflowError,
+            CustomUser.DoesNotExist,
+            ValidationError,
+        ):
             user = None
         return user
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        kwargs['user'] = self.user
+        kwargs["user"] = self.user
         return kwargs
 
     def form_valid(self, form):
@@ -363,21 +419,23 @@ class PasswordResetConfirmView(PasswordContextMixin, FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.validlink:
-            context['validlink'] = True
+            context["validlink"] = True
         else:
-            context.update({
-                'form': None,
-                'title': _('Password reset unsuccessful'),
-                'validlink': False,
-            })
+            context.update(
+                {
+                    "form": None,
+                    "title": _("Password reset unsuccessful"),
+                    "validlink": False,
+                }
+            )
         return context
 
 
 class PasswordResetCompleteView(PasswordContextMixin, TemplateView):
-    template_name = 'user/registration/password_reset_complete.html'
-    title = _('Password reset complete')
+    template_name = "user/registration/password_reset_complete.html"
+    title = _("Password reset complete")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['login_url'] = resolve_url(settings.LOGIN_URL)
+        context["login_url"] = resolve_url(settings.LOGIN_URL)
         return context
