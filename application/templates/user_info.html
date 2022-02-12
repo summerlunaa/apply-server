@@ -13,8 +13,9 @@
 
 <body>
     <header>
-        <img src="../static/logo-white.png" alt="">
-        <span id="logo-title">10TH LIKELION SOGANG</span>
+        <a href="{% url 'index'%}"><img src="{% static 'logo-white.png'%}" alt="">
+            <span id="logo-title">10TH LIKELION SOGANG</span></a>
+        
 
         <a href="{% url 'logout'%}"> <button>Log out</button></a>
     </header>
@@ -41,11 +42,10 @@
             </div>
             <div class="input-duo">
                 <label for="">내가 선택한 <span>포지션</span>은</label>
-                <select name="" id="">
-                    <option value="">선택</option>
-                    <option value="">개발</option>
-                    <option value="">기획</option>
-                    <option value="">디자인</option>
+                <select name="position" id="position" value="{{user.position}}">
+                    <option value="">디자인/기획</option>
+                    <option value="">백엔드 개발</option>
+                    <option value="">프론트엔드 개발</option>
 
                 </select>
             </div>

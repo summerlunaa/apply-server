@@ -8,6 +8,10 @@ from .forms import ApplicationForm, UserPositionForm
 def index(request):
     return render(request, "home.html")
 
+def applySuccess(request):
+    return render(request, "application-success.html")
+
+
 
 @login_required
 def user_info(request):
@@ -40,10 +44,10 @@ def write_application(request):
             editApplication.user = request.user
             editApplication.updated_at = timezone.now()
             editApplication.save()
-            return redirect("application")
+            return redirect("application-success")
     else:
         if application:  # 지원서 수정
             form = ApplicationForm(instance=application)
         else:  # 지원서 첫 작성
             form = ApplicationForm()
-    return render(request, 'application.html', {'form': form})
+    return render(request, 'application.html', {'form': form , 'application':application})
