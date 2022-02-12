@@ -1,0 +1,364 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+html {
+  width: 100%;
+  font-size: 10px;
+}
+
+/* .page4-right{
+    padding-left:15rem;
+
+} */
+
+/* 로딩페이지 */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #04080f;
+  color: white;
+}
+.loading img {
+  width: 25rem;
+  height: auto;
+  background-color: transparent;
+  z-index: 1;
+}
+.loading-box {
+  display: flex;
+  width: 25rem;
+  height: 25rem;
+  overflow: hidden;
+  position: absolute;
+  top: calc(50vh - 12.5rem);
+  left: calc(50vw - 12.5rem);
+}
+.red-box {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  background-color: transparent;
+}
+.red-box1 {
+  left: 0;
+}
+.red-box2 {
+  right: 0;
+}
+
+.rb {
+  content: " ";
+  position: absolute;
+  bottom: -24rem;
+  width: 26rem;
+  height: 26rem;
+  border-radius: 12rem;
+  animation: spin 5s ease-in-out infinite;
+  z-index: 0;
+}
+.rb1 {
+  left: -4rem;
+  background-color: #b80e18;
+}
+.rb2 {
+  right: -4rem;
+  bottom: -22rem;
+  background-color: gray;
+}
+@keyframes spin {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-80%) rotate(500deg);
+  }
+}
+#all {
+  /* display: none; */
+  opacity: 0%;
+}
+
+/* 헤더 */
+header {
+  position: fixed;
+  height: 10rem;
+  display: flex;
+  background-color: #04080f;
+  width: 100%;
+  padding: 0 8%;
+  color: white;
+  align-items: center;
+  font-size: 3rem;
+  font-weight: 400;
+  font-family: "Bebas Neue", cursive;
+}
+header img {
+  width: 4.3rem;
+}
+#logo-title {
+  transform: translate(40rem, 20rem) scale(500%);
+}
+#logo-title-mo {
+  display: none;
+}
+header button {
+  position: absolute;
+  top: 2.2rem;
+  right: 8%;
+  color: white;
+  background-color: #b80e18;
+  width: 22rem;
+  min-width: 180px;
+
+  height: 5.6rem;
+  border: solid 1px white;
+  border-radius: 10px;
+}
+
+/* 비디오 */
+#video-con {
+  width: 100%;
+  overflow: hidden;
+  position: sticky;
+  bottom: 0;
+  z-index: -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#v0 {
+  display: block; /*이거 해줘야 마진이 사라져*/
+  margin: 0;
+  width: 100%;
+  /* height:100%; */
+}
+#video-scroll {
+  display: block;
+}
+
+/* 페이지 설정 */
+.page {
+  z-index: 8;
+  position: fixed;
+  top: 0;
+  padding-left: 8%;
+  padding-top: 12rem;
+  background-color: transparent;
+}
+.page h1 {
+  font-size: 5rem;
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: bold;
+  line-height: 8.1rem;
+  color: white;
+}
+/* 애니메이션 부분 */
+.pagecomp {
+  opacity: 0;
+  transition: 0.45s;
+  transform: translate(-5rem, 0);
+}
+.none {
+  transform: none;
+  opacity: 1;
+}
+
+/* 2번 페이지 */
+.page2 {
+  padding-top: 20rem;
+}
+.page2 h1 {
+  margin-bottom: 4rem;
+}
+.page2 h6 {
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 2.4rem;
+  line-height: 3.5rem;
+  color: #ffffff;
+}
+
+/* 3번 페이지 */
+.page3 {
+  padding-top: 16rem;
+}
+#date-box {
+  width: 53rem;
+  /* 반응형 필요 */
+  height: 45rem;
+  background: linear-gradient(
+    153.34deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.72) 100%
+  );
+  box-shadow: 0px 1rem 2.5rem rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  margin-top: 10px;
+}
+/* 4번페이지 */
+.page4 {
+  display: flex;
+}
+.page4-left {
+  height: 70vh;
+  border-right: dotted white 2px;
+  padding-right: 5rem;
+}
+.page4-right {
+  padding-left: 15rem;
+}
+.codelion-text {
+  font-size: 2rem;
+  line-height: 3.5rem;
+  color: white;
+  margin: 1rem 0;
+}
+.page4 button {
+  color: white;
+  background-color: #b80e18;
+  width: 18rem;
+  min-width: 150px;
+  height: 4rem;
+  border: solid 1px white;
+  border-radius: 10px;
+}
+.tmts {
+  margin-top: 5rem;
+}
+.tmt {
+  border-top: solid 1px white;
+  display: flex;
+  align-items: center;
+  width: 130%;
+  height: 20vh;
+}
+.tmt-num {
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 8rem;
+  line-height: 10rem;
+  color: rgba(255, 255, 255, 0.2);
+  margin-right: 8rem;
+}
+.tmt-text h5 {
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 3rem;
+  color: white;
+}
+.tmt-text h6 {
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.4rem;
+  line-height: 2.3rem;
+  color: white;
+}
+/* 5번페이지 */
+.min-box {
+  width: 53rem;
+  margin-bottom: 4rem;
+  height: 20rem;
+  min-height: 140px;
+  background: linear-gradient(
+    153.34deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.72) 100%
+  );
+  box-shadow: 0 1rem 25px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  padding: 3rem;
+}
+.min-box h5 {
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.6rem;
+  line-height: 2.3rem;
+  display: flex;
+  align-items: center;
+
+  color: #04080f;
+}
+.min-box h6 {
+}
+/* footer*/
+footer {
+  background-color: #b80e18;
+  height: 90vh;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  color: white;
+  padding: 10%;
+  font-family: "Bebas Neue", cursive;
+}
+footer .text {
+  position: relative;
+  transform: translate(0, -30px);
+}
+footer h1 {
+  font-size: 14rem;
+  font-weight: 500;
+  line-height: 16rem;
+}
+footer h6 {
+  position: absolute;
+  right: 0;
+  bottom: 2.4rem;
+  font-size: 2.4rem;
+  font-weight: 400;
+}
+footer .icons {
+  display: flex;
+  width: 30%;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 20rem;
+  margin-left: 10rem;
+}
+.icons img {
+  width: 4rem;
+}
+@media (max-width: 1280px) {
+  html {
+    font-size: 8px;
+  }
+}
+@media (max-width: 1000px) {
+  html {
+    font-size: 6px;
+  }
+}
+/* 800 ~ 500 사이는 생략 (패드사이즈)*/
+@media (max-width: 500px) {
+  html {
+    font-size: 4px;
+  }
+  #logo-title {
+    display: none;
+  }
+  #logo-title-mo {
+    display: inline;
+    font-size: 25px;
+    color: white;
+    margin: 0 auto;
+    z-index: 10;
+  }
+  button {
+    min-width: 0;
+  }
+}
