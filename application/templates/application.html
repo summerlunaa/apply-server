@@ -95,15 +95,19 @@
       <span class="num4">0/500</span>
 
       <div class="label" for="answer5">
-        {% if user.position %} {{user.position}} {% else %} {% endif %} 5.
-        멋쟁이사자처럼 대학은 최소 주 2회 모임(월요일&수요일 6시30분~9시)과
-        이외에도 추가 공부시간이 필요합니다. 활동 기간동안 얼마나 열정적으로,
-        매주 얼만큼의 시간을 할애하실 수 있는지 작성해주세요. (500자 이내)
+        {% if user.position == "기획" %} 
+        5. 멋사에 들어오면 개발공부를 진행한 뒤에 서비스를 만들 수 있습니다. 만들고 싶거나 실현시키고 싶었던 아이디어가 있다면 작성하여 파일로 제출해주세요. (500자)
+        {% endif %} 
+        {% if user.position == "디자인" %} 
+        5. 웹서비스로 구현하고 싶은 자신의 아이디어를 상상해보세요. 그리고 그 웹서비스의 한 페이지만 설명해주세요. (PPT, Figma, 일러스트 등 자유로운 파일로 작업 가능. 최종 제출은 PDF파일)
+        {% endif %} 
       </div>
-
+        {% if user.position == "기획" or user.position == "디자인"%} 
+        
+        
       <!-- dragdrop Design -->
       <div class="dragdrop">
-        <div class="label">디자인 과제 제출하기</div>
+        <div class="label">기획/디자인 과제 제출하기</div>
         <div>파일 포맷을 PDF로 제출해주세요</div>
         <input
           type="file"
@@ -115,10 +119,12 @@
         <label for="design_doc" id="dragBoxD"> Drag and Drop File Here </label>
         <span class="cancel cancelD" onclick="cancel('design')">x</span>
       </div>
+      
+        {% endif %} 
       <!-- drag&drop  portfolio-->
       <div class="dragdrop">
         <div class="label">포트폴리오 제출하기</div>
-        <div>제출은 자유입니다.</div>
+        <div>포트폴리오 제출은 자유입니다.</div>
         <div>파일 포맷을 PDF로 제출해주세요</div>
         <input
           type="file"

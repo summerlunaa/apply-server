@@ -24,14 +24,20 @@
     <div class="login-container">
       <div>
         <form method="POST">
-          {% csrf_token %} {{ form.as_p }}
+          {% csrf_token %}
           <div class="input-div one">
             <div class="i">
               <i class="fas fa-solid fa-envelope"></i>
             </div>
             <div>
-              <input name+"email" class="input" type="text" placeholder="이메일" onfocus="this.placeholder=''"
-                onblur="this.placeholder='이메일'" />
+              <input
+                name="email"
+                class="input"
+                type="text"
+                placeholder="이메일"
+                onfocus="this.placeholder=''"
+                onblur="this.placeholder='이메일'"
+              />
             </div>
           </div>
           <div class="input-div two">
@@ -39,8 +45,15 @@
               <i class="fas fa-solid fa-key"></i>
             </div>
             <div>
-              <input class="input" type="password" placeholder="비밀번호" onfocus="this.placeholder=''"
-                onblur="this.placeholder='비밀번호'" ] />
+              <input
+                name="password"
+                class="input"
+                type="password"
+                placeholder="비밀번호"
+                onfocus="this.placeholder=''"
+                onblur="this.placeholder='비밀번호'"
+                ]
+              />
             </div>
           </div>
 
@@ -48,11 +61,14 @@
             <a href="{% url 'password_reset' %}">비밀번호를 잊어버리셨나요?</a>
             <a href="{% url 'signup_email' %}">아직 회원이 아니신가요?</a>
           </div>
-          <br /><button type="submit" class="btn key" value="Login">로그인</button><br />
-
+          <br /><button type="submit" class="btn key" value="Login">
+            로그인</button
+          ><br />
         </form>
 
-        <a href="{% url 'kakao_login' %}"><button class="btn other">카카오톡으로 로그인</button></a>
+        <a href="{% url 'kakao_login' %}"
+          ><button class="btn other">카카오톡으로 로그인</button></a
+        >
       </div>
     </div>
   </main>

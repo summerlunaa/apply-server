@@ -364,10 +364,11 @@ footer .icons {
 
 /* down button */
 #down{
-  width:5rem;
+  padding: 25px;
+  width:15rem;
   position:fixed;
   bottom:5rem;
-  left:calc(50vw - 2.5rem);
+  left: calc(50vw - 7.5rem);
   cursor: pointer;
   z-index:9;
   float:left;

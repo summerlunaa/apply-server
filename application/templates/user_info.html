@@ -60,10 +60,11 @@
         </div>
         <div class="input-duo">
           <label for="">내가 선택한 <span>포지션</span>은</label>
-          <select name="position" id="position" value="{{user.position}}">
-            <option value="개발">디자인/기획</option>
-            <option value="기획">백엔드</option>
-            <option value="디자인">프론트엔드</option>
+          <select name="position" id="position" >{{user.position}}
+            <option {% if user.position == "기획" %}selected{% endif %} value="기획">기획</option>
+            <option {% if user.position == "디자인" %}selected{% endif %} value="디자인">디자인</option>
+            <option {% if user.position == "프론트엔드" %}selected{% endif %} value="프론트엔드">프론트엔드</option>
+            <option {% if user.position == "백엔드" %}selected{% endif %} value="백엔드">백엔드</option>
           </select>
         </div>
         <div class="next-div">
