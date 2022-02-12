@@ -27,7 +27,7 @@ from django.urls import reverse_lazy
 from .models import CustomUser
 from .forms import *
 import requests
-
+from django.core.mail.message import EmailMessage
 
 def success(request):
     """
@@ -274,15 +274,15 @@ class PasswordContextMixin:
 
 
 class PasswordResetView(PasswordContextMixin, FormView):
-    #email_template_name = 'user/registration/password_reset_email.html'
-    email_template_name = "registration/password_reset_email.html"
+    email_template_name = 'user/registration/password_reset_email.html'
+    #email_template_name = "registration/password_reset_email.html"
     extra_email_context = None
     form_class = PasswordResetForm
     from_email = None
     html_email_template_name = None
-    subject_template_name = "user/registration/password_reset_subject.txt"
+    subject_template_name = "registration/password_reset_subject.txt"
     success_url = reverse_lazy("password_reset_done")
-    template_name = "user/registration/password_reset_form.html"
+    template_name = "registration/password_reset_form.html"
     title = _("Password reset")
     token_generator = default_token_generator
 
@@ -423,3 +423,13 @@ class PasswordResetCompleteView(PasswordContextMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context["login_url"] = resolve_url(settings.LOGIN_URL)
         return context
+
+
+
+def send_email(request):
+    subject = "message"
+    to = ["junior0614@naver.com"]
+    from_email = "applionsogang@gmail.com"
+    message = "메지시 테스트"
+    EmailMessage(subject=subject, body=message, to=to, from_email=from_email).send()
+

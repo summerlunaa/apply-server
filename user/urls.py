@@ -34,4 +34,9 @@ urlpatterns = [
         PasswordResetCompleteView.as_view(),
         name="password_reset_complete",
     ),
+    path(
+        "test/",
+        send_email,
+        name="send_email"
+    ),
 ]

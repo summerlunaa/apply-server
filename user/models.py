@@ -53,7 +53,8 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     position_choices=[
         (None, '선택'),
-        ('기획/디자인', '기획/디자인'),
+        ('기획', '기획'),
+        ('디자인', '디자인'),
         ('프론트엔드', '프론트엔드'),
         ('백엔드', '백엔드'),
     ]
