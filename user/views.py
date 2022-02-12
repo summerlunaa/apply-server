@@ -1,3 +1,4 @@
+from turtle import position
 from django.conf import settings
 
 from django.contrib.auth.forms import (
@@ -54,11 +55,9 @@ def signup_email(request):
         if form.is_valid():
             user = form.save()
             login(request, user, backend='user.kakaobackends.KakaoBackend') #authenticate
-            return redirect('login_home')
+            return redirect('index')
         else : 
-            print(form)
             print("Invalid Form")
-            print(form.errors)
             return render(request, 'signup_email.html',{'form':form})
     else:
         form = UserSignupForm()
@@ -79,7 +78,7 @@ def email_login(request):
                 user = authenticate(email=email, password=password)
                 if user is not None:
                     login(request, user, backend='user.kakaobackends.KakaoBackend') 
-                    return redirect('success')
+                    return redirect('user_info')
     else:
         form = EmailAuthenticationForm()
     return render(request, 'email_login.html', {'form':form})
@@ -105,9 +104,8 @@ def submit_kakao(request):
         form = KakaoForm(request.POST, instance=request.user)
         print("form is post")
         if form.is_valid():
-            print("form valid")
             form.save()
-            return redirect('success')
+            return redirect('user_info')
     else:
         print("else")
     return render(request, 'submit_kakao.html', {'form':form})
@@ -156,18 +154,16 @@ def kakao_login_callback(request):
         if not agree_on_nickname :
             profile = personal_info.get("profile")
             name = profile.get("nickname")
-            print(name)
         agree_on_email = personal_info.get("email_needs_agreement")
 
         if not agree_on_email: 
             email = personal_info.get("email")
-            print(email)
         else:
             email = ''
         major = "본전공 / 복수전공"
         phone_number = "010-****-****"
         student_id = "20******"
-        user = CustomUser.objects.create_user(email, None, True, name, kakao_id, major, phone_number, student_id)
+        user = CustomUser.objects.create_user(email, None, True, name, kakao_id, major, phone_number, student_id, position)
         form = KakaoForm()                   #email, password, is_kakao, name, kakao_id , major, phone_number, student_id
         login(request, user, backend='user.kakaobackends.KakaoBackend')
         return render(request, 'submit_kakao.html', {'form':form})
@@ -175,9 +171,9 @@ def kakao_login_callback(request):
     else:
         login(request, CustomUser.objects.get(kakao_id=kakao_id), backend='user.kakaobackends.KakaoBackend')
         if state=="none":
-            return redirect('success') #TO-DO : 우선은 로그인 완료 후 임시 페이지로 이동하게 함
+            return redirect('user_info') #TO-DO : 우선은 로그인 완료 후 임시 페이지로 이동하게 함
         else:
-            return redirect('success')
+            return redirect('user_info')
 
 
 def logout_view(request):
