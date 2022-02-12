@@ -17,12 +17,16 @@ html {
 
 /* 로딩페이지 */
 .loading {
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  align-items: center; */
   height: 100vh;
+  width:100%;
   background-color: #04080f;
   color: white;
+  position:fixed;
+  top:0;
 }
 .loading img {
   width: 25rem;
@@ -38,6 +42,7 @@ html {
   position: absolute;
   top: calc(50vh - 12.5rem);
   left: calc(50vw - 12.5rem);
+  background-color: transparent;
 }
 .red-box {
   position: absolute;
@@ -79,6 +84,14 @@ html {
   100% {
     transform: translateY(-80%) rotate(500deg);
   }
+}
+.loadtext{
+  width:30rem;
+  position: absolute;
+  top: calc(50vh + 13rem);
+  left: calc(50vw - 15rem);
+  font-size: 2rem;
+  text-align: center;
 }
 #all {
   /* display: none; */
@@ -192,6 +205,9 @@ header button {
   padding-top: 16rem;
 }
 #date-box {
+  font-size : 1.5rem;
+  padding:10%;
+  line-height: 2.5em;
   width: 53rem;
   /* 반응형 필요 */
   height: 45rem;
@@ -292,10 +308,10 @@ header button {
 
   color: #04080f;
 }
-.min-box h6 {
-}
+
 /* footer*/
 footer {
+
   background-color: #b80e18;
   height: 90vh;
   margin-top: 0;

@@ -2,11 +2,11 @@
 
 const frameNumber = 0; // start video at frame 0
 // 스크롤 길이 조절 상수
-const playbackConst = 400;
+const playbackConst = 1500;
 // DOM
 const videoScroll = document.getElementById("video-scroll");
 const vid = document.getElementById("v0");
-var lastHeight = Math.floor(vid.duration) * playbackConst;
+var lastHeight = Math.floor(vid.duration)*playbackConst;
 // dynamically set the page height according to video length
 //????여기서 MAth.floor(vid...)을 lastHeight변수로 대체하면 제대로 작동이 안되네. vid.duration을 받아오기 전에 변수를 할당해서 그런거 같은데 어떻게 해결하지
 vid.addEventListener("loadedmetadata", function () {
@@ -89,7 +89,7 @@ const onScroll = () => {
     for (comp of page5Comp) {
       comp.classList.remove("none");
     }
-  } else if (currentY > (lastHeight / 5) * 4 && currentY <= lastHeight - 300) {
+  } else if (currentY > (lastHeight / 5) * 4 && currentY <= lastHeight ) {
     console.log(5);
 
     for (comp of page4Comp) {
@@ -112,11 +112,11 @@ const delLoad = () => {
   setTimeout(() => {
     document.querySelector(".loading").style.display = "none";
     document.querySelector("#all").style.opacity = "100%";
-    // document.querySelector("#all").style.display = "block";
+    window.scrollTo(0,0);
+
   }, 2000);
   console.log("loaded");
+
+
 };
-// window.onload = function () {
-//   console.log("window load");
-//   delLoad();
-// };
+
