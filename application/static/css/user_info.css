@@ -144,16 +144,23 @@ option:hover{
     position:relative;
     margin-top:30%;
 }
-.bottom .a{
-    position: absolute;
-    right:calc(30rem - 50vw) ;
-    bottom:-4rem;
+.a{
+
     cursor: pointer;
-    text-decoration: none;
     color: white;
-    background-color: #04080F;
-    outline:none;
-    border:none;
+    width: 160px;
+    display: flex;
+    justify-content: center;
+    background: #b80e18;
+    height: 40px;
+    align-items: center;
+    font-size: medium;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+.next-div{
+    display: flex;
+    justify-content: center;
 }
 /* responsive */
 @media(max-width:500px){
