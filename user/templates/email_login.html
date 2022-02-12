@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 
+
 <head>
   <title>Email Login Form</title>
   <meta name="viewport" content="width=device-width, initial-scale-1" />
@@ -32,6 +33,9 @@
             <div>
               <input name+"email" class="input" type="text" placeholder="이메일" onfocus="this.placeholder=''"
                 onblur="this.placeholder='이메일'" />
+                {% if error_email %}
+                <h1 style="color: rgb(255, 255, 255);">잘못된 이메일</h1>
+                {% endif %}
             </div>
           </div>
           <div class="input-div two">
@@ -41,7 +45,10 @@
             <div>
               <input class="input" type="password" placeholder="비밀번호" onfocus="this.placeholder=''"
                 onblur="this.placeholder='비밀번호'" ] />
-            </div>
+            </div>       
+            {% if error_pw %}
+            <h1 style="color: rgb(255, 255, 255);">잘못된 비밀번호</h1>
+            {% endif %}
           </div>
 
           <div class="linkto">

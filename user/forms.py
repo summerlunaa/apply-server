@@ -1,10 +1,12 @@
-from unicodedata import name
 from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.password_validation import validate_password
 from django.forms.models import ModelForm
+from django.shortcuts import render
+from httpx import request
 from .models import CustomUser
 from django.core.exceptions import ValidationError
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class UserSignupForm(forms.Form):
@@ -54,7 +56,7 @@ class EmailAuthenticationForm(forms.Form):
         if email and password:
             user = authenticate(email=email, password=password)
             if user is None:
-                raise ValueError("Email or Password is not exact.")
+                return None
             else:
                 if self.check_is_active(user):
                     return True

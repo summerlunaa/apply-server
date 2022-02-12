@@ -76,15 +76,30 @@ def email_login(request):
     if request.method == "POST":
         form = EmailAuthenticationForm(request.POST)
         if form.is_valid():
+
             if form.authenticate_login():
                 email = form.cleaned_data.get("email")
                 password = form.cleaned_data.get("password")
                 user = authenticate(email=email, password=password)
+
                 if user is not None:
                     login(
                         request, user, backend="user.kakaobackends.KakaoBackend"
                     )
                     return redirect("user_info")
+
+            else :
+                email = form.cleaned_data.get("email")
+                password = form.cleaned_data.get("password")
+                user = authenticate(email=email, password=password)
+                print(len(CustomUser.objects.filter(email=email)))
+                a=CustomUser.objects.filter(email=email)
+                if len(CustomUser.objects.filter(email=email))==0:
+                    return render(request,"email_login.html", {"form": EmailAuthenticationForm(), "error_email" : "error_email"} )
+                else:
+                    print("pw doesn't exist")
+                    print("비밀번호잘못")
+                    return render(request,"email_login.html", {"form": EmailAuthenticationForm(), "error_pw" : "error_pw"} )
     else:
         form = EmailAuthenticationForm()
     return render(request, "email_login.html", {"form": form})
@@ -280,9 +295,9 @@ class PasswordResetView(PasswordContextMixin, FormView):
     form_class = PasswordResetForm
     from_email = None
     html_email_template_name = None
-    subject_template_name = "registration/password_reset_subject.txt"
+    subject_template_name = "user/registration/password_reset_subject.txt"
     success_url = reverse_lazy("password_reset_done")
-    template_name = "registration/password_reset_form.html"
+    template_name = "user/registration/password_reset_form.html"
     title = _("Password reset")
     token_generator = default_token_generator
 
