@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale-1" />
+    <title>회원가입</title>
+    <link rel="stylesheet" href="{%static 'css/email-login.css'%}" />
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <img src="{%static 'logo-white.png'%}" alt="" />
+      <span id="logo-title">10TH LIKELION SOGANG</span>
+    </header>
+
+    <main>
+      <div class="container">
+        <div class="img">
+          <h2>Register</h2>
+          <img src="{% static 'logo-color.png' %}" />
+        </div>
+      </div>
+
+      <div class="login-container">
+        <form method="POST">
+          {% csrf_token %}
+          <div class="input-div-info one">
+            <span class="info">이름</span>
+            <div>
+              <input
+                class="input"
+                type="text"
+                onfocus="this.placeholder=''"
+                onblur="this.placeholder="
+              />
+            </div>
+          </div>
+          <div class="input-div-info one">
+            <span class="info">학번</span>
+            <div>
+              <input
+                class="input"
+                type="text"
+                onfocus="this.placeholder=''"
+                onblur="this.placeholder="
+              />
+            </div>
+          </div>
+          <div class="input-div-info one">
+            <span class="info">학과</span>
+            <div>
+              <input
+                class="input"
+                type="text"
+                onfocus="this.placeholder=''"
+                onblur="this.placeholder="
+              />
+            </div>
+          </div>
+          <div class="input-div-info three">
+            <span class="info phone">전화번호</span>
+            <div>
+              <input
+                class="input"
+                type="text"
+                onfocus="this.placeholder=''"
+                onblur="this.placeholder="
+              />
+            </div>
+          </div>
+          <div class="input-div-info two">
+            <span class="info position"
+              >내가 선택한 <span class="fs-medium"> 포지션</span>은</span
+            >
+            <div class="info-input-div">
+              <select name="language" class="input-select" type="text">
+                <option value="none">기획&디자인</option>
+                  <option value="korean">프론트엔드</option>
+                  <option value="english">백엔드</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+          <br /><button type="submit" class="btn key" value="Login">
+            회원가입
+          </button>
+        </form>
+      </div>
+    </main>
+    <footer>
+      <a href=""><button class="btn-prev"></button></a>
+    </footer>
+  </body>
+</html>
