@@ -1,0 +1,37 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../static/css/success.css">
+<title>멋쟁이 사자처럼 지원하기</title>
+<!-- <link rel="stylesheet" href="{% static 'css/success.css'%}"> -->
+</head>
+<body>
+    <header>
+        <a href="{% url 'index'%}"><img src="{% static 'logo-white.png'%}" alt="">
+            <span id="logo-title">10TH LIKELION SOGANG</span></a>
+        
+
+        <a href="{% url 'logout'%}"> <button>Log out</button></a>
+    </header>
+    <div class="progress-bar">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+    </div>
+    <!-- done -->
+    <div class="done">
+        <img src="../static/logo-color.png" alt="">
+        <p>지원 완료되었습니다.</p>
+        <div class="contact">서류발표 | 22.03.15 개별 문자로 연락</div>
+        <div>면접| 22.03.16 - 22.03.20 <br>
+            서류 합격 후 면접날짜 선택</div>
+    </div>
+    <div class="prevNext">
+        <div class="prev"><a href="{% url 'application' %}">< Prev</a></div>
+    </div>
+</body>
+</html>
