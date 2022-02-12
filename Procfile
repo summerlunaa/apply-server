@@ -1,0 +1,1 @@
+web: gunicorn applion_server.wsgi --log-file -
