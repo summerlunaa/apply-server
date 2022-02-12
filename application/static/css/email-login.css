@@ -55,12 +55,29 @@ main{
     margin:8vh 15vh;
     padding-left:5vh;
 }
+.img-kor{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    margin:1vh 10vh;
+    padding-left:5vh;
+}
 .img h2{
     color:#ffffff;
     font-size: 4rem;
     font-weight: 700;
 }
+
+.img-kor h2{
+    color: white;
+    font-size: 3rem;
+    font-weight: 700;
+}
 .img img{
+    width: 310px;
+}
+.img-kor img{
     width: 310px;
 }
 
@@ -193,6 +210,17 @@ form{
     opacity: 0.5;
 }
 
+.password-change-alert{
+    color: white;
+    display: block;
+    text-align: left;
+    opacity: 70%;
+    margin-top: 0.5rem;
+}
+ul{
+    margin-left: 1rem;
+}
+
 a{
     display: block;
     text-align: left;
@@ -215,6 +243,7 @@ a:hover{
     font-size: 0.8rem;
     margin: 0 auto;
     cursor:pointer;
+    text-align: center;
 }
 
 .btn.key{
@@ -230,6 +259,15 @@ a:hover{
     border: none;
     background-color:#04080F;
     color:#B80E18;
+    margin-bottom: 1rem;
+}
+
+a .other{
+    font-weight: 400;
+    text-align:center;
+    color: #B80E18;
+    font-size: 0.8rem;
+
 }
 
 footer{
