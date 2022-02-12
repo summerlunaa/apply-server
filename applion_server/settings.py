@@ -208,4 +208,4 @@ AWS_S3_CUSTOM_DOMAIN = 'applion.s3.ap-northeast-2.amazonaws.com'
 
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASE['default'].update(db_from_env)
+DATABASES['default'].update(db_from_env)
