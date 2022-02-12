@@ -46,7 +46,6 @@ class CustomUserManager(BaseUserManager):
 
     def create_user(self, email,  password, is_kakao, name, kakao_id, major, phone_number, student_id, position):
         return self._create_user(email, password,False, False, is_kakao, name, kakao_id, major, phone_number, student_id, position)
-
     def create_superuser(self, email, password):
         return self._create_user(email, password,True,True,False, '','','','','','')
 
@@ -54,9 +53,9 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     position_choices=[
         (None, '선택'),
-        ('개발', '개발'),
-        ('기획', '기획'),
-        ('디자인', '디자인'),
+        ('기획/디자인', '기획/디자인'),
+        ('프론트엔드', '프론트엔드'),
+        ('백엔드', '백엔드'),
     ]
     email = models.EmailField(max_length=100, unique=True, blank=False, null=True)
     name = models.CharField(max_length=20, blank=False, null=True)
