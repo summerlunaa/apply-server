@@ -125,6 +125,10 @@ def kakao_login(request):
 
 
 def submit_kakao(request):
+    """
+    카카오/일반 회원가입 후 추가 정보 받고 유저에 저장하는 뷰입니다
+    처음엔 카카오만 그 대상이었어서 ㅠㅠ 이름 헷갈리게 지은 점 죄송합니다
+    """
     if not request.user.is_authenticated:
         return redirect("email_login")
     form = Emailform(request.POST, instance=request.user)
@@ -313,12 +317,11 @@ class PasswordContextMixin:
 
 class PasswordResetView(PasswordContextMixin, FormView):
     email_template_name = "user/registration/password_reset_email.html"
-    # email_template_name = "registration/password_reset_email.html"
     extra_email_context = None
     form_class = PasswordResetForm
     from_email = None
     html_email_template_name = None
-    subject_template_name = "user/registration/password_reset_subject.txt"
+    subject_template_name = "registration/password_reset_subject.txt"
     success_url = reverse_lazy("password_reset_done")
     template_name = "user/registration/password_reset_form.html"
     title = _("Password reset")
@@ -329,9 +332,18 @@ class PasswordResetView(PasswordContextMixin, FormView):
         return super().dispatch(*args, **kwargs)
 
     def form_valid(self, form):
-        if CustomUser.objects.filter(
+        try:
+            user_instance = CustomUser.objects.get(
             email=self.request.POST.get("email")
-        ).exists():
+        )
+        except CustomUser.DoesNotExist:
+            return render(
+                self.request,
+                "user/registration/password_reset_form.html",
+                {"form": form, "email_error":"email_error"},
+            )
+        
+        if user_instance.has_usable_password():
             opts = {
                 "use_https": self.request.is_secure(),
                 "token_generator": self.token_generator,
@@ -348,12 +360,11 @@ class PasswordResetView(PasswordContextMixin, FormView):
                 "user/registration/password_reset_done.html",
                 {"form": form},
             )
-            # return super().form_valid(form)
         else:
             return render(
                 self.request,
-                "user/registration/password_reset_done_fail.html",
-                {"form": form},
+                "user/registration/password_reset_form.html",
+                {"form": form, "kakao_error":"kakao_error"},
             )
 
 
@@ -461,14 +472,4 @@ class PasswordResetCompleteView(PasswordContextMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context["login_url"] = resolve_url(settings.LOGIN_URL)
         return context
-
-
-def send_email(request):
-    subject = "message"
-    to = ["junior0614@naver.com"]
-    from_email = "applionsogang@gmail.com"
-    message = "메지시 테스트"
-    EmailMessage(
-        subject=subject, body=message, to=to, from_email=from_email
-    ).send()
 

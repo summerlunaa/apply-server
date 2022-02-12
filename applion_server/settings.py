@@ -181,7 +181,7 @@ AUTH_SUPERUSER_MODEL = 'user.CustomUserManager'
 EMAIL_HOST = 'smtp.gmail.com'
 
 # gmail과의 통신하는 포트
-EMAIL_PORT = '587'
+EMAIL_PORT = '25'
 
 # 발신할 이메일
 # EMAIL_HOST_USER = '구글아이디@gmail.com'

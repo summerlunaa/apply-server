@@ -18,7 +18,11 @@ urlpatterns = [
     path("logout/", logout_view, name="logout"),
     path("logout/with/kakao", logout_with_kakao, name="logout_with_kakao"),
     path("success/", success, name="success"),
-    path("password_reset/", PasswordResetView.as_view(), name="password_reset"),
+    path(
+        "password_reset/", 
+        PasswordResetView.as_view(), 
+        name="password_reset"
+    ),
     path(
         "password_reset_done/",
         PasswordResetDoneView.as_view(),
@@ -34,9 +38,5 @@ urlpatterns = [
         PasswordResetCompleteView.as_view(),
         name="password_reset_complete",
     ),
-    path(
-        "test/",
-        send_email,
-        name="send_email"
-    ),
+
 ]
