@@ -102,7 +102,7 @@ html {
 /* 헤더 */
 header {
   position: fixed;
-  height: 10rem;
+  height: 8rem;
   display: flex;
   background-color: #04080f;
   width: 100%;
@@ -124,16 +124,18 @@ header img {
 }
 header button {
   position: absolute;
-  top: 2.2rem;
+  top: 1.2rem;
   right: 8%;
   color: white;
   background-color: #b80e18;
   width: 22rem;
   min-width: 180px;
-
+  z-index: 8;
+  float: right;
   height: 5.6rem;
   border: solid 1px white;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 /* 비디오 */
@@ -159,12 +161,15 @@ header button {
 
 /* 페이지 설정 */
 .page {
-  z-index: 8;
   position: fixed;
   top: 0;
   padding-left: 8%;
-  padding-top: 12rem;
+  margin-top: 10rem;
   background-color: transparent;
+
+opacity:0;  
+transition: 0.25s;
+  transform: translate(-5rem, 0);
 }
 .page h1 {
   font-size: 5rem;
@@ -176,12 +181,11 @@ header button {
 }
 /* 애니메이션 부분 */
 .pagecomp {
-  opacity: 0;
-  transition: 0.45s;
-  transform: translate(-5rem, 0);
+  
 }
 .none {
   transform: none;
+  /* visibility:visible; */
   opacity: 1;
 }
 
@@ -203,12 +207,16 @@ header button {
 
 /* 3번 페이지 */
 .page3 {
-  padding-top: 16rem;
+  padding-top: 13rem;
 }
 #date-box {
-  font-size : 1.5rem;
-  padding:10%;
-  line-height: 2.5em;
+  font-size : 2rem;
+  font-weight: 400;
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: bold;
+  padding:2.5rem 7%;
+  line-height: 10rem;
   width: 53rem;
   /* 반응형 필요 */
   height: 45rem;
@@ -224,6 +232,7 @@ header button {
 /* 4번페이지 */
 .page4 {
   display: flex;
+  height:calc(100vh - 8rem);
 }
 .page4-left {
   height: 70vh;
@@ -234,8 +243,8 @@ header button {
   padding-left: 15rem;
 }
 .codelion-text {
-  font-size: 2rem;
-  line-height: 3.5rem;
+  font-size: 1.8rem;
+  line-height: 3.2rem;
   color: white;
   margin: 1rem 0;
 }
@@ -249,7 +258,7 @@ header button {
   border-radius: 10px;
 }
 .tmts {
-  margin-top: 5rem;
+  margin-top: 3rem;
 }
 .tmt {
   border-top: solid 1px white;
@@ -296,25 +305,29 @@ header button {
   );
   box-shadow: 0 1rem 25px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
-  padding: 3rem;
+  padding: 2rem 3rem;
 }
 .min-box h5 {
   font-family: "Noto Sans KR";
   font-style: normal;
   font-weight: bold;
-  font-size: 1.6rem;
-  line-height: 2.3rem;
+  font-size: 2.2rem;
+  line-height: 2.5rem;
   display: flex;
   align-items: center;
-
+  margin-bottom: 1rem;
   color: #04080f;
+}
+.min-box{
+  font-size:2rem;
+  line-height: 2.4rem;
 }
 
 /* footer*/
 footer {
 
   background-color: #b80e18;
-  height: 90vh;
+  height: calc(100vh - 8rem);
   margin-top: 0;
   display: flex;
   align-items: center;
@@ -350,6 +363,19 @@ footer .icons {
 .icons img {
   width: 4rem;
 }
+
+/* down button */
+#down{
+  width:5rem;
+  position:fixed;
+  bottom:5rem;
+  left:calc(50vw - 2.5rem);
+  cursor: pointer;
+  z-index:9;
+  float:left;
+}
+
+/* responsive */
 @media (max-width: 1280px) {
   html {
     font-size: 8px;
@@ -377,5 +403,30 @@ footer .icons {
   }
   button {
     min-width: 0;
+  }
+}
+/* 반응형 실패 */
+#mobileNo{
+  width:100vw;
+  display:none;
+  height:100vh;
+  z-index:30;
+  font-size:4rem;
+  font-weight:bold;
+  text-align: center;
+  line-height:100vh;
+  display: none;
+  position:fixed;
+  top:0;
+}
+@media(max-width:1000px){
+ .loading{
+   display: none;
+ }
+ #all{
+   display: none;
+ }
+  #mobileNo{
+    display: block;
   }
 }
