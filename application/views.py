@@ -3,17 +3,19 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from .models import Application
 from .forms import ApplicationForm, UserPositionForm
+from user.forms import EmailAuthenticationForm, Emailform
 
 
 def index(request):
     return render(request, "home.html")
 
 
-@login_required
+@login_required(login_url='/user/login/email/') #로그인 안된 상태라면 로그인 페이지로
 def user_info(request):
     user = request.user
     if request.method == 'POST':
         user_form = UserPositionForm(request.POST, instance=user)
+
         if user_form.is_valid():
             user_form.save()
         # return redirect('user_info')
@@ -21,6 +23,10 @@ def user_info(request):
 
     else:
         user_form = UserPositionForm(instance=user)
+        if request.user.name == "name" or request.user.student_id=="student_id" or user.major =="major":
+            form = Emailform()  
+            return render(request, 'submit_kakao.html', {'form':form})
+
     return render(request, 'user_info.html', {'user_form':user_form})
 
 

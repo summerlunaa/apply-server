@@ -11,8 +11,6 @@
 </head>
 
 
- 
-
 <body onload="delLoad();">
     <div class="loading" >
         <div class="loading-box">
@@ -36,7 +34,7 @@
             <span id="logo-title-mo">10TH LIKELION SOGANG</span>
 
             {% if user.is_authenticated %}
-                <a href="{% url 'url_info' %}"><button>지금 바로 지원하기 ▶</button></a>
+                <a href="{% url 'user_info' %}"><button>지금 바로 지원하기 ▶</button></a>
             {% else %}
                 <a href="{% url 'email_login' %}"><button>지금 바로 지원하기 ▶</button></a>
             {% endif %}
