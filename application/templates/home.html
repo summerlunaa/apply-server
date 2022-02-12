@@ -19,6 +19,7 @@
  
 
 <body onload="delLoad();">
+   
     <div class="loading" >
         <div class="loading-box">
             <img src="../static/logo-line.png" alt="">
@@ -184,7 +185,7 @@
         <!-- 영상 길이만큼 높이 맞추기 -->
         <div id="video-scroll" ></div>
         <div id="video-con">
-            <video id="v0" tabindex="0" , autobuffer preload >
+            <video id="v0" tabindex="0" , autobuffer preload muted="muted">
                 <source type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"' src="{% static 'background.mp4'%}">
                 </source>
             </video>

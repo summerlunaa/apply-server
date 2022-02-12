@@ -8,6 +8,9 @@ from .forms import ApplicationForm, UserPositionForm
 def index(request):
     return render(request, "home.html")
 
+def testpage(request):
+    return render(request, "index.html")
+
 
 @login_required
 def user_info(request):
