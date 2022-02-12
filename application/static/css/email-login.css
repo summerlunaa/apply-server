@@ -178,7 +178,6 @@ form{
     border: none;
     outline: none;
     background: none;
-    padding: 0.5rem 0.7rem;
     font-size: 0.8rem;
     font-weight: 400;
     color: white;
@@ -191,6 +190,7 @@ form{
     color: #ffffff;
     font-size: 1rem;
     font-weight: 400;
+    opacity: 0.5;
 }
 
 a{
@@ -263,9 +263,9 @@ footer{
     position: absolute;
     top:50%;
     display:flex;
-    display: none;
     flex-direction: column;
     transform: translate(-50%, -50%);
+    transition: all 2s;
 }
 
 .see-personal-info-agreement{
