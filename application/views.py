@@ -10,6 +10,9 @@ def index(request):
 
 def testpage(request):
     return render(request, "index.html")
+def applySuccess(request):
+    return render(request, "application-success.html")
+
 
 
 @login_required
@@ -19,7 +22,9 @@ def user_info(request):
         user_form = UserPositionForm(request.POST, instance=user)
         if user_form.is_valid():
             user_form.save()
-        return redirect('user_info')
+        # return redirect('user_info')
+        return redirect('application')
+
     else:
         user_form = UserPositionForm(instance=user)
     return render(request, 'user_info.html', {'user_form':user_form})
@@ -41,10 +46,10 @@ def write_application(request):
             editApplication.user = request.user
             editApplication.updated_at = timezone.now()
             editApplication.save()
-            return redirect("application")
+            return redirect("application-success")
     else:
         if application:  # 지원서 수정
             form = ApplicationForm(instance=application)
         else:  # 지원서 첫 작성
             form = ApplicationForm()
-    return render(request, 'application.html', {'form': form})
+    return render(request, 'application.html', {'form': form , 'application':application})

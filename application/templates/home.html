@@ -10,11 +10,6 @@
     <link rel="stylesheet" href="{% static 'css/home.css'%}">
 </head>
 
-<script language="javascript">
-  function init() {
-    alert("안녕 세계야!");
-  }
-</script>
 
  
 
@@ -22,7 +17,7 @@
    
     <div class="loading" >
         <div class="loading-box">
-            <img src="../static/logo-line.png" alt="">
+            <img src="{% static 'logo-line.png'%}" alt="">
             <div class="red-box red-box1">
                 <div class="rb1 rb">
 
@@ -41,14 +36,14 @@
     </div>
     <div id="all">
         <header>
-            <img src="../static/logo.svg" alt="">
+            <img src="{% static 'logo.svg'%}" alt="">
             <span id="logo-title">10TH LIKELION SOGANG</span>
             <span id="logo-title-mo">10TH LIKELION SOGANG</span>
 
             {% if user.is_authenticated %}
                 <a href="{% url 'user_info' %}"><button>지금 바로 지원하기 ▶</button></a>
             {% else %}
-                <a href="{% url 'signup_email' %}"><button>지금 바로 지원하기 ▶</button></a>
+                <a href="{% url 'email_login' %}"><button>지금 바로 지원하기 ▶</button></a>
             {% endif %}
         </header>
 
@@ -193,7 +188,7 @@
         <div id="video-scroll" ></div>
         <div id="video-con">
             <video id="v0" tabindex="0" , autobuffer preload muted="muted">
-                <source type='video/mp4;' src="{% static 'background.mp4'%}">
+                <source type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"' src="{% static 'background.mp4'%}">
                 </source>
             </video>
         </div>
