@@ -207,6 +207,7 @@ footer{
     position: absolute;
     top:50%;
     display:flex;
+    display: none;
     flex-direction: column;
     transform: translate(-50%, -50%);
 }
