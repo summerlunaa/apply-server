@@ -191,7 +191,7 @@ transition: 0.25s;
 
 /* 2번 페이지 */
 .page2 {
-  padding-top: 20rem;
+  padding-top: 10rem;
 }
 .page2 h1 {
   margin-bottom: 4rem;
@@ -206,9 +206,7 @@ transition: 0.25s;
 }
 
 /* 3번 페이지 */
-.page3 {
-  padding-top: 13rem;
-}
+
 #date-box {
   font-size : 2rem;
   font-weight: 400;
