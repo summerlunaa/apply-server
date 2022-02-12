@@ -1,4 +1,3 @@
-from turtle import position
 from django.conf import settings
 
 from django.contrib.auth.forms import (
@@ -28,7 +27,7 @@ from django.urls import reverse_lazy
 from .models import CustomUser
 from .forms import *
 import requests
-
+from django.core.mail.message import EmailMessage
 
 def success(request):
     """
@@ -56,17 +55,17 @@ def signup_email(request):
     if request.method == "POST":
         form = UserSignupForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(
-                request, user, backend="user.kakaobackends.KakaoBackend"
-            )  # authenticate
-            return redirect("index")
-        else:
+            user = form.save() #유저정보 저장
+            login(request, user, backend='user.kakaobackends.KakaoBackend') #authenticate
+            infoform = Emailform()
+            return render(request, 'submit_kakao.html', {'form':infoform})
+        else : 
             print("Invalid Form")
             return render(request, "signup_email.html", {"form": form})
     else:
         form = UserSignupForm()
-    return render(request, "signup_email.html", {"form": form})
+    return render(request, 'signup_email.html', {'form':form})
+                   #email, password, is_kakao, name, kakao_id , major, phone_number, student_id
 
 
 def email_login(request):
@@ -96,7 +95,7 @@ def kakao_login(request):
     
     """
     if request.user.is_authenticated:
-        raise Exception("User already logged in")
+        return redirect('user_info')
     rest_api_key = settings.KAKAO_REST_API_KEY
     redirect_uri = "http://127.0.0.1:8000/user/kakao/login/callback/"
     state = "none"
@@ -107,17 +106,14 @@ def kakao_login(request):
 
 def submit_kakao(request):
     if not request.user.is_authenticated:
-        raise ValidationError("잘못된 접근입니다(Not authenticated)")
-    form = KakaoForm(request.POST, instance=request.user)
-    if request.method == "POST":
-        form = KakaoForm(request.POST, instance=request.user)
-        print("form is post")
+        return redirect('email_login')
+    form = Emailform(request.POST, instance=request.user)
+    if request.method=="POST":
+        form = Emailform(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect("user_info")
-    else:
-        print("else")
-    return render(request, "submit_kakao.html", {"form": form})
+            return redirect('user_info')
+    return render(request, 'submit_kakao.html', {'form':form})
 
 
 def kakao_login_callback(request):
@@ -173,16 +169,15 @@ def kakao_login_callback(request):
             name = profile.get("nickname")
         agree_on_email = personal_info.get("email_needs_agreement")
 
-        if not agree_on_email:
+        if not agree_on_email: 
+            
             email = personal_info.get("email")
         else:
-            email = ""
-        major = "본전공 / 복수전공"
-        phone_number = "010-****-****"
-        student_id = "20******"
-        user = CustomUser.objects.create_user(email, None, True, name, kakao_id, major, phone_number, student_id, position)
-        form = KakaoForm()                   #email, password, is_kakao, name, kakao_id , major, phone_number, student_id
-        login(request, user, backend='user.kakaobackends.KakaoBackend')
+            form = UserSignupForm
+            return render(request, 'signup_email.html', {'form':form, 'error_code':"kakao_error"})
+        user = CustomUser.objects.create_user(email, None, True, name, kakao_id, 'major', 'phone_number', 'student_id', 'position')
+        form = Emailform()                   #email, password, is_kakao, name, kakao_id , major, phone_number, student_id
+        login(request, user, backend='user.kakaobackends.KakaoBackend') #카카오 이메일을 안받는다면
         return render(request, 'submit_kakao.html', {'form':form})
 
     else:
@@ -279,14 +274,15 @@ class PasswordContextMixin:
 
 
 class PasswordResetView(PasswordContextMixin, FormView):
-    email_template_name = "registration/password_reset_email.html"
+    email_template_name = 'user/registration/password_reset_email.html'
+    #email_template_name = "registration/password_reset_email.html"
     extra_email_context = None
     form_class = PasswordResetForm
     from_email = None
     html_email_template_name = None
-    subject_template_name = "user/registration/password_reset_subject.txt"
+    subject_template_name = "registration/password_reset_subject.txt"
     success_url = reverse_lazy("password_reset_done")
-    template_name = "user/registration/password_reset_form.html"
+    template_name = "registration/password_reset_form.html"
     title = _("Password reset")
     token_generator = default_token_generator
 
@@ -427,3 +423,13 @@ class PasswordResetCompleteView(PasswordContextMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context["login_url"] = resolve_url(settings.LOGIN_URL)
         return context
+
+
+
+def send_email(request):
+    subject = "message"
+    to = ["junior0614@naver.com"]
+    from_email = "applionsogang@gmail.com"
+    message = "메지시 테스트"
+    EmailMessage(subject=subject, body=message, to=to, from_email=from_email).send()
+

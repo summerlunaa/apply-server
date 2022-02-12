@@ -1,5 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
+
 <head>
   <title>Email Login Form</title>
   <meta name="viewport" content="width=device-width, initial-scale-1" />
@@ -21,52 +22,38 @@
     </div>
 
     <div class="login-container">
-      <form method="POST">
-        {% csrf_token %}
-        <div class="input-div one">
-          <div class="i">
-            <i class="fas fa-solid fa-envelope"></i>
+      <div>
+        <form method="POST">
+          {% csrf_token %} {{ form.as_p }}
+          <div class="input-div one">
+            <div class="i">
+              <i class="fas fa-solid fa-envelope"></i>
+            </div>
+            <div>
+              <input name+"email" class="input" type="text" placeholder="이메일" onfocus="this.placeholder=''"
+                onblur="this.placeholder='이메일'" />
+            </div>
           </div>
-          <div>
-            <input
-              name="email"
-              class="input"
-              type="text"
-              placeholder="이메일"
-              onfocus="this.placeholder=''"
-              onblur="this.placeholder='이메일'"
-            />
+          <div class="input-div two">
+            <div class="i">
+              <i class="fas fa-solid fa-key"></i>
+            </div>
+            <div>
+              <input class="input" type="password" placeholder="비밀번호" onfocus="this.placeholder=''"
+                onblur="this.placeholder='비밀번호'" ] />
+            </div>
           </div>
-        </div>
-        <div class="input-div two">
-          <div class="i">
-            <i class="fas fa-solid fa-key"></i>
+
+          <div class="linkto">
+            <a href="{% url 'password_reset' %}">비밀번호를 잊어버리셨나요?</a>
+            <a href="{% url 'signup_email' %}">아직 회원이 아니신가요?</a>
           </div>
-          <div>
-            <input
-              class="input"
-              name="password"
-              type="password"
-              placeholder="비밀번호"
-              onfocus="this.placeholder=''"
-              onblur="this.placeholder='비밀번호'"
-              ]
-            />
-          </div>
-        </div>
-        {% if tlfvo %}
-        <p>실패</p>
-        {% endif %}
-        <div class="linkto">
-          <a href="{% url 'password_reset' %}">비밀번호를 잊어버리셨나요?</a>
-          <a href="{% url 'signup_email' %}">아직 회원이 아니신가요?</a>
-        </div>
-        <br /><button type="submit" class="btn key" value="Login">로그인</button
-        ><br />
-        <a href="{% url 'kakao_login' %}"
-          ><button class="btn other">카카오톡으로 로그인</button></a
-        >
-      </form>
+          <br /><button type="submit" class="btn key" value="Login">로그인</button><br />
+
+        </form>
+
+        <a href="{% url 'kakao_login' %}"><button class="btn other">카카오톡으로 로그인</button></a>
+      </div>
     </div>
   </main>
   <footer>
