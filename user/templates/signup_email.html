@@ -11,7 +11,7 @@
 
   <body>
     <header>
-      <img src="logo-white.png" alt="" />
+      <img src="{%static 'logo-white.png'%}" alt="" />
       <span id="logo-title">10TH LIKELION SOGANG</span>
     </header>
 
@@ -25,18 +25,7 @@
 
       <div class="login-container">
         <form method="POST">
-          {% csrf_token %} {% for field in form %}
-          <div>
-            {{ field.label }} {{ field }} {% if field.errors %} 
-            {% for e in field.errors %}
-            <p style="color: red">{{ e | escape }}</p>
-
-            <!--"""
-                                            이미 가입된 이메일, 잘못된 비번 입력 시 에러메시지 나타내는 부분입니다"""
-                                        -->
-            {% endfor %} {% endif %}
-          </div>
-          {% endfor %}
+          {% csrf_token %} 
           <div class="input-div one">
             <div class="i">
               <i class="fas fa-solid fa-envelope"></i>
