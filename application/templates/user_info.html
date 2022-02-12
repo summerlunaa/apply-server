@@ -1,62 +1,80 @@
 {%load static%}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <link rel="stylesheet" href="../static/css/user_info.css"> -->
     <title>멋쟁이 사자처럼 지원하기</title>
-    <link rel="stylesheet" href="{% static 'css/user_info.css'%}">
-</head>
+    <link rel="stylesheet" href="{% static 'css/user_info.css'%}" />
+  </head>
 
-<body>
+  <body>
     <header>
-        <a href="{% url 'index'%}"><img src="{% static 'logo-white.png'%}" alt="">
-            <span id="logo-title">10TH LIKELION SOGANG</span></a>
-        
+      <a href="{% url 'index'%}"
+        ><img src="{% static 'logo-white.png'%}" alt="" />
+        <span id="logo-title">10TH LIKELION SOGANG</span></a
+      >
 
-        <a href="{% url 'logout'%}"> <button>Log out</button></a>
+      <a href="{% url 'logout'%}"> <button>Log out</button></a>
     </header>
     <div class="progress-bar">
-        <div class="bar bar1"></div>
-        <div class="bar bar2"></div>
-        <div class="bar bar3"></div>
+      <div class="bar bar1"></div>
+      <div class="bar bar2"></div>
+      <div class="bar bar3"></div>
     </div>
     <div class="form">
-        <form method='POST' enctype="multipart/form-data">
-            {% csrf_token %}
+      <form id="form_id" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
 
-            <div class="input-duo">
-                <label for="">이름</label>
-                <input type="text" class="" name="name"value="{{user.name}}">
-            </div>
-            <div class="input-duo">
-                <label for="">학번</label>
-                <input type="text" class="" name="student_id" value="{{user.student_id}}">
-            </div>
-            <div class="input-duo">
-                <label for="">학과</label>
-                <input type="text" class="long-input" name="major"value="{{user.major}}">
-            </div>
-            <div class="input-duo">
-                <label for="">내가 선택한 <span>포지션</span>은</label>
-                <select name="position" id="position" value="{{user.position}}">
-                    <option value="">디자인/기획</option>
-                    <option value="">백엔드 개발</option>
-                    <option value="">프론트엔드 개발</option>
-
-                </select>
-            </div>
-            <div class="bottom">
-                <span>지원서는 22.03.13까지 로그인 후 수정 가능합니다.</span>
-                <button class = "a" type="submit">Next ></button>
-            </div>
-        </form>
-        
+        <div class="input-duo">
+          <label for="">이름</label>
+          <input
+            type="text"
+            class=""
+            name="name"
+            value="{{user.name}}"
+            disabled
+          />
+        </div>
+        <div class="input-duo">
+          <label for="">학번</label>
+          <input
+            type="text"
+            class=""
+            name="student_id"
+            value="{{user.student_id}}"
+            disabled
+          />
+        </div>
+        <div class="input-duo">
+          <label for="">학과</label>
+          <input
+            type="text"
+            class="long-input"
+            name="major"
+            value="{{user.major}}"
+            disabled
+          />
+        </div>
+        <div class="input-duo">
+          <label for="">내가 선택한 <span>포지션</span>은</label>
+          <select name="position" id="position" value="{{user.position}}">
+            <option value="개발">디자인/기획</option>
+            <option value="기획">백엔드</option>
+            <option value="디자인">프론트엔드</option>
+          </select>
+        </div>
+        <div class="next-div">
+          <div class="a" onclick="document.getElementById('form_id').submit();">
+            Next
+          </div>
+        </div>
+        <div class="bottom">
+          <span>지원서는 22.03.13까지 로그인 후 수정 가능합니다.</span>
+        </div>
+      </form>
     </div>
-    
-</body>
-
+  </body>
 </html>

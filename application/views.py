@@ -8,24 +8,28 @@ from .forms import ApplicationForm, UserPositionForm
 def index(request):
     return render(request, "home.html")
 
+
 def applySuccess(request):
     return render(request, "application-success.html")
-
 
 
 @login_required
 def user_info(request):
     user = request.user
-    if request.method == 'POST':
+    if request.method == "POST":
         user_form = UserPositionForm(request.POST, instance=user)
+
+        print("unvaild")
+        print(user_form.is_valid())
         if user_form.is_valid():
+            print("vaild")
             user_form.save()
-        # return redirect('user_info')
-        return redirect('application')
+
+        return redirect("application")
 
     else:
         user_form = UserPositionForm(instance=user)
-    return render(request, 'user_info.html', {'user_form':user_form})
+    return render(request, "user_info.html", {"user_form": user_form})
 
 
 @login_required
@@ -50,4 +54,6 @@ def write_application(request):
             form = ApplicationForm(instance=application)
         else:  # 지원서 첫 작성
             form = ApplicationForm()
-    return render(request, 'application.html', {'form': form , 'application':application})
+    return render(
+        request, "application.html", {"form": form, "application": application}
+    )
