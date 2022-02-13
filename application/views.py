@@ -43,12 +43,16 @@ def write_application(request):
     application = Application.objects.filter(user=request.user).first()
 
     if request.method == "POST":
+        
         if application:  # 지원서 수정
             form = ApplicationForm(
                 request.POST, request.FILES, instance=application
             )
+            for i in form :
+                print(i)
         else:  # 지원서 첫 작성
             form = ApplicationForm(request.POST, request.FILES)
+            print(form)
         if form.is_valid():
             editApplication = form.save(commit=False)
             editApplication.user = request.user

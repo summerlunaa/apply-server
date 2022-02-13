@@ -2,12 +2,12 @@ from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.password_validation import validate_password
 from django.forms.models import ModelForm
-from django.shortcuts import render
-from httpx import request
 from .models import CustomUser
 from django.core.exceptions import ValidationError
-from django.core.exceptions import ObjectDoesNotExist
-
+from django.utils.translation import gettext_lazy as _
+from django.contrib.auth import (
+    authenticate, password_validation,
+)
 
 class UserSignupForm(forms.Form):
     email = forms.EmailField(label="이메일", required=True)
@@ -90,3 +90,50 @@ class Emailform(ModelForm):
     class Meta:
         model = CustomUser
         fields = ["name", "phone_number", "student_id", "major", "position"]
+
+
+class SetPasswordForm(forms.Form):
+    """
+    A form that lets a user change set their password without entering the old
+    password => 기존 form 커스텀
+    """
+    
+    error_messages = {
+        'password_mismatch': _('The two password fields didn’t match.'),
+    }
+
+    new_password1 = forms.CharField(
+        label="",
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+        strip=False,
+        help_text=password_validation.password_validators_help_text_html(),
+        
+    )
+    new_password2 = forms.CharField(
+        label="",
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+    )
+
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
+
+    def clean_new_password2(self):
+        password1 = self.cleaned_data.get('new_password1')
+        password2 = self.cleaned_data.get('new_password2')
+        if password1 and password2:
+            if password1 != password2:
+                raise ValidationError(
+                    self.error_messages['password_mismatch'], #둘이 같지 않은 경우
+                    code='password_mismatch',
+                )
+        password_validation.validate_password(password2, self.user) #적절한 비번인 경우
+        return password2
+
+    def save(self, commit=True):
+        password = self.cleaned_data["new_password1"]
+        self.user.set_password(password)
+        if commit:
+            self.user.save()
+        return self.user

@@ -2,8 +2,8 @@ from django.conf import settings
 
 from django.contrib.auth.forms import (
     PasswordResetForm,
-    SetPasswordForm,
 )
+
 from django.contrib.auth.tokens import default_token_generator
 
 from django.core.exceptions import ImproperlyConfigured, ValidationError
@@ -18,16 +18,15 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
-from django.contrib.auth.forms import SetPasswordForm
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect, resolve_url
 from django.conf import settings
 from django.urls import reverse_lazy
 from .models import CustomUser
+from .forms import SetPasswordForm
 from .forms import *
 import requests
-from django.core.mail.message import EmailMessage
 
 
 def success(request):
@@ -385,7 +384,6 @@ class PasswordResetConfirmView(PasswordContextMixin, FormView):
     template_name = "user/registration/password_reset_confirm.html"
     title = _("Enter new password")
     token_generator = default_token_generator
-
     @method_decorator(sensitive_post_parameters())
     @method_decorator(never_cache)
     def dispatch(self, *args, **kwargs):
