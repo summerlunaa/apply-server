@@ -54,6 +54,7 @@ def signup_email(request):
     """
     if request.method == "POST":
         form = UserSignupForm(request.POST)
+        email_remain = form["email"].value()
         if form.is_valid():
             user = form.save()  # 유저정보 저장
             login(
@@ -62,9 +63,8 @@ def signup_email(request):
             infoform = Emailform()
             return render(request, "signup_info.html", {"form": infoform})
         else:
-            print(form.as_p())
-            print("Invalid Form")
-            return render(request, "signup_email.html", {"form": form})
+            form = UserSignupForm(request.POST)
+            return render(request, "signup_email.html", {"form": form, "email_remain":email_remain})
     else:
         form = UserSignupForm()
     return render(request, "signup_email.html", {"form": form})
@@ -78,14 +78,11 @@ def email_login(request):
     """
     if request.method == "POST":
         form = EmailAuthenticationForm(request.POST)
-        print("valid?")
-        print(form.as_p())
         if form.is_valid():
             if form.authenticate_login():
                 email = form.cleaned_data.get("email")
                 password = form.cleaned_data.get("password")
                 user = authenticate(email=email, password=password)
-
                 if user is not None:
                     login(
                         request, user, backend="user.kakaobackends.KakaoBackend"
@@ -96,14 +93,22 @@ def email_login(request):
                 email = form.cleaned_data.get("email")
                 password = form.cleaned_data.get("password")
                 user = authenticate(email=email, password=password)
-                print(len(CustomUser.objects.filter(email=email)))
-                a=CustomUser.objects.filter(email=email)
                 if len(CustomUser.objects.filter(email=email))==0:
-                    return render(request,"email_login.html", {"form": EmailAuthenticationForm(), "error_email" : "error_email"} )
+                    return render(
+                        request,
+                        "email_login.html", 
+                        {
+                            "form": EmailAuthenticationForm(), 
+                            "error_email" : "error_email"
+                        } )
                 else:
-                    print("pw doesn't exist")
-                    print("비밀번호잘못")
-                    return render(request,"email_login.html", {"form": EmailAuthenticationForm(), "error_pw" : "error_pw"} )
+                    return render(
+                        request,
+                        "email_login.html",
+                        {
+                            "form": EmailAuthenticationForm(), 
+                            "error_pw" : "error_pw"
+                        } )
     else:
         form = EmailAuthenticationForm()
     return render(request, "email_login.html", {"form": form})
