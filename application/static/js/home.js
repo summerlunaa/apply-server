@@ -101,9 +101,9 @@ const downfunc = () => {
 
 //로딩화면
 const delLoad = () => {
-	setTimeout(() => {
-		document.querySelector('.loading').style.display = 'none';
-		document.querySelector('#all').style.opacity = '100%';
-		window.scrollTo(0, 0);
-	}, 2000);
+	// setTimeout(() => {
+	// 	document.querySelector('.loading').style.display = 'none';
+	// 	document.querySelector('#all').style.opacity = '100%';
+	// 	window.scrollTo(0, 0);
+	// }, 2000);
 };

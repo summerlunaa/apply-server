@@ -33,6 +33,7 @@ html {
   height: auto;
   background-color: transparent;
   z-index: 1;
+  /* opacity: 0; */
 }
 .loading-box {
   display: flex;
@@ -62,9 +63,9 @@ html {
   content: " ";
   position: absolute;
   bottom: -24rem;
-  width: 26rem;
+  width: 24rem;
   height: 26rem;
-  border-radius: 12rem;
+  border-radius: 10rem;
   animation: spin 5s ease-in-out infinite;
   z-index: 0;
 }
@@ -74,7 +75,7 @@ html {
 }
 .rb2 {
   right: -4rem;
-  bottom: -22rem;
+  bottom: -23rem;
   background-color: gray;
 }
 @keyframes spin {
@@ -82,7 +83,7 @@ html {
     transform: translateY(0) rotate(0deg);
   }
   100% {
-    transform: translateY(-80%) rotate(500deg);
+    transform: translateY(-85%) rotate(500deg);
   }
 }
 .loadtext{
