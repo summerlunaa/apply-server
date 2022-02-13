@@ -43,27 +43,46 @@ def write_application(request):
     application = Application.objects.filter(user=request.user).first()
 
     if request.method == "POST":
-        
+
         if application:  # 지원서 수정
             form = ApplicationForm(
                 request.POST, request.FILES, instance=application
             )
-            for i in form :
-                print(i)
+
         else:  # 지원서 첫 작성
             form = ApplicationForm(request.POST, request.FILES)
-            print(form)
+
         if form.is_valid():
             editApplication = form.save(commit=False)
             editApplication.user = request.user
             editApplication.updated_at = timezone.now()
             editApplication.save()
-            return redirect("application-success")
+
+       
+        #일단 지금까지 작성한거 저장하고 글항목 (1-4번) 빈칸 여부 체크 
+        for i in range(1,5):
+            if len(str(form[f'answer{i}']))-73==0:
+        #1) 빈칸 있으면 에러메시지
+                error_msg = form.empty_error()
+                return render(
+                    request, 
+                    "application.html", 
+                    {
+                        "form": form, 
+                        "application": application, 
+                        "error_msg": error_msg
+                    }
+                )
+        #2) 빈칸 없으면 success 제출
+        return redirect("application-success")
+
     else:
         if application:  # 지원서 수정
             form = ApplicationForm(instance=application)
         else:  # 지원서 첫 작성
             form = ApplicationForm()
+
+
     return render(
         request, "application.html", {"form": form, "application": application}
     )
