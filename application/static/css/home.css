@@ -112,27 +112,29 @@ header {
   font-size: 3rem;
   font-weight: 400;
   font-family: "Bebas Neue", cursive;
+
 }
 header img {
   width: 4.3rem;
+  display: block;
 }
 #logo-title {
-  transform: translate(40rem, 20rem) scale(500%);
+  transform: translate(40rem, 18rem) scale(500%);
 }
 #logo-title-mo {
   display: none;
 }
 header button {
   position: absolute;
-  top: 1.2rem;
+  top: 1.4rem;
   right: 8%;
   color: white;
   background-color: #b80e18;
-  width: 22rem;
+  width: 20rem;
   min-width: 180px;
   z-index: 8;
   float: right;
-  height: 5.6rem;
+  height: 5.2rem;
   border: solid 1px white;
   border-radius: 10px;
   cursor: pointer;
@@ -176,13 +178,11 @@ transition: 0.25s;
   font-family: "Noto Sans KR";
   font-style: normal;
   font-weight: bold;
-  line-height: 8.1rem;
+  line-height: 7rem;
   color: white;
 }
 /* 애니메이션 부분 */
-.pagecomp {
-  
-}
+
 .none {
   transform: none;
   /* visibility:visible; */
@@ -254,6 +254,7 @@ transition: 0.25s;
   height: 4rem;
   border: solid 1px white;
   border-radius: 10px;
+  cursor: pointer;
 }
 .tmts {
   margin-top: 3rem;
@@ -357,9 +358,11 @@ footer .icons {
   align-items: flex-end;
   height: 20rem;
   margin-left: 10rem;
+  z-index:30;
 }
 .icons img {
   width: 4rem;
+  cursor: pointer;
 }
 
 /* down button */
@@ -367,7 +370,7 @@ footer .icons {
   padding: 25px;
   width:15rem;
   position:fixed;
-  bottom:5rem;
+  bottom:1rem;
   left: calc(50vw - 7.5rem);
   cursor: pointer;
   z-index:9;

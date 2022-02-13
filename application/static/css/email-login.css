@@ -14,6 +14,7 @@ body{
 header{
     position:relative;
     height:10vh;
+    text-align: center;
     display: flex;
     background-color: #B80E18;
     width:100%;
@@ -26,9 +27,19 @@ header{
 }
 header img{
     width:3rem;
-    padding-right: 0.5rem;
+}
+header a{
+    display: flex;
+}
+header a:hover{
+    color:white;
 }
 
+header a{
+    font-size: 1.8rem;
+    font-weight: 400;
+    font-family: 'Bebas Neue', cursive;
+}
 /*main*/
 main{
     background-color: #04080F;
@@ -398,7 +409,15 @@ footer{
     font-size: 0.8rem;
     margin-bottom: 0.5rem;
 }
+header a:hover{
+    color:white;
+}
 
+header a{
+    font-size: 1.8rem;
+    font-weight: 400;
+    font-family: 'Bebas Neue', cursive;
+}
 /*반응형*/
 @media screen and (max-width: 1920px){
     .container{
