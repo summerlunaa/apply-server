@@ -111,9 +111,7 @@
         {% endif %} 
       </div>
         {% if user.position == "기획" or user.position == "디자인"%} 
-        
-        {{form.portfolio}}
-        {{form.design_doc}}
+
       <!-- dragdrop Design -->
       <div class="dragdrop dragdrop-D">
         <div class="label">5번 문항 제출</div>
@@ -148,8 +146,8 @@
 
         <div class="fileaddP">
           <div id="filenameP">{%if application.portfolio%}{{application.portfolio.name}}
-            <input type="checkbox" name="design_doc-clear" id="design_doc-clear_id" >
-            <label for="design_doc-clear_id" onclick="cancel('design')"></label>
+            <input type="checkbox" name="portfolio-clear" id="portfolio-clear_id" >
+            <label for="portfolio-clear_id" onclick="cancel('portfolio')"></label>
         </div>{%endif%}</div>
       </div>
       <!-- button -->
