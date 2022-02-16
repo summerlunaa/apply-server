@@ -114,39 +114,43 @@
         
         
       <!-- dragdrop Design -->
-      <div class="dragdrop">
-        <div class="label">기획/디자인 과제 제출하기</div>
-        <div>파일 포맷을 PDF로 제출해주세요</div>
+      <div class="dragdrop dragdrop-D">
+        <div class="label">5번 문항 제출</div>
+        <div>PDF파일을 제출해주세요.</div>
         <input
           type="file"
           name="design_doc"
           id="design_doc"
           onchange="getfile('design')"
         />
-
         <label for="design_doc" id="dragBoxD"> Drag and Drop File Here </label>
-        <span class="cancel cancelD" onclick="cancel('design')">x</span>
-      </div>
+        <div class="fileaddD">
+          <div id="filenameD">{%if application.design_doc%}{{design_doc}} {%endif%}</div>
+          <img class="cancel cancelD" onclick="cancel('design')"src="{%static 'cancel.png'%}" alt="">
+        </div>      </div>
       
         {% endif %} 
       <!-- drag&drop  portfolio-->
       <div class="dragdrop">
-        <div class="label">포트폴리오 제출하기</div>
-        <div>포트폴리오 제출은 자유입니다.</div>
-        <div>파일 포맷을 PDF로 제출해주세요</div>
+        <div class="label">*추가 포트폴리오 제출하기</div>
+        <div>포트폴리오 제출은 필수가 아닙니다. 지원서에 포트폴리오를 첨부하고 싶으시다면 </div>
+        <div>PDF파일을 제출해주세요.</div>
         <input
           type="file"
           name="portfolio"
           id="portfolio"
           onchange="getfile('portfolio')"
         />
-
         <label for="portfolio" id="dragBoxP"> Drag and Drop File Here </label>
-        <span class="cancel cancelP" onclick="cancel('portfolio')">x</span>
+
+        <div class="fileaddP">
+          <div id="filenameP">{%if application.portfolio%}{{portfolio}}{%endif%}</div>
+          <img class="cancel cancelP" onclick="cancel('portfolio')"src="{%static 'cancel.png'%}" alt="">
+        </div>
       </div>
       <!-- button -->
       <div class="submit">
-        지원서 제출 버튼을 눌러도 3월 21일 11:59까지 로그인 후 수정 가능합니다.
+        제출을 완료한 이후에도 3월 21일 11:59까지 로그인 후 수정 가능합니다.
         <button type="submit" class="save btn btn-default">
           지원서 제출하기
         </button>
