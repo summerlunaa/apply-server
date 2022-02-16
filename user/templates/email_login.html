@@ -1,7 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
 
-
 <head>
   <title>Email Login Form</title>
   <meta name="viewport" content="width=device-width, initial-scale-1" />
@@ -34,21 +33,13 @@
             </div>
             <div>
               <h1>ererer</h1>
-                <input
-                name="email"
-                class="input"
-                required id = "id_email"
-                type="text"
-                placeholder="{{email_remain}}"
-                onfocus="this.placeholder=''"
-                onblur="this.placeholder='이메일'"
-              />
               <input
                 name="email"
                 class="input"
-                required id = "id_email"
+                required
+                id="id_email"
                 type="text"
-                placeholder="이메일"
+                placeholder="{{email_remain}}"
                 onfocus="this.placeholder=''"
                 onblur="this.placeholder='이메일'"
               />
@@ -62,7 +53,8 @@
               <input
                 name="password"
                 class="input"
-                required id = "id_password"
+                required
+                id="id_password"
                 type="password"
                 placeholder="비밀번호"
                 onfocus="this.placeholder=''"
@@ -72,10 +64,9 @@
             </div>
           </div>
           {% if error_email %}
-          <p style="color:red;">잘못된 이메일입니다.</p>
-          {% endif %}
-          {% if error_pw %}
-          <p style="color:red;">잘못된 비밀번호입니다.</p>
+          <p style="color: red">잘못된 이메일입니다.</p>
+          {% endif %} {% if error_pw %}
+          <p style="color: red">잘못된 비밀번호입니다.</p>
           {% endif %}
           <div class="linkto">
             <a href="{% url 'password_reset' %}">비밀번호를 잊어버리셨나요?</a>
