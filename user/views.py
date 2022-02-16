@@ -2,8 +2,8 @@ from django.conf import settings
 
 from django.contrib.auth.forms import (
     PasswordResetForm,
-    SetPasswordForm,
 )
+
 from django.contrib.auth.tokens import default_token_generator
 
 from django.core.exceptions import ImproperlyConfigured, ValidationError
@@ -18,16 +18,15 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
-from django.contrib.auth.forms import SetPasswordForm
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect, resolve_url
 from django.conf import settings
 from django.urls import reverse_lazy
 from .models import CustomUser
+from .forms import SetPasswordForm
 from .forms import *
 import requests
-from django.core.mail.message import EmailMessage
 
 
 def success(request):
@@ -55,6 +54,7 @@ def signup_email(request):
     """
     if request.method == "POST":
         form = UserSignupForm(request.POST)
+        email_remain = form["email"].value()
         if form.is_valid():
             user = form.save()  # 유저정보 저장
             login(
@@ -63,9 +63,8 @@ def signup_email(request):
             infoform = Emailform()
             return render(request, "signup_info.html", {"form": infoform})
         else:
-            print(form.as_p())
-            print("Invalid Form")
-            return render(request, "signup_email.html", {"form": form})
+            form = UserSignupForm(request.POST)
+            return render(request, "signup_email.html", {"form": form, "email_remain":email_remain})
     else:
         form = UserSignupForm()
     return render(request, "signup_email.html", {"form": form})
@@ -79,10 +78,7 @@ def email_login(request):
     """
     if request.method == "POST":
         form = EmailAuthenticationForm(request.POST)
-        print("valid?")
-        print(form.as_p())
         if form.is_valid():
-            print("valid")
             if form.authenticate_login():
                 email = form.cleaned_data.get("email")
                 password = form.cleaned_data.get("password")
@@ -92,6 +88,27 @@ def email_login(request):
                         request, user, backend="user.kakaobackends.KakaoBackend"
                     )
                     return redirect("user_info")
+
+            else :
+                email = form.cleaned_data.get("email")
+                password = form.cleaned_data.get("password")
+                user = authenticate(email=email, password=password)
+                if len(CustomUser.objects.filter(email=email))==0:
+                    return render(
+                        request,
+                        "email_login.html", 
+                        {
+                            "form": EmailAuthenticationForm(), 
+                            "error_email" : "error_email"
+                        } )
+                else:
+                    return render(
+                        request,
+                        "email_login.html",
+                        {
+                            "form": EmailAuthenticationForm(), 
+                            "error_pw" : "error_pw"
+                        } )
     else:
         form = EmailAuthenticationForm()
     return render(request, "email_login.html", {"form": form})
@@ -112,6 +129,10 @@ def kakao_login(request):
 
 
 def submit_kakao(request):
+    """
+    카카오/일반 회원가입 후 추가 정보 받고 유저에 저장하는 뷰입니다
+    처음엔 카카오만 그 대상이었어서 ㅠㅠ 이름 헷갈리게 지은 점 죄송합니다
+    """
     if not request.user.is_authenticated:
         return redirect("email_login")
     form = Emailform(request.POST, instance=request.user)
@@ -300,7 +321,6 @@ class PasswordContextMixin:
 
 class PasswordResetView(PasswordContextMixin, FormView):
     email_template_name = "user/registration/password_reset_email.html"
-    # email_template_name = "registration/password_reset_email.html"
     extra_email_context = None
     form_class = PasswordResetForm
     from_email = None
@@ -316,9 +336,18 @@ class PasswordResetView(PasswordContextMixin, FormView):
         return super().dispatch(*args, **kwargs)
 
     def form_valid(self, form):
-        if CustomUser.objects.filter(
+        try:
+            user_instance = CustomUser.objects.get(
             email=self.request.POST.get("email")
-        ).exists():
+        )
+        except CustomUser.DoesNotExist:
+            return render(
+                self.request,
+                "user/registration/password_reset_form.html",
+                {"form": form, "email_error":"email_error"},
+            )
+        
+        if user_instance.has_usable_password():
             opts = {
                 "use_https": self.request.is_secure(),
                 "token_generator": self.token_generator,
@@ -335,12 +364,11 @@ class PasswordResetView(PasswordContextMixin, FormView):
                 "user/registration/password_reset_done.html",
                 {"form": form},
             )
-            # return super().form_valid(form)
         else:
             return render(
                 self.request,
-                "user/registration/password_reset_done_fail.html",
-                {"form": form},
+                "user/registration/password_reset_form.html",
+                {"form": form, "kakao_error":"kakao_error"},
             )
 
 
@@ -361,7 +389,6 @@ class PasswordResetConfirmView(PasswordContextMixin, FormView):
     template_name = "user/registration/password_reset_confirm.html"
     title = _("Enter new password")
     token_generator = default_token_generator
-
     @method_decorator(sensitive_post_parameters())
     @method_decorator(never_cache)
     def dispatch(self, *args, **kwargs):
@@ -448,14 +475,4 @@ class PasswordResetCompleteView(PasswordContextMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context["login_url"] = resolve_url(settings.LOGIN_URL)
         return context
-
-
-def send_email(request):
-    subject = "message"
-    to = ["junior0614@naver.com"]
-    from_email = "applionsogang@gmail.com"
-    message = "메지시 테스트"
-    EmailMessage(
-        subject=subject, body=message, to=to, from_email=from_email
-    ).send()
 

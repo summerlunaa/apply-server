@@ -32,14 +32,30 @@
               <i class="fas fa-solid fa-envelope"></i>
             </div>
             <div>
-              <input
-              name="email"
+
+              {% if email_remain %}
+              <h1>ererer</h1>
+                <input
+                name="email"
                 class="input"
+                required id = "id_email"
+                type="text"
+                value="{{email_remain}}"
+                placeholder="{{email_remain}}"
+                onfocus="this.placeholder=''"
+                onblur="this.placeholder='이메일'"
+              />
+              {% else %}
+              <input
+                name="email"
+                class="input"
+                required id = "id_email"
                 type="text"
                 placeholder="이메일"
                 onfocus="this.placeholder=''"
                 onblur="this.placeholder='이메일'"
               />
+              {% endif %}
             </div>
           </div>
           <div class="input-div two">
@@ -51,6 +67,7 @@
               name="password1"
                 class="input"
                 type="password"
+                required id = "id_password1"
                 placeholder="비밀번호"
                 onfocus="this.placeholder=''"
                 onblur="this.placeholder='비밀번호'"
@@ -67,6 +84,7 @@
                 name="password2"
                 class="input"
                 type="password"
+                required id = "id_password2"
                 placeholder="비밀번호 확인"
                 onfocus="this.placeholder=''"
                 onblur="this.placeholder='비밀번호 확인'"
@@ -75,7 +93,11 @@
             </div>
           </div>
           <div class="linkto">
-            
+            {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+            <p style="color:red;">{{error}}</p>
+            {% endfor %}
+        {% endfor %}
             <a href="{% url 'email_login' %}">이미 회원이신가요?</a>
           </div>
           <br /><button type="submit" class="btn key" value="Login">다음</button
