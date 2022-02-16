@@ -33,7 +33,7 @@ a{
   }
 /* 헤더 */
 header {
-    height: 10rem;
+    height: 8rem;
     display: flex;
     background-color: #b80e18;
     width: 100%;
@@ -50,13 +50,13 @@ header {
   
   header button {
     position: absolute;
-    top: 2.2rem;
+    top: 1.4rem;
     right: 8%;
     color: black;
     background-color: #b80e18;
-    width: 22rem;
+    width: 20rem;
     cursor: pointer;
-    height: 5.6rem;
+    height: 5.2rem;
     border: solid 1px black;
     border-radius: 10px;
   }
@@ -86,7 +86,6 @@ header {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height:calc(85vh - 10rem);
 }
 
 .input-duo{
@@ -127,9 +126,9 @@ select{
     outline:none;
 }
 option{
-    background-color: white;
-    color:black;
-    font-size:1rem;
+    background-color: #04080F;
+    color:white;
+    font-size:1.3rem;
 }
 option:hover{
     background-color: #b80e18;
@@ -143,17 +142,25 @@ option:hover{
     color:white;
     position:relative;
     margin-top:30%;
+    margin-bottom: 50px;
 }
-.bottom .a{
-    position: absolute;
-    right:calc(30rem - 50vw) ;
-    bottom:-4rem;
+.a{
+
     cursor: pointer;
-    text-decoration: none;
     color: white;
-    background-color: #04080F;
-    outline:none;
-    border:none;
+    width: 160px;
+    display: flex;
+    justify-content: center;
+    background: #b80e18;
+    height: 40px;
+    align-items: center;
+    font-size: medium;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+.next-div{
+    display: flex;
+    justify-content: center;
 }
 /* responsive */
 @media(max-width:500px){

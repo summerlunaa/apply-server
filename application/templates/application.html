@@ -1,93 +1,168 @@
 {% load static%}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <link rel="stylesheet" href="../static/css/application.css"> -->
     <title>멋쟁이 사자처럼 지원하기</title>
-    <link rel="stylesheet" href="{% static 'css/application.css'%}"></head>
+    <link rel="stylesheet" href="{% static 'css/application.css'%}" />
+  </head>
 
-<body>
+  <body>
     <header>
-        <a href="{% url 'index'%}"><img src="{% static 'logo-white.png'%}" alt="">
-            <span id="logo-title">10TH LIKELION SOGANG</span></a>
-        
+      <a href="{% url 'index'%}"
+        ><img src="{% static 'logo-white.png'%}" alt="" />
+        <span id="logo-title">10TH LIKELION SOGANG</span></a
+      >
 
-        <a href="{% url 'logout'%}"> <button>Log out</button></a>
+      <a href="{% url 'logout'%}"> <button>Log out</button></a>
     </header>
-    
 
     <div class="progress-bar">
-        <div class="bar bar1"></div>
-        <div class="bar bar2"></div>
-        <div class="bar bar3"></div>
+      <div class="bar bar1"></div>
+      <div class="bar bar2"></div>
+      <div class="bar bar3"></div>
     </div>
+
     <form method="POST" enctype="multipart/form-data">
-        {%csrf_token%}
-        <div class="label" for="answer1">1. 다양한 IT동아리 중에서 멋쟁이사자처럼 대학 10기를 선택하고 지원하시게 된 이유를 작성해주세요. (500자 이내)
-        </div>
-        <textarea onkeydown="counter(1)" class="num1" name="answer1" id="" cols="30" rows="10">{{application.answer1}}</textarea>
-        <span class="num1">0/500</span>
+      {%csrf_token%}
 
-        <div class="label" for="answer2">2. 파트를 선택한 이유와 관련 경험을 해본 적이 있는지, 그리고 이 파트를 통해 어떠한 성정을 희망하시는지 작성해주세요. (500자 이내)
-        </div>
-        <textarea onkeydown="counter(2)" class="num2" name="answer2" id="" cols="30" rows="10">{{application.answer2}}</textarea>
-        <span class="num2">0/500</span>
+      <div> <!--채우지 않은 항목 에러메시지-->
+        {% if error_msg %}
+        <strong style= "color:red;font-size: 1.8rem;">{{error_msg}}</strong>
+        {% endif %}
+      </div>
 
-        <div class="label" for="answer3">3. 멋쟁이사자처럼 대학은 협업과 팀워크를 중요한 가치로 생각하는 공동체입니다. 지원자 본인이 협업과 팀워크를 진행해보았던 경험과, 그 경험을 멋쟁이 사자처럼 대학에서 어떻게 적용시킬 수 있을지 작성해주세요. (500자 이내)</div>
-        <textarea onkeydown="counter(3)" class="num3" name="answer3" id="" cols="30" rows="10">{{application.answer3}}</textarea>
-        <span class="num3">0/500</span>
+      <div class="label" for="answer1">
+        1. 다양한 IT동아리 중에서 멋쟁이사자처럼 대학 10기를 선택하고 지원하시게
+        된 이유를 작성해주세요. (500자 이내)
+      </div>
+      <textarea
+        onkeydown="counter(1)"
+        class="num1"
+        name="answer1"
+        id=""
+        cols="30"
+        rows="10"
+      >
+{{application.answer1}}</textarea
+      >
+      <span class="num1">0/500</span>
 
-        <div class="label" for="answer4">4. 멋쟁이사자처럼 대학은 최소 주 2회 모임(월요일&수요일 6시30분~9시)과 이외에도 추가 공부시간이 필요합니다.  활동 기간동안 얼마나 열정적으로, 매주 얼만큼의 시간을 할애하실 수 있는지 작성해주세요. (500자 이내)</div>
-        <textarea onkeydown="counter(4)" class="num4" name="answer4" id="" cols="30" rows="10">{{application.answer4}}</textarea>
-        <span class="num4">0/500</span>
+      <div class="label" for="answer2">
+        2. 파트를 선택한 이유와 관련 경험을 해본 적이 있는지, 그리고 이 파트를
+        통해 어떠한 성정을 희망하시는지 작성해주세요. (500자 이내)
+      </div>
+      <textarea
+        onkeydown="counter(2)"
+        class="num2"
+        name="answer2"
+        id=""
+        cols="30"
+        rows="10"
+      >
+{{application.answer2}}</textarea
+      >
+      <span class="num2">0/500</span>
 
-        <div class="label" for="answer5">5. 디자인 & 기획 질문</div>
-        <textarea onkeydown="counter(5)" class="num5" name="answer5" id="" cols="30" rows="10">{{application.answer5}}</textarea>
-        <span class="num5">0/500</span>
+      <div class="label" for="answer3">
+        3. 멋쟁이사자처럼 대학은 협업과 팀워크를 중요한 가치로 생각하는
+        공동체입니다. 지원자 본인이 협업과 팀워크를 진행해보았던 경험과, 그
+        경험을 멋쟁이 사자처럼 대학에서 어떻게 적용시킬 수 있을지 작성해주세요.
+        (500자 이내)
+      </div>
+      <textarea
+        onkeydown="counter(3)"
+        class="num3"
+        name="answer3"
+        id=""
+        cols="30"
+        rows="10"
+      >
+{{application.answer3}}</textarea
+      >
+      <span class="num3">0/500</span>
+
+      <div class="label" for="answer4">
+        4. 멋쟁이사자처럼 대학은 최소 주 2회 모임(월요일&수요일 6시30분~9시)과
+        이외에도 추가 공부시간이 필요합니다. 활동 기간동안 얼마나 열정적으로,
+        매주 얼만큼의 시간을 할애하실 수 있는지 작성해주세요. (500자 이내)
+      </div>
+      <textarea
+        onkeydown="counter(4)"
+        class="num4"
+        name="answer4"
+        id=""
+        cols="30"
+        rows="10"
+      >
+{{application.answer4}}</textarea
+      >
+      <span class="num4">0/500</span>
+
+      <div class="label" for="answer5">
+        {% if user.position == "기획" %} 
+        5. 멋사에 들어오면 개발공부를 진행한 뒤에 서비스를 만들 수 있습니다. 만들고 싶거나 실현시키고 싶었던 아이디어가 있다면 작성하여 파일로 제출해주세요. (500자)
+        {% endif %} 
+        {% if user.position == "디자인" %} 
+        5. 웹서비스로 구현하고 싶은 자신의 아이디어를 상상해보세요. 그리고 그 웹서비스의 한 페이지만 설명해주세요. (PPT, Figma, 일러스트 등 자유로운 파일로 작업 가능. 최종 제출은 PDF파일)
+        {% endif %} 
+      </div>
+        {% if user.position == "기획" or user.position == "디자인"%} 
         
-        <!-- dragdrop Design -->
-    <div class="dragdrop">
-        <div class="label" >디자인 과제 제출하기</div>
-        <div>파일 포맷을 PDF로 제출해주세요</div>
-        <input type="file" name="design_doc" id="design_doc" onchange="getfile('design')">
-
-        <label for="design_doc" id="dragBoxD">
-            Drag and Drop File Here
-        </label>
-        <span class="cancel cancelD"onclick="cancel('design')">x</span>
-
-    </div>
-    <!-- drag&drop  portfolio-->
-    <div class="dragdrop">
-        <div class="label" >포트폴리오 제출하기</div>
-        <div>파일 포맷을 PDF로 제출해주세요</div>
-        <input type="file" name="portfolio" id="portfolio" onchange="getfile('portfolio')">
         
-        <label for="portfolio" id="dragBoxP">
-            Drag and Drop File Here
-        </label>
-        <span class="cancel cancelP" onclick="cancel('portfolio')">x</span>
+      <!-- dragdrop Design -->
+      <div class="dragdrop dragdrop-D">
+        <div class="label">5번 문항 제출</div>
+        <div>PDF파일을 제출해주세요.</div>
+        <input
+          type="file"
+          name="design_doc"
+          id="design_doc"
+          onchange="getfile('design')"
+        />
+        <label for="design_doc" id="dragBoxD"> Drag and Drop File Here </label>
+        <div class="fileaddD">
+          <div id="filenameD">{%if application.design_doc%}{{design_doc}} {%endif%}</div>
+          <img class="cancel cancelD" onclick="cancel('design')"src="{%static 'cancel.png'%}" alt="">
+        </div>      </div>
+      
+        {% endif %} 
+      <!-- drag&drop  portfolio-->
+      <div class="dragdrop">
+        <div class="label">*추가 포트폴리오 제출하기</div>
+        <div>포트폴리오 제출은 필수가 아닙니다. 지원서에 포트폴리오를 첨부하고 싶으시다면 </div>
+        <div>PDF파일을 제출해주세요.</div>
+        <input
+          type="file"
+          name="portfolio"
+          id="portfolio"
+          onchange="getfile('portfolio')"
+        />
+        <label for="portfolio" id="dragBoxP"> Drag and Drop File Here </label>
 
-    </div>
-    <!-- button -->
-    <div class="submit"> 
-        지원서 제출 버튼을 눌러도 3월 21일 11:59까지 로그인 후 수정 가능합니다.
-        <button type="submit" class="save btn btn-default">지원서 제출하기</button>
-    </div>
+        <div class="fileaddP">
+          <div id="filenameP">{%if application.portfolio%}{{portfolio}}{%endif%}</div>
+          <img class="cancel cancelP" onclick="cancel('portfolio')"src="{%static 'cancel.png'%}" alt="">
+        </div>
+      </div>
+      <!-- button -->
+      <div class="submit">
+        제출을 완료한 이후에도 3월 21일 11:59까지 로그인 후 수정 가능합니다.
+        <button type="submit" class="save btn btn-default">
+          지원서 제출하기
+        </button>
+      </div>
     </form>
-    
 
     <div class="prevNext">
-        <div class="prev"><a href="{% url 'user_info' %}">< Prev</a></div>
-        <div class="next"><a href="{% url 'application-success' %}"> Next ></a></div>
+      <div class="prev"><a href=""></a></div>
+      <div class="next"><a href="}"></a></div>
     </div>
 
     <!-- <script src="../static/js/application.js"></script> -->
     <script src="{% static 'js/application.js' %}"></script>
-</body>
-
+  </body>
 </html>

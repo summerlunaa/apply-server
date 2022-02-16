@@ -1,12 +1,16 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>Index Page</title>
-</head>
+  </head>
 
-<body>
-    <h1>Index Page</h1>    
-</body>
-
+  <body>
+    <h1>Index Page</h1>
+    <video controls autoplay>
+      <source src="{% static 'background.webm'%}" type="video/webm" />
+      <source src="{% static 'background.mp4'%}" type="video/mp4" />
+      Sorry, your browser doesn't support embedded videos.
+    </video>
+  </body>
 </html>

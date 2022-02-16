@@ -12,6 +12,9 @@
 
 
 <body onload="delLoad();">
+   <div class="" id="mobileNo">
+       Pc환경에서 접속해주세요 ㅠㅠ
+   </div>
     <div class="loading" >
         <div class="loading-box">
             <img src="{% static 'logo-line.png'%}" alt="">
@@ -25,6 +28,10 @@
                     
                 </div>
             </div>
+        </div>
+        <div class="loadtext">
+            잠시만 기다려주세요~
+
         </div>
     </div>
     <div id="all">
@@ -40,9 +47,9 @@
             {% endif %}
         </header>
 
-            <div id="logo-title-mo" class="pagecomp pagecomp1">10TH LIKELION</div>
-            <div id="logo-title-mo" class="pagecomp pagecomp1"> SOGANG</div>
-
+            <!-- <div id="logo-title-mo" class="pagecomp pagecomp1">10TH LIKELION</div>
+            <div id="logo-title-mo" class="pagecomp pagecomp1"> SOGANG</div> -->
+                <img id="down" src="{% static 'downIcon.svg'%}" alt="" onclick="downfunc()">
 
 
         <!-- 페이지2 컴포넌트 -->
@@ -64,7 +71,10 @@
             <h1 class="pagecomp pagecomp3">지원일정</h1>
 
             <div class="pagecomp pagecomp3" id="date-box">
-
+                서류지원 : 2022.02.21 ~ 2022.03.13 <br>
+                서류 발표 : 2022.03.15 <br>
+                면접 : 2022.03.16 ~ 2022.03.22 <br>
+                최종 결과 발표 : 2022.03.25
             </div>
         </div>
         <!-- 페이지4 컴포넌트 -->
@@ -164,8 +174,7 @@
                 <h6>
                     이런 분들에게 추천드려요 <br>
                     ▶ 고객 경험에 관심이 있으신 분<br>
-                    ▶ <br>
-                    ▶ <br>
+                    ▶ 사용자에게 친숙한 프로덕트를 개발하고 싶으신<br>
                 </h6>
             </div>
         </div>
@@ -190,9 +199,9 @@
                 <h6>LIKELION SOGANG</h6>
             </div>
             <div class="icons">
-                <a href=""><img src="../static/Facebook - Negative.svg" alt=""></a>
-                <a href=""><img src="../static/Instagram - Negative.svg" alt=""></a>
-                <a href=""><img src="../static/EnvelopeSimple.svg" alt=""></a>
+                <a href=""><img src="{% static 'Facebook - Negative.svg'%}" alt=""></a>
+                <a href="https://www.instagram.com/likelion_sg/"><img src="{% static 'Instagram - Negative.svg'%}" alt=""></a>
+                <a href=""><img src="{% static 'EnvelopeSimple.svg'%}" alt=""></a>
             </div>
 
         </footer>

@@ -11,8 +11,10 @@
 
   <body>
     <header>
-      <img src="{%static 'logo-white.png'%}" alt="" />
-      <span id="logo-title">10TH LIKELION SOGANG</span>
+      <a href="{% url 'index'%}">
+        <img src="{% static 'logo-white.png'%}" alt="" />
+        <div id="logo-title">10TH LIKELION SOGANG</div>
+      </a>
     </header>
 
     <main>
@@ -24,18 +26,18 @@
       </div>
 
       <div class="login-container">
-        <form method="POST">
+        <form method="POST" action="{%url 'submit_kakao'%}">
           {% csrf_token %}
           <div class="input-div-info one">
             <span class="info">이름</span>
             <div>
               <input
-              
+                name="name"
                 placeholder="멋쟁이"
                 class="input"
                 type="text"
                 onfocus="this.placeholder=''"
-                onblur="this.placeholder="
+                onblur="this.placeholder"
               />
             </div>
           </div>
@@ -43,12 +45,13 @@
             <span class="info">학번</span>
             <div>
               <input
+              name="student_id"
                 class="input"
                 type="text"
                 
                 placeholder="20NNNNNN"
                 onfocus="this.placeholder=''"
-                onblur="this.placeholder="
+                onblur="this.placeholder"
               />
             </div>
           </div>
@@ -56,11 +59,12 @@
             <span class="info">학과</span>
             <div>
               <input
+              name="major"
                 class="input"
                 type="text"
                 placeholder="사자학과"
                 onfocus="this.placeholder=''"
-                onblur="this.placeholder="
+                onblur="this.placeholder"
               />
             </div>
           </div>
@@ -68,11 +72,12 @@
             <span class="info phone">전화번호</span>
             <div>
               <input
+              name="phone_number"
                 class="input"
                 type="text"
                 placeholder="010NNNNNNNN"
                 onfocus="this.placeholder=''"
-                onblur="this.placeholder="
+                onblur="this.placeholder"
               />
             </div>
           </div>
@@ -81,10 +86,11 @@
               >내가 선택한 <span class="fs-medium"> 포지션</span>은</span
             >
             <div class="info-input-div">
-              <select name="language" class="input-select" type="text">
-                <option value="none">기획&디자인</option>
-                  <option value="korean">프론트엔드</option>
-                  <option value="english">백엔드</option>
+              <select name="position" class="input-select" type="text">
+                <option value="기획">기획</option>
+                <option value="디자인">디자인</option>
+                  <option value="프론트엔드">프론트엔드</option>
+                  <option value="백엔드">백엔드</option>
                 </optgroup>
               </select>
             </div>
