@@ -200,6 +200,12 @@ def kakao_login_callback(request):
         if not agree_on_email:
 
             email = personal_info.get("email")
+
+            if len(CustomUser.objects.filter(email=email))!=0:
+                form = EmailAuthenticationForm(request.POST)
+                msg="already_signedup"
+                return render(request,"email_login.html", {"form": form, "already_signedup":msg})
+
         else:
             form = UserSignupForm
             return render(

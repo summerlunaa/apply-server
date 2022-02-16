@@ -63,7 +63,9 @@
               />
             </div>
           </div>
-          {% if error_email %}
+          {% if already_signedup %}
+          <p style="color: red">카카오 이메일로 이미 가입된 유저가 있습니다.</p>
+          {% endif %} {% if error_email %}
           <p style="color: red">잘못된 이메일입니다.</p>
           {% endif %} {% if error_pw %}
           <p style="color: red">잘못된 비밀번호입니다.</p>
