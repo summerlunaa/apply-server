@@ -124,10 +124,20 @@
         />
         <label for="design_doc" id="dragBoxD"> Drag and Drop File Here </label>
         <div class="fileaddD">
-          <div id="filenameD">{%if application.design_doc%}{{application.design_doc.name}}
+          <div id="filenameD">
+            
+            {%if application.design_doc%}
+            <script  type='text/javascript'>
+              let design_words= `{{application.design_doc.name}}`;
+              design_words = design_words.replace("design_doc/","");
+              document.write(design_words);
+
+            </script>
           <input type="checkbox" name="design_doc-clear" id="design_doc-clear_id" >
           <label for="design_doc-clear_id" onclick="cancel('design')"></label>
-          {%endif%}</div>
+          {%endif%}
+        
+        </div>
         </div>      </div>
       
         {% endif %} 
@@ -145,7 +155,12 @@
         <label for="portfolio" id="dragBoxP"> Drag and Drop File Here </label>
 
         <div class="fileaddP">
-          <div id="filenameP">{%if application.portfolio%}{{application.portfolio.name}}
+          <div id="filenameP">{%if application.portfolio%}
+            <script  type='text/javascript'>
+              let ports_words= `{{application.portfolio.name}}`;
+              ports_words = ports_words.replace("portfolio/","");
+              document.write(ports_words);
+            </script>
             <input type="checkbox" name="portfolio-clear" id="portfolio-clear_id" >
             <label for="portfolio-clear_id" onclick="cancel('portfolio')"></label>
         </div>{%endif%}</div>
