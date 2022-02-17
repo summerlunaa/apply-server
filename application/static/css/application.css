@@ -238,3 +238,13 @@ form span{
     }
     
 }
+input[type=checkbox] + label { 
+    cursor: pointer; 
+    padding-left: 23px; 
+    background-repeat: no-repeat;
+    background-image: url('cancel.png');
+}
+
+input[type=checkbox] {
+    display:none;
+}
