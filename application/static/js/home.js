@@ -47,7 +47,7 @@ const onScroll = () => {
 		}rem,${18 - ((18 * currentY) / lastHeight) * 5}rem) scale(${
 			550 - 450 * ((currentY / lastHeight) * 5)
 		}%) `;
-
+		down.style.transform = 'rotate(0deg)';
 		page2.classList.remove('none');
 		pageNum = 1;
 	} else if (currentY > lastHeight / 5 && currentY <= (lastHeight / 5) * 2) {
@@ -104,6 +104,6 @@ const delLoad = () => {
 	setTimeout(() => {
 		document.querySelector('.loading').style.display = 'none';
 		document.querySelector('#all').style.opacity = '100%';
-		window.scrollTo(0, 0);
+		window.scrollTo(0, 1);
 	}, 2000);
 };
