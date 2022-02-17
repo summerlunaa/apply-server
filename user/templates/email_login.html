@@ -77,11 +77,10 @@
           <br /><button type="submit" class="btn key" value="Login">
             로그인</button
           ><br />
+          <a href="{% url 'kakao_login' %}"
+            ><button class="btn kakao"><img class="kakaologo" src="{% static 'kakao-logo.jpg'%}" alt="" />카카오 로그인</button></a
+          >
         </form>
-
-        <a href="{% url 'kakao_login' %}"
-          ><button class="btn other">카카오톡으로 로그인</button></a
-        >
       </div>
     </div>
   </main>
