@@ -20,14 +20,14 @@ function counter(n) {
 // drag & drop
 const portfolio = document.querySelector('#portfolio');
 const design = document.querySelector('#design_doc');
-const uploadBoxD = document.querySelector('#dragBoxD');
 const uploadBoxP = document.querySelector('#dragBoxP');
-const cancelD = document.querySelector('.cancelD');
 const cancelP = document.querySelector('.cancelP');
-
 const filenameP = document.querySelector('#filenameP');
-const filenameD = document.querySelector('#filenameD');
 const fileaddP = document.querySelector('.fileaddP');
+
+const uploadBoxD = document.querySelector('#dragBoxD');
+const cancelD = document.querySelector('.cancelD');
+const filenameD = document.querySelector('#filenameD');
 const fileaddD = document.querySelector('.fileaddD');
 
 	//파일 저장 후 ui변경
@@ -35,10 +35,13 @@ if (filenameP.innerHTML){
 	uploadBoxP.style.display = 'none';
 	fileaddP.style.display = 'flex';
 }
-if (filenameD.innerHTML){
-	uploadBoxD.style.display = 'none';
-	fileaddD.style.display = 'flex';
+if (filenameD!==null){
+	if (filenameD.innerHTML){
+		uploadBoxD.style.display = 'none';
+		fileaddD.style.display = 'flex';
+	}
 }
+
 
 const getfile = (target) => {
 	const uploadbox = target === 'portfolio' ? uploadBoxP : uploadBoxD;
@@ -94,7 +97,6 @@ if (uploadBoxD!==null){
         e.preventDefault();
         const files = e.dataTransfer && e.dataTransfer.files;
         design.files = files;
-        console.log("filedrop");
         getfile("design");
     });
 }
