@@ -1,9 +1,7 @@
 import email
 from django.conf import settings
 
-from django.contrib.auth.forms import (
-    PasswordResetForm,
-)
+from django.contrib.auth.forms import PasswordResetForm
 
 from django.contrib.auth.tokens import default_token_generator
 
@@ -65,7 +63,11 @@ def signup_email(request):
             return render(request, "signup_info.html", {"form": infoform})
         else:
             form = UserSignupForm(request.POST)
-            return render(request, "signup_email.html", {"form": form, "email_remain":email_remain})
+            return render(
+                request,
+                "signup_email.html",
+                {"form": form, "email_remain": email_remain},
+            )
     else:
         form = UserSignupForm()
     return render(request, "signup_email.html", {"form": form})
@@ -90,26 +92,30 @@ def email_login(request):
                     )
                     return redirect("user_info")
 
-            else :
+            else:
                 email = form.cleaned_data.get("email")
                 password = form.cleaned_data.get("password")
                 user = authenticate(email=email, password=password)
-                if len(CustomUser.objects.filter(email=email))==0:
+                if len(CustomUser.objects.filter(email=email)) == 0:
                     return render(
                         request,
-                        "email_login.html", 
+                        "email_login.html",
                         {
-                            "form": EmailAuthenticationForm(), 
-                            "error_email" : "error_email"
-                        } )
+                            "form": EmailAuthenticationForm(),
+                            "email_remain": email,
+                            "error_email": "error_email",
+                        },
+                    )
                 else:
                     return render(
                         request,
                         "email_login.html",
                         {
-                            "form": EmailAuthenticationForm(), 
-                            "error_pw" : "error_pw"
-                        } )
+                            "form": EmailAuthenticationForm(),
+                            "email_remain": email,
+                            "error_pw": "error_pw",
+                        },
+                    )
     else:
         form = EmailAuthenticationForm()
     return render(request, "email_login.html", {"form": form})
@@ -202,10 +208,14 @@ def kakao_login_callback(request):
 
             email = personal_info.get("email")
 
-            if len(CustomUser.objects.filter(email=email))!=0:
+            if len(CustomUser.objects.filter(email=email)) != 0:
                 form = EmailAuthenticationForm(request.POST)
-                msg="already_signedup"
-                return render(request,"email_login.html", {"form": form, "already_signedup":msg})
+                msg = "already_signedup"
+                return render(
+                    request,
+                    "email_login.html",
+                    {"form": form, "already_signedup": msg},
+                )
 
         else:
             form = UserSignupForm
@@ -345,15 +355,15 @@ class PasswordResetView(PasswordContextMixin, FormView):
     def form_valid(self, form):
         try:
             user_instance = CustomUser.objects.get(
-            email=self.request.POST.get("email")
-        )
+                email=self.request.POST.get("email")
+            )
         except CustomUser.DoesNotExist:
             return render(
                 self.request,
                 "user/registration/password_reset_form.html",
-                {"form": form, "email_error":"email_error"},
+                {"form": form, "email_error": "email_error"},
             )
-        
+
         if user_instance.has_usable_password():
             opts = {
                 "use_https": self.request.is_secure(),
@@ -376,7 +386,7 @@ class PasswordResetView(PasswordContextMixin, FormView):
             return render(
                 self.request,
                 "user/registration/password_reset_form.html",
-                {"form": form, "kakao_error":"kakao_error"},
+                {"form": form, "kakao_error": "kakao_error"},
             )
 
 
@@ -397,6 +407,7 @@ class PasswordResetConfirmView(PasswordContextMixin, FormView):
     template_name = "user/registration/password_reset_confirm.html"
     title = _("Enter new password")
     token_generator = default_token_generator
+
     @method_decorator(sensitive_post_parameters())
     @method_decorator(never_cache)
     def dispatch(self, *args, **kwargs):
