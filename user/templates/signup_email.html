@@ -7,6 +7,95 @@
     <title>회원가입</title>
     <link rel="stylesheet" href="{%static 'css/email-login.css'%}" />
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+    <!--favicon-->
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="{% static 'favicon/apple-icon-57x57.png' %}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="60x60"
+      href="{% static 'favicon/apple-icon-60x60.png' %}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="{% static 'favicon/apple-icon-72x72.png' %}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="{% static 'favicon/apple-icon-76x76.png' %}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="{% static 'favicon/apple-icon-114x114.png' %}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="{% static 'favicon/apple-icon-120x120.png' %}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="{% static 'favicon/apple-icon-144x144.png' %}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="{% static 'favicon/apple-icon-152x152.png' %}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="{% static 'favicon/apple-icon-180x180.png' %}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="{% static 'favicon/android-icon-192x192.png' %}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="{% static 'favicon/favicon-32x32.png' %}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="{% static 'favicon/favicon-96x96.png' %}"
+    />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="{% static 'favicon/favicon-16x16.png' %}"
+    />
+    <link rel="manifest" href="{% static 'favicon/manifest.json' %}" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta
+      name="msapplication-TileImage"
+      content="{% static 'favicon/ms-icon-144x144.png' %}"
+    />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!--kakaotalk thumbnail-->
+    <meta property="og:url" content="https://www.applionsg.com/" />
+    <meta property="og:title" content="멋쟁이 사자처럼 10기 지원하기" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="{% static 'Thumbnail.png' %}" />
+    <meta
+      property="og:description"
+      content="내 손으로 내 아이디어를 실현한다"
+    />
   </head>
 
   <body>
@@ -18,7 +107,6 @@
     </header>
 
     <main>
-        
       <div class="container">
         <div class="img">
           <h2>Register</h2>
@@ -28,19 +116,19 @@
 
       <div class="login-container">
         <form method="POST">
-          {% csrf_token %} 
+          {% csrf_token %}
           <div class="input-div one">
             <div class="i">
               <i class="fas fa-solid fa-envelope"></i>
             </div>
             <div>
-
               {% if email_remain %}
               <h1>ererer</h1>
-                <input
+              <input
                 name="email"
                 class="input"
-                required id = "id_email"
+                required
+                id="id_email"
                 type="text"
                 value="{{email_remain}}"
                 placeholder="{{email_remain}}"
@@ -51,7 +139,8 @@
               <input
                 name="email"
                 class="input"
-                required id = "id_email"
+                required
+                id="id_email"
                 type="text"
                 placeholder="이메일"
                 onfocus="this.placeholder=''"
@@ -66,10 +155,11 @@
             </div>
             <div>
               <input
-              name="password1"
+                name="password1"
                 class="input"
                 type="password"
-                required id = "id_password1"
+                required
+                id="id_password1"
                 placeholder="비밀번호"
                 onfocus="this.placeholder=''"
                 onblur="this.placeholder='비밀번호'"
@@ -86,7 +176,8 @@
                 name="password2"
                 class="input"
                 type="password"
-                required id = "id_password2"
+                required
+                id="id_password2"
                 placeholder="비밀번호 확인"
                 onfocus="this.placeholder=''"
                 onblur="this.placeholder='비밀번호 확인'"
@@ -95,23 +186,27 @@
             </div>
           </div>
           <div class="linkto">
-            {% for field, errors in form.errors.items %}
-            {% for error in errors %}
-            <p style="color:red;">{{error}}</p>
-            {% endfor %}
-        {% endfor %}
+            {% for field, errors in form.errors.items %} {% for error in errors
+            %}
+            <p style="color: red">{{error}}</p>
+            {% endfor %} {% endfor %}
             <a href="{% url 'email_login' %}">이미 회원이신가요?</a>
           </div>
           <br /><button type="submit" class="btn key" value="Login">다음</button
           ><br />
           <a href="{% url 'kakao_login' %}"
-            ><button class="btn kakao"><img class="kakaologo" src="{% static 'kakao-logo.jpg'%}" alt="" />카카오 회원가입</button></a
+            ><button class="btn kakao">
+              <img
+                class="kakaologo"
+                src="{% static 'kakao-logo.jpg'%}"
+                alt=""
+              />카카오 회원가입
+            </button></a
           >
         </form>
         <div id="info_popup" class="personal-info-popup">
           <div class="popup-container">
             <div class="popup-top">
-                
               <h2>개인정보 수집·이용 동의서</h2>
             </div>
 
@@ -165,7 +260,7 @@
             <div class="agree">
               <h5>개인정보 수집에 동의하십니까?</h5>
               <input id="infoagree_check" type="checkbox" id="agree-click" />
-              <label  for="agree-click" class="check-agree">동의합니다</label>
+              <label for="agree-click" class="check-agree">동의합니다</label>
             </div>
           </div>
         </div>
@@ -176,15 +271,15 @@
     </footer>
   </body>
   <script>
-      let checkbox = document.querySelector("#infoagree_check");
-      let info_popup = document.querySelector("#info_popup");
-      checkbox.addEventListener('input',(e)=>{
-          if(e.target.checked){
-              info_popup.style.opacity="0";
-              setTimeout(()=>{
-                info_popup.style.display="none";
-              },1500)
-          }
-      })
+    let checkbox = document.querySelector("#infoagree_check");
+    let info_popup = document.querySelector("#info_popup");
+    checkbox.addEventListener("input", (e) => {
+      if (e.target.checked) {
+        info_popup.style.opacity = "0";
+        setTimeout(() => {
+          info_popup.style.display = "none";
+        }, 1500);
+      }
+    });
   </script>
 </html>
