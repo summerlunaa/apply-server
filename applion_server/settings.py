@@ -29,8 +29,8 @@ KAKAO_ADNIN_KEY = os.getenv("KAKAO_ADMIN_KEY")
 SECRET_KEY= os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = (os.environ.get('DEBUG', 'TRUE') != 'False')
-
+# DEBUG = (os.environ.get('DEBUG', 'TRUE') != 'False')
+DEBUG =False
 ALLOWED_HOSTS = ['*']
 
 
@@ -70,7 +70,7 @@ ROOT_URLCONF = 'applion_server.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
