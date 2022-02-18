@@ -124,22 +124,20 @@
         />
         <label for="design_doc" id="dragBoxD"> Drag and Drop File Here </label>
         <div class="fileaddD">
-          <div id="filenameD">
-            
-            {%if application.design_doc%}
+          <div id="filenameD">{%if application.design_doc%}
             <script  type='text/javascript'>
               let design_words= `{{application.design_doc.name}}`;
               design_words = design_words.replace("design_doc/","");
               document.write(design_words);
-
             </script>
-          <input type="checkbox" name="design_doc-clear" id="design_doc-clear_id" >
-          <label for="design_doc-clear_id" onclick="cancel('design')"></label>
-          {%endif%}
+            {%endif%}</div>
+        <img class="cancel cancelD" onclick="cancel('design')"src="{%static 'cancel.png'%}" alt="">
+          <!-- <label for="design_doc-clear_id" onclick="cancel('design')"></label> -->
         
-        </div>
-        </div>      </div>
-
+        
+        </div>             <input type="checkbox" readonly name="design_doc-clear" id="design_doc-clear_id" >
+      </div>
+      
         {% endif %} 
       <!-- drag&drop  portfolio-->
       <div class="dragdrop">
@@ -161,10 +159,13 @@
               ports_words = ports_words.replace("portfolio/","");
               document.write(ports_words);
             </script>
-            <input type="checkbox" name="portfolio-clear" id="portfolio-clear_id" >
-            <label for="portfolio-clear_id" onclick="cancel('portfolio')"></label>
-        </div>{%endif%}</div><br>
+            {%endif%}</div>
+            <img class="cancel cancelP" onclick="cancel('portfolio')"src="{%static 'cancel.png'%}" alt="">
 
+          </div>
+
+            <input type="checkbox" readonly name="portfolio-clear" id="portfolio-clear_id" >
+        </div>
       </div>
       <!-- button -->
       <div class="submit">
