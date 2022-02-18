@@ -189,7 +189,7 @@
             {% for field, errors in form.errors.items %} {% for error in errors
             %}
             <p style="color: red">{{error}}</p>
-            {% endfor %} {% endfor %}
+            {% endfor %}
             <a href="{% url 'email_login' %}">이미 회원이신가요?</a>
           </div>
           <br /><button type="submit" class="btn key" value="Login">다음</button
