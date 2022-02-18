@@ -58,8 +58,8 @@ const getfile = (target) => {
 	//파일명 보내기 - slicing
 	filename.innerHTML = `${
 		target === 'portfolio'
-			? portfolio.value.slice(portfolio.value.lastIndexOf('\\'))
-			: design.value.slice(design.value.lastIndexOf('\\'))
+			? portfolio.value.slice(portfolio.value.lastIndexOf('\\')+1)
+			: design.value.slice(design.value.lastIndexOf('\\')+1)
 	}`;
 	
 };
