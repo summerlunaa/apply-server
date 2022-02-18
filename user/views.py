@@ -1,3 +1,4 @@
+import email
 from django.conf import settings
 
 from django.contrib.auth.forms import PasswordResetForm
@@ -375,10 +376,11 @@ class PasswordResetView(PasswordContextMixin, FormView):
                 "extra_email_context": self.extra_email_context,
             }
             form.save(**opts)
+            email=self.request.POST.get("email")
             return render(
                 self.request,
                 "user/registration/password_reset_done.html",
-                {"form": form},
+                {"form": form,"email":email},
             )
         else:
             return render(
