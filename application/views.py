@@ -51,7 +51,6 @@ def write_application(request):
 
         else:  # 지원서 첫 작성
             form = ApplicationForm(request.POST, request.FILES)
-
         if form.is_valid():
             editApplication = form.save(commit=False)
             editApplication.user = request.user

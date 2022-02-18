@@ -8,6 +8,7 @@
 html {
   width: 100%;
   font-size: 10px;
+  background-color: #04080f;
 }
 
 /* .page4-right{
@@ -22,11 +23,11 @@ html {
   flex-direction: column;
   align-items: center; */
   height: 100vh;
-  width:100%;
+  width: 100%;
   background-color: #04080f;
   color: white;
-  position:fixed;
-  top:0;
+  position: fixed;
+  top: 0;
 }
 .loading img {
   width: 25rem;
@@ -86,8 +87,8 @@ html {
     transform: translateY(-85%) rotate(500deg);
   }
 }
-.loadtext{
-  width:30rem;
+.loadtext {
+  width: 30rem;
   position: absolute;
   top: calc(50vh + 13rem);
   left: calc(50vw - 15rem);
@@ -98,7 +99,6 @@ html {
   /* display: none; */
   opacity: 0%;
 }
-
 
 /* 헤더 */
 header {
@@ -113,7 +113,6 @@ header {
   font-size: 3rem;
   font-weight: 400;
   font-family: "Bebas Neue", cursive;
-
 }
 header img {
   width: 4.3rem;
@@ -170,8 +169,8 @@ header button {
   margin-top: 10rem;
   background-color: transparent;
 
-opacity:0;  
-transition: 0.25s;
+  opacity: 0;
+  transition: 0.25s;
   transform: translate(-5rem, 0);
 }
 .page h1 {
@@ -209,12 +208,12 @@ transition: 0.25s;
 /* 3번 페이지 */
 
 #date-box {
-  font-size : 2rem;
+  font-size: 2rem;
   font-weight: 400;
   font-family: "Noto Sans KR";
   font-style: normal;
   font-weight: bold;
-  padding:2.5rem 7%;
+  padding: 2.5rem 7%;
   line-height: 10rem;
   width: 53rem;
   /* 반응형 필요 */
@@ -231,7 +230,7 @@ transition: 0.25s;
 /* 4번페이지 */
 .page4 {
   display: flex;
-  height:calc(100vh - 8rem);
+  height: calc(100vh - 8rem);
 }
 .page4-left {
   height: 70vh;
@@ -318,14 +317,13 @@ transition: 0.25s;
   margin-bottom: 1rem;
   color: #04080f;
 }
-.min-box{
-  font-size:2rem;
+.min-box {
+  font-size: 2rem;
   line-height: 2.4rem;
 }
 
 /* footer*/
 footer {
-
   background-color: #b80e18;
   height: calc(100vh - 8rem);
   margin-top: 0;
@@ -359,7 +357,7 @@ footer .icons {
   align-items: flex-end;
   height: 20rem;
   margin-left: 10rem;
-  z-index:30;
+  z-index: 30;
 }
 .icons img {
   width: 4rem;
@@ -367,15 +365,15 @@ footer .icons {
 }
 
 /* down button */
-#down{
+#down {
   padding: 25px;
-  width:15rem;
-  position:fixed;
-  bottom:1rem;
+  width: 15rem;
+  position: fixed;
+  bottom: 1rem;
   left: calc(50vw - 7.5rem);
   cursor: pointer;
-  z-index:9;
-  float:left;
+  z-index: 9;
+  float: left;
 }
 
 /* responsive */
@@ -409,27 +407,28 @@ footer .icons {
   }
 }
 /* 반응형 실패 */
-#mobileNo{
-  width:100vw;
-  display:none;
-  height:100vh;
-  z-index:30;
-  font-size:4rem;
-  font-weight:bold;
-  text-align: center;
-  line-height:100vh;
+#mobileNo {
+  width: 100vw;
   display: none;
-  position:fixed;
-  top:0;
+  height: 100vh;
+  z-index: 30;
+  font-size: 4rem;
+  font-weight: bold;
+  text-align: center;
+  line-height: 100vh;
+  display: none;
+  position: fixed;
+  top: 0;
 }
-@media(max-width:1000px){
- .loading{
-   display: none;
- }
- #all{
-   display: none;
- }
-  #mobileNo{
+@media (max-width: 1000px) {
+  .loading {
+    display: none;
+  }
+  #all {
+    display: none;
+  }
+  #mobileNo {
     display: block;
+    color:white;
   }
 }

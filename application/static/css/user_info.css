@@ -86,7 +86,6 @@ header {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height:calc(85vh - 10rem);
 }
 
 .input-duo{
@@ -143,6 +142,7 @@ option:hover{
     color:white;
     position:relative;
     margin-top:30%;
+    margin-bottom: 50px;
 }
 .a{
 

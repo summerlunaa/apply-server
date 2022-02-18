@@ -190,6 +190,8 @@ form span{
     align-items: center;
     color:white;
     margin-bottom: 16vh;
+    margin-top: 30px;
+
 }
 .save{
     border: white solid 1px;
@@ -237,4 +239,20 @@ form span{
         line-height: 2.5rem;
     }
     
+}
+
+/* input[type=checkbox] + label { 
+    cursor: pointer; 
+    padding-left: 23px; 
+    background-repeat: no-repeat;
+    background-image: url('cancel.png');
+}
+
+
+
+#portfolio{
+    margin:15px;
+} */
+input[type=checkbox] {
+    display:none;
 }
