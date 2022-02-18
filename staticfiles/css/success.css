@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+html {
+  width: 100%;
+  font-size: 10px;
+  
+}
+
+@media(max-width:680px) {
+    html{
+        font-size: 8px;
+    }
+}
+a:visited, a{
+    text-decoration: none;
+    color:white;
+}
+
+  /* body color */
+  body{
+    background-color: #04080F;
+    font-family: 'Noto Sans KR';
+    word-spacing: .5rem;
+    position: relative;
+  }
+/* 헤더 */
+header {
+    position:fixed;
+    top:0;
+    height: 10rem;
+    display: flex;
+    background-color: #b80e18;
+    width: 100%;
+    padding: 0 8%;
+    color: white;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: 400;
+    font-family: "Bebas Neue", cursive;
+  }
+  header img {
+    width: 4.3rem;
+  }
+  
+  header button {
+    position: absolute;
+    top: 2.2rem;
+    right: 8%;
+    color: black;
+    background-color: #b80e18;
+    width: 22rem;
+    cursor: pointer;
+    height: 5.6rem;
+    border: solid 1px black;
+    border-radius: 10px;
+  }
+/* progress bar */
+.progress-bar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+    height: 15vh;
+    position:fixed;
+    top:10rem;
+    background-color: #04080F;
+    
+}
+.bar{
+    border-radius: 1rem;
+    width:15%;
+    height:3rem;
+    margin: 0 1rem;
+    box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.14), 0px 6px 30px rgba(0, 0, 0, 0.12), 0px 8px 10px rgba(0, 0, 0, 0.2);
+    background-color: #b80e18;
+}
+/* done */
+.done{
+    margin-top:calc(10rem + 10vh);
+    color:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height:calc(85vh - 10rem);
+}
+.done img{
+    width:30rem;
+}
+.done p{
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom:1rem;
+}
+.done div{
+    font-size:1.3rem;
+}
+.done .contact{
+    margin-bottom:2rem;
+}
+/* prev, next */
+.prevNext{
+    position:fixed;
+    bottom:0;
+    background-color: transparent;
+    color:white;
+    font-size:1.5rem;
+    width:100%;
+    height:3rem;
+    margin-bottom: 4rem;;
+}
+.prevNext a:visited{
+    text-decoration: none;
+    color:white;
+}
+.prev{
+    position: absolute;
+    left:10rem;
+}
+.next{
+    position: absolute;
+    right:10rem;
+}
+
+/* responsive  - mobile*/
+@media(max-width:500px){
+    header button{
+        width:10rem;
+    }
+    
+    
+}

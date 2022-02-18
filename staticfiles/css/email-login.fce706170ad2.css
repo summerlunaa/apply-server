@@ -1,0 +1,406 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+body{
+    font-size: 10px;
+}
+
+/*헤더*/
+header{
+    position:relative;
+    height:10vh;
+    display: flex;
+    background-color: #B80E18;
+    width:100%;
+    padding: 0 3%;
+    color:white;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: 400;
+    font-family: 'Bebas Neue', cursive;
+}
+header img{
+    width:3rem;
+    padding-right: 0.5rem;
+}
+
+/*main*/
+main{
+    background-color: #04080F;
+    height: 80vh;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.contianer{
+    width: 50%;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.img{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin:8vh 15vh;
+    padding-left:5vh;
+}
+.img h2{
+    color:#ffffff;
+    font-size: 4rem;
+    font-weight: 700;
+}
+.img img{
+    width: 310px;
+}
+
+.login-container{
+    width: 50%;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-left:white dashed 0.1rem;
+
+}
+
+form{
+    width: 360px;
+    outline: 0.1rem white;
+    padding: 20px 0;
+}
+
+.input-div{
+    position: relative;
+    display:grid;
+    grid-template-columns: 7% 93%;
+    margin: 15px 0;
+    padding: 5px 0;
+    border-bottom: 1px solid #ffffff;
+}
+
+.input-div-info {
+    position: relative;
+    display: grid;
+    grid-template-columns: 7% 93%;
+    margin: 15px 0;
+    padding: 5px 0;
+   
+}
+
+.input-div.one{
+    margin-top: 0px;
+}
+
+.input-div .two{
+    margin-bottom: 2px;
+}
+
+.input-div .two{
+    margin-bottom: 2px;
+}
+
+.i{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:white;
+}
+.info{
+    display: flex;
+    align-items: center;
+    color:white;
+        font-size: medium;
+        width: 40px;
+}
+.fs-medium{
+    font-size: medium;
+    margin-left: 5px;
+    font-weight: bolder;
+}
+.info.position {
+    font-size: small;
+    width: 150px;
+}
+.info.phone {
+    font-size: small;
+    width: 100px;
+}
+
+.input-div > div{
+    position: relative;
+    height: 30px;
+}
+.input-div-info>div {
+    position: relative;
+    height: 30px;
+    margin-left: 50px;
+    border-bottom: 1px solid #ffffff;
+}
+.input-div-info>.info-input-div {
+    position: relative;
+    height: 30px;
+    margin-left: 150px;
+    border-bottom: 1px solid #ffffff;
+}
+
+.input{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0.5rem 0.7rem;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: white;
+}
+.input-select {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: white;
+    background-color: #04080F;
+}
+
+.input::placeholder{
+    left: 10px;
+    top: 50%;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 400;
+    opacity: 0.5;
+}
+
+a{
+    display: block;
+    text-align: left;
+    text-decoration: none;
+    color: white;
+    font-size: 0.8rem;
+    transition: .3s;
+    margin: 0.5rem 0;
+}
+
+a:hover{
+    color:#B80E18;
+}
+
+.btn{
+    display: block;
+    width: 70%;
+    height: 50px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    margin: 0 auto;
+    cursor:pointer;
+}
+
+.btn.key{
+    font-weight: 900;
+    border: none;
+    background-color:#B80E18;
+    color: white;
+}
+
+.btn.other{
+    font-weight: 400;
+    outline: #B80E18 solid 0.05rem;
+    border: none;
+    background-color:#04080F;
+    color:#B80E18;
+}
+
+footer{
+    height:10vh;
+    display: flex;
+    background-color: #B80E18;
+    width:100%;
+    padding: 0 3%;
+    background-color: #04080F;
+}
+
+.btn-prev{
+    display: block;
+    height: 30px;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    margin: 0 auto;
+    cursor:pointer;
+    color: white;
+    opacity: 70%;
+    background-color: #04080F;
+    top: 0;
+    left: 0;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+/*popup*/
+.personal-info-popup, .popup-container{
+    position: absolute;
+    top:50%;
+    display:flex;
+    flex-direction: column;
+    transform: translate(-50%, -50%);
+    transition: all 2s;
+}
+
+.see-personal-info-agreement{
+    background-color: transparent;
+    border:none;
+    display: block;
+    text-align:left;
+    text-decoration: none;
+    color: white;
+    font-size: 0.8rem;
+}
+
+.see-personal-info-agreement:hover{
+    color:#B80E18;
+    cursor:pointer;
+    font-weight: bold;
+
+}
+
+#click{
+    display:none;
+}
+
+.popup-container{
+    /*일단 팝업창 보이게 설정해둠*/
+    opacity:1;
+    visibility:visible;
+    width: 30vw;
+    height: 70vh;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.4);
+    text-align: left;
+}
+
+/* 클릭하면 뜨도록 */
+#click:checked ~* .popup-container{
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup-top{
+    height: 20vh;
+    background: #B80E18;
+    overflow:hidden;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,0,2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.popup-top h2{
+    color: white;
+    padding-left: 3vh;
+    font-weight:900;
+}
+
+.fa-xmark{
+    position:absolute;
+    right:1vw;
+    color: white;
+    font-weight: bold;
+    cursor:pointer;
+}
+
+.popup-container .content{
+    margin:1vw;
+    padding-right: 1vw;
+    overflow: auto;
+}
+.content h5{
+    font-weight:900;
+    font-size: 0.7rem;
+}
+
+.line{
+    bottom:5vh;
+    width: 100%;
+    height: 1px;
+    background: silver;
+}
+
+.agree{
+    height:8vh;
+    display: block;
+    text-align: center;
+    justify-content: center;
+    margin: 0.5rem 0;
+}
+.agree h5{
+    font-weight:900;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+/*반응형*/
+@media screen and (max-width: 1920px){
+    .container{
+        grid-gap: 5rem;
+    }
+}
+
+@media screen and (max-width:1000px){
+    form{
+        width: 290px;
+    }
+    form h2{
+        font-size: 2.4rem;
+        margin: 8px 0;
+    }
+    .img img{
+        width: 240px;
+    }
+}
+@media screen and (max-width:900px){
+    .img{
+        display: none;
+    }
+    .container{
+        display: none;
+    }
+    .login-container{
+        border-left:none;
+        justify-content: center;
+    }
+    .popup-container{
+        width:300px;
+    }
+    .popup-top h2{
+        font-size: 1rem;
+        margin: 8px 0;
+    }
+    .popup-container .content{
+        margin:0.5rem;
+        padding-right: 1rem;
+        overflow: auto;
+    }
+}
