@@ -6,39 +6,39 @@
     margin:0;
     box-sizing: border-box;
 }
-body{
+html{
     font-size: 10px;
 }
 
 /*헤더*/
 header{
     position:relative;
-    height:10vh;
-    text-align: center;
+    height:8rem;
+    /* text-align: center; */
     display: flex;
     background-color: #B80E18;
     width:100%;
-    padding: 0 3%;
+    padding: 0 8%;
     color:white;
     align-items: center;
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: 400;
     font-family: 'Bebas Neue', cursive;
 }
 header img{
     width:3rem;
 }
-header a{
-    display: flex;
-}
+
 header a:hover{
     color:white;
 }
 
 header a{
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     font-weight: 400;
     font-family: 'Bebas Neue', cursive;
+    display: flex;
+    align-items: center;
 }
 /*main*/
 main{
@@ -427,11 +427,7 @@ header a:hover{
     color:white;
 }
 
-header a{
-    font-size: 1.8rem;
-    font-weight: 400;
-    font-family: 'Bebas Neue', cursive;
-}
+
 /*반응형*/
 @media screen and (max-width: 1920px){
     .container{
