@@ -186,9 +186,10 @@
             </div>
           </div>
           <div class="linkto">
-            {% for field, errors in form.errors.items %} {% for error in errors
-            %}
+            {% for field, errors in form.errors.items %} 
+            {% for error in errors %}
             <p style="color: red">{{error}}</p>
+            {% endfor %}
             {% endfor %}
             <a href="{% url 'email_login' %}">이미 회원이신가요?</a>
           </div>
