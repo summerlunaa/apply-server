@@ -128,7 +128,7 @@ def kakao_login(request):
     if request.user.is_authenticated:
         return redirect("user_info")
     rest_api_key = settings.KAKAO_REST_API_KEY
-    redirect_uri = "http://127.0.0.1:8000/user/kakao/login/callback/"
+    redirect_uri = "http://www.applionsg.com/user/kakao/login/callback/"
     state = "none"
     return redirect(
         f"https://kauth.kakao.com/oauth/authorize?client_id={rest_api_key}&redirect_uri={redirect_uri}&response_type=code&state={state}"
@@ -168,7 +168,7 @@ def kakao_login_callback(request):
     state = request.GET.get("state")
     token_url = "https://kauth.kakao.com/oauth/token"
     rest_api_key = settings.KAKAO_REST_API_KEY
-    redirect_uri = "http://127.0.0.1:8000/user/kakao/login/callback/"
+    redirect_uri = "http://www.applionsg.com/user/kakao/login/callback/"
     res = requests.post(
         token_url,
         data={
@@ -286,7 +286,7 @@ def logout_with_kakao(request):
     카카오톡과 함께 로그아웃 처리
     """
     kakao_rest_api_key = settings.KAKAO_REST_API_KEY
-    logout_redirect_uri = "http://127.0.0.1:8000/user/logout/"
+    logout_redirect_uri = "http://www.applionsg.com/user/logout/"
     state = "none"
     kakao_service_logout_url = "https://kauth.kakao.com/oauth/logout"
     return redirect(
