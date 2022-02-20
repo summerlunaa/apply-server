@@ -1,208 +1,174 @@
 {% load static%}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link rel="stylesheet" href="../static/css/application.css"> -->
-    <title>멋쟁이 사자처럼 지원하기</title>
-    <link rel="stylesheet" href="{% static 'css/application.css'%}" />
-  
-    <!--favicon-->
-    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'favicon/apple-icon-57x57.png' %}">
-    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'favicon/apple-icon-60x60.png' %}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'favicon/apple-icon-72x72.png' %}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'favicon/apple-icon-76x76.png' %}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'favicon/apple-icon-114x114.png' %}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'favicon/apple-icon-120x120.png' %}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'favicon/apple-icon-144x144.png' %}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'favicon/apple-icon-152x152.png' %}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-icon-180x180.png' %}">
-    <link rel="icon" type="image/png" sizes="192x192"  href="{% static 'favicon/android-icon-192x192.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'favicon/favicon-96x96.png' %}">
 
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
-    <link rel="manifest" href="{% static 'favicon/manifest.json' %}">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="{% static 'favicon/ms-icon-144x144.png' %}">
-    <meta name="theme-color" content="#ffffff">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- <link rel="stylesheet" href="../static/css/application.css"> -->
+  <title>멋쟁이 사자처럼 지원하기</title>
+  <link rel="stylesheet" href="{% static 'css/application.css'%}" />
 
-    <!--kakaotalk thumbnail-->
-    <meta property="og:url" content="https://www.applionsg.com/">
-    <meta property="og:title" content="멋쟁이 사자처럼 10기 지원하기">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="{% static 'Thumbnail.png' %}">
-    <meta property="og:description" content="내 손으로 내 아이디어를 실현한다">
+  <!--favicon-->
+  <link rel="apple-touch-icon" sizes="57x57" href="{% static 'favicon/apple-icon-57x57.png' %}">
+  <link rel="apple-touch-icon" sizes="60x60" href="{% static 'favicon/apple-icon-60x60.png' %}">
+  <link rel="apple-touch-icon" sizes="72x72" href="{% static 'favicon/apple-icon-72x72.png' %}">
+  <link rel="apple-touch-icon" sizes="76x76" href="{% static 'favicon/apple-icon-76x76.png' %}">
+  <link rel="apple-touch-icon" sizes="114x114" href="{% static 'favicon/apple-icon-114x114.png' %}">
+  <link rel="apple-touch-icon" sizes="120x120" href="{% static 'favicon/apple-icon-120x120.png' %}">
+  <link rel="apple-touch-icon" sizes="144x144" href="{% static 'favicon/apple-icon-144x144.png' %}">
+  <link rel="apple-touch-icon" sizes="152x152" href="{% static 'favicon/apple-icon-152x152.png' %}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-icon-180x180.png' %}">
+  <link rel="icon" type="image/png" sizes="192x192" href="{% static 'favicon/android-icon-192x192.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="96x96" href="{% static 'favicon/favicon-96x96.png' %}">
+
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+  <link rel="manifest" href="{% static 'favicon/manifest.json' %}">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="{% static 'favicon/ms-icon-144x144.png' %}">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--kakaotalk thumbnail-->
+  <meta property="og:url" content="https://www.applionsg.com/">
+  <meta property="og:title" content="멋쟁이 사자처럼 10기 지원하기">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="{% static 'Thumbnail.png' %}">
+  <meta property="og:description" content="내 손으로 내 아이디어를 실현한다">
 </head>
 
-  <body>
-    <header>
-      <a href="{% url 'index'%}"
-        ><img src="{% static 'logo-white.png'%}" alt="" />
-        <span id="logo-title">10TH LIKELION SOGANG</span></a
-      >
+<body>
+  <header>
+    <a href="{% url 'index'%}"><img src="{% static 'logo-white.png'%}" alt="" />
+      <span id="logo-title">10TH LIKELION SOGANG</span></a>
 
-      <a href="{% url 'logout'%}"> <button>Log out</button></a>
-    </header>
+    <a href="{% url 'logout'%}"> <button>Log out</button></a>
+  </header>
 
-    <div class="progress-bar">
-      <div class="bar bar1"></div>
-      <div class="bar bar2"></div>
-      <div class="bar bar3"></div>
+  <div class="progress-bar">
+    <div class="bar bar1"></div>
+    <div class="bar bar2"></div>
+    <div class="bar bar3"></div>
+  </div>
+
+  <form method="POST" enctype="multipart/form-data">
+    {%csrf_token%}
+
+    <div>
+      <!--채우지 않은 항목 에러메시지-->
+      {% if error_msg %}
+      <strong style="color:red;font-size: 1.8rem;">{{error_msg}}</strong>
+      {% endif %}
     </div>
 
-    <form method="POST" enctype="multipart/form-data">
-      {%csrf_token%}
+    <div class="label" for="answer1">
+      1. 다양한 IT동아리 중에서 멋쟁이사자처럼 대학 10기를 선택하고 지원하시게
+      된 이유를 작성해주세요. (500자 이내)
+    </div>
+    <textarea onkeydown="counter(1)" class="num1" name="answer1" id="" cols="30" rows="10">
+{{application.answer1}}</textarea>
+    <span class="num1">0/500</span>
 
-      <div> <!--채우지 않은 항목 에러메시지-->
-        {% if error_msg %}
-        <strong style= "color:red;font-size: 1.8rem;">{{error_msg}}</strong>
+    <div class="label" for="answer2">
+      2. 파트를 선택한 이유와 관련 경험을 해본 적이 있는지, 그리고 이 파트를
+      통해 어떠한 성정을 희망하시는지 작성해주세요. (500자 이내)
+    </div>
+    <textarea onkeydown="counter(2)" class="num2" name="answer2" id="" cols="30" rows="10">
+{{application.answer2}}</textarea>
+    <span class="num2">0/500</span>
+
+    <div class="label" for="answer3">
+      3. 멋쟁이사자처럼 대학은 협업과 팀워크를 중요한 가치로 생각하는
+      공동체입니다. 지원자 본인이 협업과 팀워크를 진행해보았던 경험과, 그
+      경험을 멋쟁이 사자처럼 대학에서 어떻게 적용시킬 수 있을지 작성해주세요.
+      (500자 이내)
+    </div>
+    <textarea onkeydown="counter(3)" class="num3" name="answer3" id="" cols="30" rows="10">
+{{application.answer3}}</textarea>
+    <span class="num3">0/500</span>
+
+    <div class="label" for="answer4">
+      4. 멋쟁이사자처럼 대학은 최소 주 2회 모임(월요일&수요일 6시30분~9시)과
+      이외에도 추가 공부시간이 필요합니다. 활동 기간동안 얼마나 열정적으로,
+      매주 얼만큼의 시간을 할애하실 수 있는지 작성해주세요. (500자 이내)
+    </div>
+    <textarea onkeydown="counter(4)" class="num4" name="answer4" id="" cols="30" rows="10">
+{{application.answer4}}</textarea>
+    <span class="num4">0/500</span>
+
+    <div class="label" for="answer5">
+      {% if user.position == "기획" %}
+      5. 멋사에 들어오면 개발공부를 진행한 뒤에 서비스를 만들 수 있습니다. 만들고 싶거나 실현시키고 싶었던 아이디어가 있다면 작성하여 파일로 제출해주세요. (500자)
+      {% endif %}
+      {% if user.position == "디자인" %}
+      5. 웹서비스로 구현하고 싶은 자신의 아이디어를 상상해보세요. 그리고 그 웹서비스의 한 페이지만 설명해주세요. (PPT, Figma, 일러스트 등 자유로운 파일로 작업 가능. 최종 제출은 PDF파일.)
+      {% endif %}
+    </div>
+    {% if user.position == "기획" or user.position == "디자인"%}
+
+    <!-- dragdrop Design -->
+    <div class="dragdrop dragdrop-D">
+      <div class="label">5번 문항 제출</div>
+      <div>PDF파일을 제출해주세요.
+        {% if user.position == "기획" %}
+        (제출형식은 기획_학번_이름.pdf입니다.)
+        {% endif %}
+        {% if user.position == "디자인" %}
+        (제출형식은 디자인_학번_이름.pdf입니다.)
         {% endif %}
       </div>
+      <input type="file" name="design_doc" id="design_doc" onchange="getfile('design')" />
+      <label for="design_doc" id="dragBoxD"> Drag and Drop File Here </label>
+      <div class="fileaddD">
+        <div id="filenameD">{%if application.design_doc%}
+          <script type='text/javascript'>
+            let design_words = `{{application.design_doc.name}}`;
+            design_words = design_words.replace("design_doc/", "");
+            document.write(design_words);
+          </script>
+          {%endif%}</div>
+        <img class="cancel cancelD" onclick="cancel('design')" src="{%static 'cancel.png'%}" alt="">
+        <!-- <label for="design_doc-clear_id" onclick="cancel('design')"></label> -->
 
-      <div class="label" for="answer1">
-        1. 다양한 IT동아리 중에서 멋쟁이사자처럼 대학 10기를 선택하고 지원하시게
-        된 이유를 작성해주세요. (500자 이내)
+
+      </div> <input type="checkbox" readonly name="design_doc-clear" id="design_doc-clear_id">
+    </div>
+
+    {% endif %}
+    <!-- drag&drop  portfolio-->
+    <div class="dragdrop">
+      <div class="label">*추가 포트폴리오 제출하기</div>
+      <div>포트폴리오 제출은 필수가 아닙니다. 지원서에 포트폴리오를 첨부하고 싶으시다면 </div>
+      <div>PDF파일을 제출해주세요. 제출형식은 포트폴리오_학번_이름.pdf입니다.</div>
+      <input type="file" name="portfolio" id="portfolio" onchange="getfile('portfolio')" />
+      <label for="portfolio" id="dragBoxP"> Drag and Drop File Here </label>
+
+      <div class="fileaddP">
+        <div id="filenameP">{%if application.portfolio%}
+          <script type='text/javascript'>
+            let ports_words = `{{application.portfolio.name}}`;
+            ports_words = ports_words.replace("portfolio/", "");
+            document.write(ports_words);
+          </script>
+          {%endif%}</div>
+        <img class="cancel cancelP" onclick="cancel('portfolio')" src="{%static 'cancel.png'%}" alt="">
+
       </div>
-      <textarea
-        onkeydown="counter(1)"
-        class="num1"
-        name="answer1"
-        id=""
-        cols="30"
-        rows="10"
-      >
-{{application.answer1}}</textarea
-      >
-      <span class="num1">0/500</span>
 
-      <div class="label" for="answer2">
-        2. 파트를 선택한 이유와 관련 경험을 해본 적이 있는지, 그리고 이 파트를
-        통해 어떠한 성정을 희망하시는지 작성해주세요. (500자 이내)
-      </div>
-      <textarea
-        onkeydown="counter(2)"
-        class="num2"
-        name="answer2"
-        id=""
-        cols="30"
-        rows="10"
-      >
-{{application.answer2}}</textarea
-      >
-      <span class="num2">0/500</span>
-
-      <div class="label" for="answer3">
-        3. 멋쟁이사자처럼 대학은 협업과 팀워크를 중요한 가치로 생각하는
-        공동체입니다. 지원자 본인이 협업과 팀워크를 진행해보았던 경험과, 그
-        경험을 멋쟁이 사자처럼 대학에서 어떻게 적용시킬 수 있을지 작성해주세요.
-        (500자 이내)
-      </div>
-      <textarea
-        onkeydown="counter(3)"
-        class="num3"
-        name="answer3"
-        id=""
-        cols="30"
-        rows="10"
-      >
-{{application.answer3}}</textarea
-      >
-      <span class="num3">0/500</span>
-
-      <div class="label" for="answer4">
-        4. 멋쟁이사자처럼 대학은 최소 주 2회 모임(월요일&수요일 6시30분~9시)과
-        이외에도 추가 공부시간이 필요합니다. 활동 기간동안 얼마나 열정적으로,
-        매주 얼만큼의 시간을 할애하실 수 있는지 작성해주세요. (500자 이내)
-      </div>
-      <textarea
-        onkeydown="counter(4)"
-        class="num4"
-        name="answer4"
-        id=""
-        cols="30"
-        rows="10"
-      >
-{{application.answer4}}</textarea
-      >
-      <span class="num4">0/500</span>
-
-      <div class="label" for="answer5">
-        {% if user.position == "기획" %} 
-        5. 멋사에 들어오면 개발공부를 진행한 뒤에 서비스를 만들 수 있습니다. 만들고 싶거나 실현시키고 싶었던 아이디어가 있다면 작성하여 파일로 제출해주세요. (500자)
-        {% endif %} 
-        {% if user.position == "디자인" %} 
-        5. 웹서비스로 구현하고 싶은 자신의 아이디어를 상상해보세요. 그리고 그 웹서비스의 한 페이지만 설명해주세요. (PPT, Figma, 일러스트 등 자유로운 파일로 작업 가능. 최종 제출은 PDF파일)
-        {% endif %} 
-      </div>
-        {% if user.position == "기획" or user.position == "디자인"%} 
-
-      <!-- dragdrop Design -->
-      <div class="dragdrop dragdrop-D">
-        <div class="label">5번 문항 제출</div>
-        <div>PDF파일을 제출해주세요.</div>
-        <input
-          type="file"
-          name="design_doc"
-          id="design_doc"
-          onchange="getfile('design')"
-        />
-        <label for="design_doc" id="dragBoxD"> Drag and Drop File Here </label>
-        <div class="fileaddD">
-          <div id="filenameD">{%if application.design_doc%}
-            <script  type='text/javascript'>
-              let design_words= `{{application.design_doc.name}}`;
-              design_words = design_words.replace("design_doc/","");
-              document.write(design_words);
-            </script>
-            {%endif%}</div>
-        <img class="cancel cancelD" onclick="cancel('design')"src="{%static 'cancel.png'%}" alt="">
-          <!-- <label for="design_doc-clear_id" onclick="cancel('design')"></label> -->
-        
-        
-        </div>             <input type="checkbox" readonly name="design_doc-clear" id="design_doc-clear_id" >
-      </div>
-      
-        {% endif %} 
-      <!-- drag&drop  portfolio-->
-      <div class="dragdrop">
-        <div class="label">*추가 포트폴리오 제출하기</div>
-        <div>포트폴리오 제출은 필수가 아닙니다. 지원서에 포트폴리오를 첨부하고 싶으시다면 </div>
-        <div>PDF파일을 제출해주세요.</div>
-        <input
-          type="file"
-          name="portfolio"
-          id="portfolio"
-          onchange="getfile('portfolio')"
-        />
-        <label for="portfolio" id="dragBoxP"> Drag and Drop File Here </label>
-
-        <div class="fileaddP">
-          <div id="filenameP">{%if application.portfolio%}
-            <script  type='text/javascript'>
-              let ports_words= `{{application.portfolio.name}}`;
-              ports_words = ports_words.replace("portfolio/","");
-              document.write(ports_words);
-            </script>
-            {%endif%}</div>
-            <img class="cancel cancelP" onclick="cancel('portfolio')"src="{%static 'cancel.png'%}" alt="">
-
-          </div>
-
-            <input type="checkbox" readonly name="portfolio-clear" id="portfolio-clear_id" >
-        </div>
-      </div>
-      <div class="submit">
-        제출을 완료한 이후에도 3월 21일 11:59까지 로그인 후 수정 가능합니다.
-        <button type="submit" class="save btn btn-default">
-          지원서 제출하기
-        </button>
-      </div>
-    </form>
+      <input type="checkbox" readonly name="portfolio-clear" id="portfolio-clear_id">
+    </div>
+    </div>
+    <div class="submit">
+      제출을 완료한 이후에도 3월 21일 11:59까지 로그인 후 수정 가능합니다.
+      <button type="submit" class="save btn btn-default">
+        지원서 제출하기
+      </button>
+    </div>
+  </form>
 
 
-    <script src="{% static 'js/application.js' %}"></script>
-  </body>
+  <script src="{% static 'js/application.js' %}"></script>
+</body>
+
 </html>
