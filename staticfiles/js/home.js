@@ -105,5 +105,5 @@ const delLoad = () => {
 		document.querySelector('.loading').style.display = 'none';
 		document.querySelector('#all').style.opacity = '100%';
 		window.scrollTo(0, 1);
-	}, 2000);
+	}, 3000);
 };
