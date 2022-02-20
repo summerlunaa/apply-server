@@ -115,7 +115,7 @@
         (제출형식은 기획_학번_이름.pdf입니다.)
         {% endif %}
         {% if user.position == "디자인" %}
-        (제출형식은 디자인_학번_이름.pdf입니다.)
+        (제출형식은 디자인_학번_이름.pdf 입니다.)
         {% endif %}
       </div>
       <input type="file" name="design_doc" id="design_doc" onchange="getfile('design')" />
@@ -140,7 +140,7 @@
     <div class="dragdrop">
       <div class="label">*추가 포트폴리오 제출하기</div>
       <div>포트폴리오 제출은 필수가 아닙니다. 지원서에 포트폴리오를 첨부하고 싶으시다면 </div>
-      <div>PDF파일을 제출해주세요. 제출형식은 포트폴리오_학번_이름.pdf입니다.</div>
+      <div>PDF파일을 제출해주세요. (제출형식은 포트폴리오_학번_이름.pdf 입니다.)</div>
       <input type="file" name="portfolio" id="portfolio" onchange="getfile('portfolio')" />
       <label for="portfolio" id="dragBoxP"> Drag and Drop File Here </label>
 
