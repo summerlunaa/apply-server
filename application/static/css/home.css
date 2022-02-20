@@ -30,7 +30,7 @@ html {
   top: 0;
 }
 .loading img {
-  width: 25rem;
+  width: 26rem;
   height: auto;
   background-color: transparent;
   z-index: 1;
@@ -67,7 +67,7 @@ html {
   width: 24rem;
   height: 26rem;
   border-radius: 10rem;
-  animation: spin 5s ease-in-out infinite;
+  animation: spin 4.5s ease-in-out infinite;
   z-index: 0;
 }
 .rb1 {
