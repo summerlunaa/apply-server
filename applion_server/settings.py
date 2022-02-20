@@ -205,8 +205,6 @@ AWS_STORAGE_BUCKET_NAME = 'applion'
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_S3_REGION_NAME = 'ap-northeast-2'
 AWS_S3_CUSTOM_DOMAIN = 'applion.s3.ap-northeast-2.amazonaws.com'
-AWS_ACCESS_KEY_ID = 'AKIAY47YQKLU3ATTBQNH'
-AWS_SECRET_ACCESS_KEY = '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'
 
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
