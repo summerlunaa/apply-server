@@ -30,7 +30,7 @@ html {
   top: 0;
 }
 .loading img {
-  width: 25rem;
+  width: 26rem;
   height: auto;
   background-color: transparent;
   z-index: 1;
@@ -67,7 +67,7 @@ html {
   width: 24rem;
   height: 26rem;
   border-radius: 10rem;
-  animation: spin 5s ease-in-out infinite;
+  animation: spin 4.5s ease-in-out infinite;
   z-index: 0;
 }
 .rb1 {
@@ -115,8 +115,7 @@ header {
   font-family: "Bebas Neue", cursive;
 }
 header img {
-  width: 4.3rem;
-  display: block;
+  width: 3rem;
 }
 #logo-title {
   transform: translate(40rem, 18rem) scale(500%);
@@ -138,6 +137,13 @@ header button {
   border: solid 1px white;
   border-radius: 10px;
   cursor: pointer;
+}
+header a{
+  font-size: 2.2rem;
+  font-weight: 400;
+  font-family: 'Bebas Neue', cursive;
+  display: flex;
+  align-items: center;
 }
 
 /* 비디오 */
