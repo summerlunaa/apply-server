@@ -101,6 +101,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   text-align: center;
   border-left: white dashed 0.1rem;
 }
@@ -273,6 +274,7 @@ a:hover {
   margin-bottom: 1rem;
 }
 
+
 .btn.kakao {
   font-weight: 700;
   border: none;
@@ -282,6 +284,7 @@ a:hover {
   align-items: center;
   align-content: space-around;
   justify-content: center;
+  width:252px;
 }
 .kakaologo {
   width: 18px;
@@ -444,6 +447,9 @@ header a:hover {
   }
   .img img {
     width: 240px;
+  }
+  .btn.kakao{
+    width:203px;
   }
 }
 @media screen and (max-width: 900px) {
