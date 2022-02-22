@@ -138,10 +138,10 @@ header button {
   border-radius: 10px;
   cursor: pointer;
 }
-header a{
+header a {
   font-size: 2.2rem;
   font-weight: 400;
-  font-family: 'Bebas Neue', cursive;
+  font-family: "Bebas Neue", cursive;
   display: flex;
   align-items: center;
 }
@@ -435,6 +435,19 @@ footer .icons {
   }
   #mobileNo {
     display: block;
-    color:white;
+    color: white;
   }
+}
+
+a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  outline: none;
+}
+
+a:hover,
+a:active {
+  text-decoration: none;
+  color: #fff;
+  background-color: #b80e18;
 }
