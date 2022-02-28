@@ -29,8 +29,8 @@ KAKAO_ADNIN_KEY = os.getenv("KAKAO_ADMIN_KEY")
 SECRET_KEY= os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = (os.environ.get('DEBUG', 'TRUE') != 'False')
-
+# DEBUG = (os.environ.get('DEBUG', 'TRUE') != 'False')
+DEBUG=False
 ALLOWED_HOSTS = ['*']
 
 
