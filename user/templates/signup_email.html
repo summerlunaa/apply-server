@@ -98,10 +98,13 @@
             <a href="{% url 'email_login' %}">이미 회원이신가요?</a>
           </div>
           <br /><button type="submit" class="btn key" value="Login">다음</button><br />
-          <a href="{% url 'kakao_login' %}"><button class="btn kakao">
-              <img class="kakaologo" src="{% static 'kakao-logo.jpg'%}" alt="" />카카오 회원가입
-            </button></a>
         </form>
+        
+        <a class = "kakao-a-tag"href="{% url 'kakao_login' %}">
+          <button class="btn kakao">
+            <img class="kakaologo" src="{% static 'kakao-logo.jpg'%}" alt="" />카카오 회원가입
+          </button>
+        </a>
 
       </div>
     </main>
