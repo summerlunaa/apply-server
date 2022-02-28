@@ -1,3 +1,4 @@
+from turtle import position
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager,PermissionsMixin
 class CustomUserManager(BaseUserManager):
@@ -80,7 +81,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELD = ['email', 'name', 'major', 'phone_number', 'student_id','position']
 
     def __str__(self):
-        return self.name
+        return str(self.name +"  _ " + self.position)
     
     def has_perm(self, perm, obj=None):
         return self.is_superuser
