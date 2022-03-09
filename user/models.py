@@ -81,7 +81,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELD = ['email', 'name', 'major', 'phone_number', 'student_id','position']
 
     def __str__(self):
-        return str(self.name +"  _ " + self.position)
+        if self.position : 
+            return str(self.name +"  _ " + self.position)
+        else : 
+            return str(self.name)
     
     def has_perm(self, perm, obj=None):
         return self.is_superuser
