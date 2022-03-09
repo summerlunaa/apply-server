@@ -15,5 +15,5 @@ class Application(models.Model):
     updated_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        solve = self.user.position +'-'+ self.user.name
-        return solve
+        # solve = self.user.position +'-'+ self.user.name
+        return self.user.position +'-'+ self.user.name
