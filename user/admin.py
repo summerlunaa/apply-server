@@ -39,8 +39,9 @@ class UserChangeForm(forms.ModelForm):
         model = CustomUser
         fields = ('email', 'password', 'name', 'major', 'phone_number', 'student_id', 'is_kakao',
         'is_active', 'is_admin')
+""""""""""""""""""
 
-
+""""""""""""""""""""""""
 class UserAdmin(BaseUserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
@@ -63,6 +64,16 @@ class UserAdmin(BaseUserAdmin):
     ordering = ('email',)
     filter_horizontal = ()
 
-
+    def has_delete_permission(self, request, obj=None):
+            #Disable delete
+            return False
+        
+    def has_add_permission(self, request, obj=None):
+            #Disable add
+            return False
+            
+    def has_change_permission(self, request, obj=None):
+            #Disable update
+        return False
 admin.site.register(CustomUser, UserAdmin)
 admin.site.unregister(Group)
