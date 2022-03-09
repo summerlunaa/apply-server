@@ -15,4 +15,4 @@ class Application(models.Model):
     updated_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.user.name
+        return self.user.name + self.user.position
