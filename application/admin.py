@@ -3,7 +3,7 @@ from .models import Application
 
 
 class DisplayApplication(admin.ModelAdmin):
-    list_display = ('user',)
+    list_display = ('user')
     ordering = ('updated_at',)
     # 여기 추가
     readonly_fields = ['answer1', 'answer2','answer3','answer4','answer5']
