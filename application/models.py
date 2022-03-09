@@ -16,4 +16,4 @@ class Application(models.Model):
 
     def __str__(self):
         # solve = self.user.position +'-'+ self.user.name
-        return self.user.position +'-'+ self.user.name
+        return self.user.name +'-'+ self.user.position
