@@ -1,4 +1,3 @@
-import email
 from django.conf import settings
 
 from django.contrib.auth.forms import PasswordResetForm
