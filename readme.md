@@ -10,8 +10,8 @@
   <img src="https://github.com/myway00.png" width="100">
 </a>
   
- <a href="https://github.com/gdakate">
-  <img src="https://github.com/gdakate.png" width="100">
+ <a href="https://github.com/chans97">
+  <img src="https://github.com/chans97.png" width="100">
 </a>
   
  <a href="https://github.com/hehahihang">
