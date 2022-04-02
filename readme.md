@@ -1,6 +1,36 @@
 # [서강대 멋쟁이 사자처럼 지원사이트]
 
-2022.01.23 ~ 2022.02.21
+## 제작 기간 : 2022.01.23 ~ 2022.02.21
+
+## 작업한 사람들
+
+<p align="center">
+  
+<a href="https://github.com/myway00">
+  <img src="https://github.com/myway00.png" width="100">
+</a>
+  
+ <a href="https://github.com/gdakate">
+  <img src="https://github.com/gdakate.png" width="100">
+</a>
+  
+ <a href="https://github.com/hehahihang">
+  <img src="https://github.com/hehahihang.png" width="100">
+</a>
+  
+ <a href="https://github.com/LeeJin0527">
+  <img src="https://github.com/LeeJin0527.png" width="100">
+</a>
+  
+ <a href="https://github.com/Subinhyun">
+  <img src="https://github.com/Subinhyun.png" width="100">
+</a>
+  
+ <a href="https://github.com/yoon-youngjin">
+  <img src="https://github.com/yoon-youngjin.png" width="100">
+</a>
+  
+</p>
 
 ![](https://images.velog.io/images/myway00/post/f2d2b39d-fcf7-4071-b86e-9841e4f8f7a1/%EB%85%B9%ED%99%94_2022_02_27_01_29_31_54.gif)
 
