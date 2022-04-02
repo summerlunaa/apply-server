@@ -5,30 +5,29 @@
 ## 작업한 사람들
 
 <p align="center">
+ 
+   <a href="https://github.com/chans97">
+  <img src="https://github.com/chans97.png" width="100">
+</a>
   
+ 
 <a href="https://github.com/myway00">
   <img src="https://github.com/myway00.png" width="100">
 </a>
   
- <a href="https://github.com/chans97">
-  <img src="https://github.com/chans97.png" width="100">
-</a>
-  
+
  <a href="https://github.com/summerlunaa">
   <img src="https://github.com/summerlunaa.png" width="100">
 </a>
   
- <a href="https://github.com/LeeJin0527">
-  <img src="https://github.com/LeeJin0527.png" width="100">
+ <a href="https://github.com/gilgor2">
+  <img src="https://github.com/gilgor2.png" width="100">
 </a>
   
- <a href="https://github.com/Subinhyun">
-  <img src="https://github.com/Subinhyun.png" width="100">
+ <a href="https://github.com/SBleeyouk">
+  <img src="https://github.com/SBleeyouk.png" width="100">
 </a>
-  
- <a href="https://github.com/yoon-youngjin">
-  <img src="https://github.com/yoon-youngjin.png" width="100">
-</a>
+
   
 </p>
 
